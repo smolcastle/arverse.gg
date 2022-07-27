@@ -1,5 +1,6 @@
-import ClockIcon from "./Clock";
-import CurrentIcon from "./Current";
-import ServerIcon from "./Server";
+import ClockIcon from "./svgs/Clock";
+import CurrentIcon from "./svgs/Current";
+import ServerIcon from "./svgs/Server";
+import RightArrowIcon from "./svgs/RightArrow";
 
-export { ClockIcon, CurrentIcon, ServerIcon };
+export { ClockIcon, CurrentIcon, ServerIcon, RightArrowIcon };

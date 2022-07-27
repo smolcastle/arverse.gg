@@ -2,7 +2,12 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import Button from "../components/Button";
-import { ClockIcon, ServerIcon, CurrentIcon } from "../components/icons";
+import {
+	ClockIcon,
+	ServerIcon,
+	CurrentIcon,
+	RightArrowIcon,
+} from "../components/icons";
 
 const Home: NextPage = () => {
 	return (
@@ -37,16 +42,7 @@ const Home: NextPage = () => {
 							<span className="text-2xl">
 								Follow step by step tutorials
 							</span>
-							<i>
-								<svg
-									className="w-16 h-16"
-									viewBox="0 0 16 16"
-									fill="currentColor"
-									xmlns="http://www.w3.org/2000/svg"
-								>
-									<path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
-								</svg>
-							</i>
+							<RightArrowIcon />
 						</a>
 					</Link>
 					<Link href="validator-node-id">
@@ -57,16 +53,7 @@ const Home: NextPage = () => {
 							<span className="text-2xl">
 								View our node ID details
 							</span>
-							<i>
-								<svg
-									className="w-16 h-16"
-									viewBox="0 0 16 16"
-									fill="currentColor"
-									xmlns="http://www.w3.org/2000/svg"
-								>
-									<path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
-								</svg>
-							</i>
+							<RightArrowIcon />
 						</a>
 					</Link>
 				</div>
