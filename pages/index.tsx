@@ -12,7 +12,7 @@ const Home: NextPage = () => {
 
 			<main className="pt-56 flex flex-col items-center justify-center gap-6 max-w-[800px] mx-auto min-h-screen">
 				<h1 className="font-bold text-7xl">
-					Compound your <span className="text-red-500">AVAX</span>
+					Compound your <span className="text-red-dark">AVAX</span>
 				</h1>
 				<span className="px-4 my-4 font-medium text-3xl text-center">
 					Stake your AVAX tokens and earn passive income on <br />
@@ -28,7 +28,7 @@ const Home: NextPage = () => {
 				</div>
 				<div className="my-6 w-full flex items-stretch h-[400px]">
 					<Link href="how-to-stake-avax">
-						<a className="flex-1 flex flex-col justify-center gap-4 px-10 text-left bg-red-100 hover:bg-red-400 hover:text-white transition-all">
+						<a className="flex-1 flex flex-col justify-center gap-4 px-10 text-left bg-red-light hover:bg-red-dark hover:text-white transition-all">
 							<h3 className="font-extrabold text-4xl">
 								STAKE WITH US
 							</h3>
@@ -48,7 +48,7 @@ const Home: NextPage = () => {
 						</a>
 					</Link>
 					<Link href="validator-node-id">
-						<a className="flex-1 flex flex-col justify-center gap-4 px-10 text-left bg-green-100 hover:bg-green-400 hover:text-white transition-all">
+						<a className="flex-1 flex flex-col justify-center gap-4 px-10 text-left bg-green-light hover:bg-green-dark hover:text-white transition-all">
 							<h3 className="font-extrabold text-4xl">
 								NODE STATUS
 							</h3>
