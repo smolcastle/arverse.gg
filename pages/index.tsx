@@ -1,6 +1,8 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
+import Button from "../components/Button";
+import { ClockIcon, ServerIcon, CurrentIcon } from "../components/icons";
 
 const Home: NextPage = () => {
 	return (
@@ -68,17 +70,41 @@ const Home: NextPage = () => {
 						</a>
 					</Link>
 				</div>
-				<h2 className="self-start my-40 leading-snug font-semibold text-6xl">
-					STAKE WITH
-					<br />
-					ONE OF THE
-					<br />
-					LARGEST
-					<br />
-					VALIDATOR
-					<br />
-					ON AVALANCHE
-				</h2>
+				<div className="self-start mt-40">
+					<h2 className="leading-snug font-semibold text-6xl">
+						STAKE WITH
+						<br />
+						ONE OF THE
+						<br />
+						LARGEST
+						<br />
+						VALIDATOR
+						<br />
+						ON AVALANCHE
+					</h2>
+					{/* <div className="flex gap-4">
+						<Button startIcon={<ServerIcon />} filled>
+							Enterprise grade
+						</Button>
+						<Button startIcon={<ClockIcon />} filled>
+							24x7 monitoring
+						</Button>
+						<Button startIcon={<CurrentIcon />} filled>
+							99.93% uptime
+						</Button>
+					</div> */}
+				</div>
+				<div>
+					<h2 className="font-extralight text-[34rem] text-transparent text-stroke">
+						97200
+					</h2>
+					<span className="w-full flex justify-center gap-2 text-2xl -mt-20">
+						<span className="px-2 bg-red-dark text-white font-bold">
+							AVAX
+						</span>
+						<span>staked with us</span>
+					</span>
+				</div>
 			</main>
 		</div>
 	);
