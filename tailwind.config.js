@@ -16,12 +16,10 @@ module.exports = {
 				green: {
 					light: "#E8FCE8",
 					DEFAULT: "#40E840",
-					dark: "#40E840",
 				},
 				red: {
 					light: "#FCE8E8",
 					DEFAULT: "#E84142",
-					dark: "#E84142",
 				},
 				accent: {
 					DEFAULT: "#8B5CF6",
