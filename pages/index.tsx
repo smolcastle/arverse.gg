@@ -8,14 +8,11 @@ import {
   UptimeIcon,
   MonitorIcon,
   EnterpriseIcon,
-  PlusIcon,
-  CrossIcon,
-  PoweredIcon,
 } from "../components/icons";
 import React from "react";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
-import FAQs from "../components/FAQs";
+import FAQsList from "../components/FAQsList";
 import axios from "axios";
 
 const Home: NextPage = () => {
@@ -193,7 +190,7 @@ const Home: NextPage = () => {
           </div>
         </div>
 
-        <FAQs />
+        <FAQsList limit={3} />
 
         <div className="relative sm:mt-40 mt-20 sm:mb-60 mb-40 sm:pl-10 pl-5 flex items-center justify-around sm:gap-10 gap-5 max-w-[800px] w-full mx-auto">
           <h2 className="text-white font-bold sm:text-4xl text-2xl sm:w-1/4 w-3/4 leading-snug z-10">
