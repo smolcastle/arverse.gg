@@ -4,16 +4,20 @@ type Props = {
   name?: string;
   id?: string;
   className?: string;
+  value?: any;
+  onChange?: any;
 };
 
 const Input = (props: Props) => {
   return (
     <input
       type={props.type ?? "text"}
-      name={props.name}
-      id={props.id}
+      name={props.name ?? "text"}
+      id={props.id ?? "text"}
       className={`${props.className} shadow-sm focus:ring-accent focus:border-accent block w-full border-gray-300 rounded-xl`}
-      placeholder={props.placeholder}
+      placeholder={props.placeholder ?? "Enter here..."}
+      value={props.value ?? ""}
+      onChange={props.onChange ?? null}
     />
   );
 };

@@ -16,10 +16,16 @@ const Footer = () => {
         </div>
         <div className="flex flex-col gap-1 text-right text-gray-600">
           <h3 className="font-semibold text-xl">Company</h3>
-          <a href="#">Follow us on Twitter</a>
-          <a href="#">Help center</a>
-          <a href="#">Node details</a>
-          <a href="#">Staking guide</a>
+          <a href="https://twitter.com/sy100x">Follow us on Twitter</a>
+          <Link href="faqs">
+            <a>Help center</a>
+          </Link>
+          <Link href="#">
+            <a>Node details</a>
+          </Link>
+          <Link href="#">
+            <a>Staking guide</a>
+          </Link>
         </div>
       </div>
       <div className="my-20">

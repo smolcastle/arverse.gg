@@ -7,13 +7,13 @@ const Header = () => {
         <a className="text-2xl font-semibold text-accent">ARVERSE</a>
       </Link>
       <div className="flex sm:gap-8 gap-3 font-medium">
-        <Link href="/faqs">
+        <Link href="faqs">
           <a>FAQs</a>
         </Link>
-        <Link href="/node-id">
+        <Link href="#">
           <a>Node ID</a>
         </Link>
-        <Link href="/stake-with-us">
+        <Link href="#">
           <a>Stake with us</a>
         </Link>
       </div>
