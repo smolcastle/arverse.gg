@@ -4,8 +4,8 @@ type Props = {
   name?: string;
   id?: string;
   className?: string;
-  value?: any;
-  onChange?: any;
+  value?: string | number;
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
 };
 
 const Input = (props: Props) => {
@@ -17,7 +17,7 @@ const Input = (props: Props) => {
       className={`${props.className} shadow-sm focus:ring-accent focus:border-accent block w-full border-gray-300 rounded-xl`}
       placeholder={props.placeholder ?? "Enter here..."}
       value={props.value ?? ""}
-      onChange={props.onChange ?? null}
+      onChange={props.onChange}
     />
   );
 };

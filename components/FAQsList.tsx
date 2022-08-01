@@ -7,6 +7,8 @@ import getBasePath from "../utils/getBasePath";
 import Input from "./Input";
 import React from "react";
 import SmallArrowRight from "./icons/svgs/SmallArrowRight";
+import getSearchResults from "../utils/getSearchResults";
+import objEqual from "../utils/isEqualObjects";
 
 type Props = {
   limit?: number;
@@ -17,25 +19,16 @@ const FAQsList = (props: Props) => {
   const [query, setQuery] = React.useState("");
   const [faqList, setFaqList] = React.useState<Array<any>>(faqs);
 
-  function getSearchResults(result: string) {
-    return result.replace(
-      new RegExp(query, "gi"),
-      (match: string) => `<span class="text-accent">${match}</span>`
-    );
-  }
-
   React.useEffect(() => {
     if (query.length) {
       let newFaqs = faqs.map((faq, index) => {
         let newFaq = {
-          question: getSearchResults(faq.question),
-          answer: getSearchResults(faq.answer),
+          question: getSearchResults(faq.question, query),
+          answer: getSearchResults(faq.answer, query),
         };
-        if (JSON.stringify(newFaq) !== JSON.stringify(faqs[index]))
-          return newFaq;
+        if (!objEqual(newFaq, faqs[index])) return newFaq;
       });
       newFaqs = newFaqs.filter((faq) => Boolean(faq));
-      // console.log(newFaqs);
       setFaqList(newFaqs);
     } else setFaqList(faqs);
   }, [query]);
