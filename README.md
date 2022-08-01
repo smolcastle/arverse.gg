@@ -1,4 +1,4 @@
-<h2 align="center">Arverse - compound your<span style="color:#E84142">AVAX</span></h2>
+<h2 align="center">Arverse: Validator Node for Avalanche Blockchain</h2>
 
 <p align="center">
 <a href="https://github.com/smol-ninja/arverse.gg/actions/workflows/deploy.yml"><img alt="Github Actions Build Status" src="https://img.shields.io/github/workflow/status/smol-ninja/arverse.gg/Prod?label=Build&style=flat-square"></a>
@@ -9,7 +9,9 @@
 <a href="https://github.com/smol-ninja/arverse.gg/actions/workflows/deploy.yml"><img alt="Prettier style" src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square"></a>
 </p>
 
-Live version: [arverse.gg](https://arverse.gg)
+<p align="center">
+<a href="https://arverse.gg">Live version - Arverse.gg</a>
+<p>
 
 ### To start development
 
