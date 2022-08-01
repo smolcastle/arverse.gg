@@ -1,5 +1,5 @@
 const objEqual = (obj1: object, obj2: object) => {
-  return JSON.stringify(obj1) === JSON.stringify(obj2);
-};
+  return JSON.stringify(obj1) === JSON.stringify(obj2)
+}
 
-export default objEqual;
+export default objEqual
