@@ -1,54 +1,54 @@
-import type { NextPage } from "next";
-import Head from "next/head";
-import Link from "next/link";
-import Button from "../components/Button";
+import type { NextPage } from 'next'
+import Head from 'next/head'
+import Link from 'next/link'
+import Button from '../components/Button'
 import {
   RightArrowIcon,
   AvaxIcon,
   UptimeIcon,
   MonitorIcon,
-  EnterpriseIcon,
-} from "../components/icons";
-import React from "react";
-import Footer from "../components/Footer";
-import Header from "../components/Header";
-import FAQsList from "../components/FAQsList";
-import axios from "axios";
+  EnterpriseIcon
+} from '../components/icons'
+import React from 'react'
+import Footer from '../components/Footer'
+import Header from '../components/Header'
+import FAQsList from '../components/FAQsList'
+import axios from 'axios'
 
 const Home: NextPage = () => {
-  const [isAvax, setIsAvax] = React.useState(true);
-  const [avax, setAvax] = React.useState(92700);
+  const [isAvax, setIsAvax] = React.useState(true)
+  const [avax, setAvax] = React.useState(92700)
 
-  const stakeURL = "https://rpc-888.arverse.gg/ext/P";
+  const stakeURL = 'https://rpc-888.arverse.gg/ext/P'
   const getBody = (start: number, end: number) => ({
-    jsonrpc: "2.0",
+    jsonrpc: '2.0',
     id: 1,
-    method: "platform.getMaxStakeAmount",
+    method: 'platform.getMaxStakeAmount',
     params: {
-      nodeID: "NodeID-2pN3EtqAUKWvJedQvYfPSgKeonNmFn8bA",
+      nodeID: 'NodeID-2pN3EtqAUKWvJedQvYfPSgKeonNmFn8bA',
       startTime: start,
-      endTime: end,
-    },
-  });
+      endTime: end
+    }
+  })
   async function getStakedAmount() {
-    let start = Math.floor(Date.now() / 1000);
+    let start = Math.floor(Date.now() / 1000)
     let end = Math.floor(
       new Date(new Date().setFullYear(new Date().getFullYear() + 1)).getTime() /
         1000
-    );
+    )
     await axios.post(stakeURL, getBody(start, end)).then((res) => {
-      let avax = res.data?.result?.amount / 1e9;
+      let avax = res.data?.result?.amount / 1e9
       // console.log(res.data);
-      setAvax(avax);
-    });
+      setAvax(avax)
+    })
   }
 
   React.useEffect(() => {
     const interval = setInterval(() => {
-      getStakedAmount();
-    }, 5000);
-    return () => clearInterval(interval);
-  }, [avax]);
+      getStakedAmount()
+    }, 5000)
+    return () => clearInterval(interval)
+  }, [avax])
 
   return (
     <div className="w-full bg-light">
@@ -119,11 +119,11 @@ const Home: NextPage = () => {
           <div className="w-full flex justify-center gap-2 text-2xl">
             <button
               className={`px-2 ${
-                isAvax ? "bg-red" : "bg-green"
+                isAvax ? 'bg-red' : 'bg-green'
               } text-white font-bold`}
               onClick={() => setIsAvax(!isAvax)}
             >
-              {isAvax ? "AVAX" : "USD"}
+              {isAvax ? 'AVAX' : 'USD'}
             </button>
             <span className="font-semibold">staked with us</span>
           </div>
@@ -209,7 +209,7 @@ const Home: NextPage = () => {
 
       <Footer />
     </div>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home

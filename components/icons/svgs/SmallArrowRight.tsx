@@ -16,7 +16,7 @@ const SmallArrowRight = () => {
         fill="#FCE8E8"
       />
     </svg>
-  );
-};
+  )
+}
 
-export default SmallArrowRight;
+export default SmallArrowRight

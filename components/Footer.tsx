@@ -1,5 +1,5 @@
-import Link from "next/link";
-import { PoweredIcon } from "./icons";
+import Link from 'next/link'
+import { PoweredIcon } from './icons'
 
 const Footer = () => {
   return (
@@ -65,7 +65,7 @@ const Footer = () => {
         </p>
       </div>
     </footer>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer

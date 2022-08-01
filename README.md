@@ -1,23 +1,42 @@
-# Next.js + Tailwind CSS Example
+# Arverse - compound your <span style="color:#E84142">AVAX</span>
 
-This example shows how to use [Tailwind CSS](https://tailwindcss.com/) [(v3.0)](https://tailwindcss.com/blog/tailwindcss-v3) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs).
+![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/smol-ninja/arverse.gg/deploy/dev)
 
-## Deploy your own
+![next](https://img.shields.io/badge/next-v12.2.3-blue)
+![typescript](https://img.shields.io/badge/typescript-v4.7.2-blue)
+![tailwindcss](https://img.shields.io/badge/tailwindcss-v3.1.2-blue)
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example) or preview live with [StackBlitz](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-tailwindcss)
+Live version: [arverse.gg](https://arverse.gg)
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss&project-name=with-tailwindcss&repository-name=with-tailwindcss)
+### To start development
 
-## How to use
-
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init), [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/), or [pnpm](https://pnpm.io) to bootstrap the example:
+###### Installing dependencies
 
 ```bash
-npx create-next-app --example with-tailwindcss with-tailwindcss-app
-# or
-yarn create next-app --example with-tailwindcss with-tailwindcss-app
-# or
-pnpm create next-app --example with-tailwindcss with-tailwindcss-app
+yarn install
 ```
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+###### Running locally on Port 3000
+
+```bash
+yarn dev
+```
+
+### Docker deployment
+
+###### Build docker image
+
+```bash
+docker-compose build
+```
+
+###### Run docker container on Port 8000
+
+```bash
+docker-compose up
+```
+
+### Production deployment
+
+Auto deployment is enabled via Github workflow.
