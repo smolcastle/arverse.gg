@@ -6,7 +6,7 @@
 <a href="https://nextjs.org/"><img alt="Next JS" src="https://img.shields.io/badge/next-v12.2.3-blue?style=flat-square"></a>
 <a href="https://www.typescriptlang.org/"><img alt="Typescript" src="https://img.shields.io/badge/typescript-v4.7.2-blue?style=flat-square"></a>
 <a href="https://tailwindcss.com/"><img alt="TailwindCSS" src="https://img.shields.io/badge/tailwindcss-v3.1.2-blue?style=flat-square"></a>
-<a href="https://github.com/smol-ninja/arverse.gg/actions/workflows/deploy.yml"><img alt="Prettier style" src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square"></a>
+<a href="https://github.com/prettier/prettier"><img alt="Prettier style" src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square"></a>
 </p>
 
 <p align="center">
