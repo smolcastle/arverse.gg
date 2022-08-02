@@ -43,3 +43,8 @@ docker-compose up
 ### Production deployment
 
 Auto deployment is enabled via Github workflow.
+
+
+### License
+
+(c) Arverse.gg, 2022 - [All rights reserved](LICENSE).
