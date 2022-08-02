@@ -27,9 +27,11 @@
 name: Prod
 
 on:
-  push:
+  pull_request:
+    types:
+      - closed
     branches:
-      - dev
+      - master
 
 env:
   AWS_REGION: eu-west-2 # set this to your preferred AWS region, e.g. us-west-1
@@ -42,6 +44,7 @@ env:
 jobs:
   deploy:
     name: deploy
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
 
     steps:
