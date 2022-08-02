@@ -17,36 +17,30 @@ import axios from 'axios'
 
 const Home: NextPage = () => {
   const [isAvax, setIsAvax] = React.useState(true)
-  const [avax, setAvax] = React.useState(92700)
-
-  const stakeURL = 'https://rpc-888.arverse.gg/ext/P'
-  const getBody = (start: number, end: number) => ({
-    jsonrpc: '2.0',
-    id: 1,
-    method: 'platform.getMaxStakeAmount',
-    params: {
-      nodeID: 'NodeID-2pN3EtqAUKWvJedQvYfPSgKeonNmFn8bA',
-      startTime: start,
-      endTime: end
-    }
+  const [avax, setAvax] = React.useState({
+    price: 0,
+    marketCap: 0,
+    TVL: 0,
+    stake: 0
   })
-  async function getStakedAmount() {
-    let start = Math.floor(Date.now() / 1000)
-    let end = Math.floor(
-      new Date(new Date().setFullYear(new Date().getFullYear() + 1)).getTime() /
-        1000
-    )
-    await axios.post(stakeURL, getBody(start, end)).then((res) => {
-      let avax = res.data?.result?.amount / 1e9
-      // console.log(res.data);
-      setAvax(avax)
-    })
+
+  async function getAVAX() {
+    await axios
+      .get(`${process.env.NEXT_PUBLIC_ARVERSE_URL}/api/avax` ?? '')
+      .then((res) => setAvax(res.data))
+      .catch((err) => console.log('ERROR:', err))
   }
 
+  // first time
+  React.useEffect(() => {
+    getAVAX()
+  }, [])
+
+  // every 5 mins
   React.useEffect(() => {
     const interval = setInterval(() => {
-      getStakedAmount()
-    }, 5000)
+      getAVAX()
+    }, 300000) // 5 mins
     return () => clearInterval(interval)
   }, [avax])
 
@@ -78,16 +72,16 @@ const Home: NextPage = () => {
             Enterprise grade
           </span>
         </div>
-        <div className="my-6 max-w-[800px] w-full flex flex-wrap items-stretch min-h-[400px] z-10">
+        <div className="my-6 max-w-[640px] w-full flex flex-wrap items-stretch min-h-[300px] z-10">
           <Link href="how-to-stake-avax">
-            <a className="flex-1 flex flex-col justify-center gap-4 px-10 py-20 text-left bg-red-light hover:bg-red hover:text-white transition-all">
+            <a className="flex-1 flex flex-col justify-center gap-4 px-10 py-10 text-left bg-red-light hover:bg-red hover:text-white transition-all">
               <h3 className="font-extrabold text-4xl">STAKE WITH US</h3>
               <span className="text-2xl">Follow step by step tutorials</span>
               <RightArrowIcon />
             </a>
           </Link>
           <Link href="validator-node-id">
-            <a className="flex-1 flex flex-col justify-center gap-4 px-10 py-20 text-left bg-green-light hover:bg-green hover:text-white transition-all">
+            <a className="flex-1 flex flex-col justify-center gap-4 px-10 py-10 text-left bg-green-light hover:bg-green hover:text-white transition-all">
               <h3 className="font-extrabold text-4xl">NODE STATUS</h3>
               <span className="text-2xl">
                 View our node ID
@@ -106,14 +100,14 @@ const Home: NextPage = () => {
         <div className="sm:mb-40 mb-10 z-10 text-white text-center">
           {isAvax ? (
             <h2 className="font-extralight lg:text-[20rem] md:text-[15rem] sm:text-[10rem] text-[5rem]">
-              {avax}
+              {avax.stake}
             </h2>
           ) : (
             <h2 className="font-extralight lg:text-[20rem] md:text-[15rem] sm:text-[10rem] text-[5rem] flex items-center">
               <span className="font-medium lg:text-[10rem] md:text-[8rem] text-[2rem]">
                 $
               </span>
-              <span>{avax * 20}</span>
+              <span>{avax.stake * 20}</span>
             </h2>
           )}
           <div className="w-full flex justify-center gap-2 text-2xl">
@@ -128,7 +122,7 @@ const Home: NextPage = () => {
             <span className="font-semibold">staked with us</span>
           </div>
         </div>
-        <div className="self-start max-w-[800px] w-full mx-auto text-white z-10">
+        <div className="self-start max-w-[640px] w-full mx-auto text-white z-10">
           <h2 className="font-bold text-4xl my-12">What is Avalanche?</h2>
           <p className="font-medium text-xl sm:leading-loose leading-snug">
             Avalanche is open, programmable smart contracts platform for
@@ -140,23 +134,29 @@ const Home: NextPage = () => {
             resources, and can scale infinitely.
           </p>
         </div>
-        <div className="flex flex-wrap gap-4 max-w-[800px] w-full mx-auto z-10">
+        <div className="flex flex-wrap gap-4 max-w-[640px] w-full mx-auto z-10">
           <Button startIcon={<AvaxIcon />} filled>
             Avalanche website
           </Button>
           <Button filled>Learn more about subnets</Button>
         </div>
-        <div className="sm:mt-28 mt-20 flex sm:gap-24 gap-6 text-center justify-center md:max-w-[800px] w-full mx-auto text-xl z-10">
+        <div className="sm:mt-28 mt-20 flex sm:gap-24 gap-6 text-center justify-center md:max-w-[640px] w-full mx-auto text-xl z-10">
           <div className="flex flex-col items-center gap-1">
-            <h3 className="font-bold sm:text-4xl text-2xl">$22.98</h3>
+            <h3 className="font-bold sm:text-4xl text-2xl">
+              ${avax.price ?? 22.98}
+            </h3>
             <span className="font-medium">AVAX Price</span>
           </div>
           <div className="flex flex-col items-center gap-1">
-            <h3 className="font-bold sm:text-4xl text-2xl">$16.5B</h3>
+            <h3 className="font-bold sm:text-4xl text-2xl">
+              ${avax.marketCap ?? 16.5}B
+            </h3>
             <span className="font-medium">AVAX marketcap</span>
           </div>
           <div className="flex flex-col items-center gap-1">
-            <h3 className="font-bold sm:text-4xl text-2xl">$2.8B</h3>
+            <h3 className="font-bold sm:text-4xl text-2xl">
+              ${avax.TVL ?? 2.8}B
+            </h3>
             <span className="font-medium">Avalanche TVL</span>
           </div>
         </div>
@@ -192,7 +192,7 @@ const Home: NextPage = () => {
 
         <FAQsList limit={3} />
 
-        <div className="relative sm:mt-40 mt-20 sm:mb-60 mb-40 sm:pl-10 pl-5 flex items-center justify-around sm:gap-10 gap-5 max-w-[800px] w-full mx-auto">
+        <div className="relative sm:mt-40 mt-20 sm:mb-60 mb-40 sm:pl-10 pl-5 flex items-center justify-around sm:gap-10 gap-5 max-w-[640px] w-full mx-auto">
           <h2 className="text-white font-bold sm:text-4xl text-2xl sm:w-1/4 w-3/4 leading-snug z-10">
             Stake with us to earn upto 8.0% a year on your AVAX
           </h2>

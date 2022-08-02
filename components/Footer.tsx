@@ -3,7 +3,7 @@ import { PoweredIcon } from './icons'
 
 const Footer = () => {
   return (
-    <footer className="px-4 pt-10 pb-10 flex flex-col max-w-[800px] w-full mx-auto border-t border-gray-300">
+    <footer className="px-4 pt-10 pb-10 flex flex-col max-w-[640px] w-full mx-auto border-t border-gray-300">
       <div className="flex justify-between items-start">
         <div className="flex flex-col gap-4">
           <Link href="/">

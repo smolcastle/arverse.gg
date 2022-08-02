@@ -8,7 +8,7 @@ import Input from './Input'
 import React from 'react'
 import SmallArrowRight from './icons/svgs/SmallArrowRight'
 import getSearchResults from '../utils/getSearchResults'
-import objEqual from '../utils/isEqualObjects'
+import objEqual from '../utils/objEqual'
 
 type Props = {
   limit?: number
@@ -34,7 +34,7 @@ const FAQsList = (props: Props) => {
   }, [query])
 
   return (
-    <div className="px-4 sm:py-40 py-20 flex flex-col justify-center items-center max-w-[800px] w-full mx-auto z-10">
+    <div className="px-4 sm:py-40 py-20 flex flex-col justify-center items-center max-w-[640px] w-full mx-auto z-10">
       <h2 className="font-bold text-4xl mb-16">
         {currentPath === '/' ? 'FAQs' : 'Help Center'}
       </h2>
