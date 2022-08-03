@@ -48,12 +48,11 @@ const Home: NextPage = () => {
     <div className="w-full bg-light">
       <Head>
         <title>Arverse</title>
-        <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <Header />
 
-      <main className="sm:pt-48 pt-24 px-4 flex flex-col items-center justify-center gap-6 mx-auto min-h-screen z-10">
+      <main className="pt-[140px] px-4 flex flex-col items-center justify-center gap-6 mx-auto min-h-screen z-10">
         <div
           className={`absolute top-[calc(800px)] left-0 w-full ${
             isAvax
@@ -61,10 +60,10 @@ const Home: NextPage = () => {
               : 'lg:h-[2150px] md:h-[2000px] sm:h-[1800px] h-[1700px]'
           } bg-accent skew-y-6`}
         />
-        <h1 className="font-bold text-[56px] text-center z-10">
+        <h1 className="max-w-[640px] w-full font-bold text-[56px] text-center z-10">
           Compound your <span className="text-red">AVAX</span>
         </h1>
-        <span className="px-4 my-4 md:w-[640px] font-medium text-[24px] text-center z-10">
+        <span className="px-4 my-4 max-w-[640px] w-full font-medium text-[24px] text-center z-10">
           Stake your AVAX tokens and earn passive income on your investments
         </span>
         <div className="my-4 flex gap-6 font-medium text-[16px] z-10">

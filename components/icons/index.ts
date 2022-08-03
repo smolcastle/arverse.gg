@@ -9,6 +9,12 @@ import EnterpriseIcon from './svgs/Enterprise'
 import PlusIcon from './svgs/Plus'
 import CrossIcon from './svgs/Cross'
 import PoweredIcon from './svgs/Powered'
+import BookmarkIcon from './svgs/Bookmark'
+import CopyIcon from './svgs/Copy'
+import QuestionIcon from './svgs/Question'
+import CashIcon from './svgs/Cash'
+import PeakIcon from './svgs/Peak'
+import StackIcon from './svgs/Stack'
 
 export {
   ClockIcon,
@@ -21,5 +27,11 @@ export {
   EnterpriseIcon,
   PlusIcon,
   CrossIcon,
-  PoweredIcon
+  PoweredIcon,
+  BookmarkIcon,
+  CopyIcon,
+  QuestionIcon,
+  CashIcon,
+  PeakIcon,
+  StackIcon
 }

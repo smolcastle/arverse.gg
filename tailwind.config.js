@@ -15,11 +15,19 @@ module.exports = {
         },
         green: {
           light: '#E8FCE8',
-          DEFAULT: '#40E840'
+          DEFAULT: '#40E840',
+          dark: '#2CC099'
         },
         red: {
           light: '#FCE8E8',
           DEFAULT: '#E84142'
+        },
+        blue: {
+          light: '#E8E8FD',
+          DEFAULT: '#6D6DF2'
+        },
+        gray: {
+          DEFAULT: '#4F4F4F'
         },
         accent: {
           DEFAULT: '#8B5CF6'

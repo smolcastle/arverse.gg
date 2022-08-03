@@ -20,10 +20,10 @@ const Footer = () => {
           <Link href="faqs">
             <a className="text-[16px]">Help center</a>
           </Link>
-          <Link href="#">
+          <Link href="node_id">
             <a className="text-[16px]">Node details</a>
           </Link>
-          <Link href="#">
+          <Link href="how_to_stake">
             <a className="text-[16px]">Staking guide</a>
           </Link>
         </div>
@@ -31,12 +31,12 @@ const Footer = () => {
       <div className="mt-[50px]">
         <h4 className="text-[16px] mb-5">Disclaimer</h4>
         <p className="text-[12px]">
-          Arverse.gg (“the platform”) strives to provide the most reasonable and
+          Arverse.gg ("the platform") strives to provide the most reasonable and
           accurate information. Still all data and information presented on this
           platform may be wrong or does not reflect the current status. All
           information is subject to change and arverse.gg does not guarantee
           accuracy or completeness. The metrics arverse.gg has developed and
-          presents on this platform are based on it´s own methodology and may be
+          presents on this platform are based on it's own methodology and may be
           misinterpreted by the user. The annualized staking yields and annual
           issuance rates presented on the platform are mostly based on current
           conditions of the network and will effectively diverge. The calculator
@@ -59,7 +59,7 @@ const Footer = () => {
           any digital asset. Only make investment decisions after evaluating
           many different sources, information provider and opinions. Digital
           Assets should be considered a very risky investment class. Do not
-          invest anything that you can´t afford to loose. Arverse.gg will not be
+          invest anything that you can't afford to loose. Arverse.gg will not be
           held responsible for any investment decision you make based on the
           information provided on the platform.
         </p>

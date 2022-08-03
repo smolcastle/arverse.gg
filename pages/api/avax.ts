@@ -27,7 +27,7 @@ async function getStakedAmount() {
       id: 1,
       method: 'platform.getMaxStakeAmount',
       params: {
-        nodeID: process.env.NODE_ID,
+        nodeID: process.env.NEXT_PUBLIC_NODE_ID,
         startTime: start,
         endTime: end
       }

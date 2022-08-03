@@ -26,7 +26,7 @@ yarn install
 NEXT_PUBLIC_ARVERSE_URL=Website_URL
 CMC_API_KEY=CoinMarketCap_API_KEY_here
 RPC_ENDPOINT=RPC_Endpoint_here
-NODE_ID=Node_ID_for_RPC_API
+NEXT_PUBLIC_NODE_ID=NEXT_PUBLIC_NODE_ID_for_RPC_API
 CMC_ENDPOINT=https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest
 ```
 

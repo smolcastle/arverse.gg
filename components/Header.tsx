@@ -10,10 +10,10 @@ const Header = () => {
         <Link href="faqs">
           <a>FAQs</a>
         </Link>
-        <Link href="#">
+        <Link href="node_id">
           <a>Node ID</a>
         </Link>
-        <Link href="#">
+        <Link href="how_to_stake">
           <a>Stake with us</a>
         </Link>
       </div>
