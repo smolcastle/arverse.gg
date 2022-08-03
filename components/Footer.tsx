@@ -3,34 +3,34 @@ import { PoweredIcon } from './icons'
 
 const Footer = () => {
   return (
-    <footer className="px-4 pt-10 pb-10 flex flex-col max-w-[640px] w-full mx-auto border-t border-gray-300">
+    <footer className="px-[30px] mt-[120px] pt-[48px] pb-[90px] flex flex-col max-w-[700px] w-full mx-auto border-t border-gray-300 z-10">
       <div className="flex justify-between items-start">
         <div className="flex flex-col gap-4">
           <Link href="/">
-            <a className="text-2xl font-semibold text-accent">ARVERSE</a>
+            <a className="text-[32px] font-semibold text-accent">ARVERSE</a>
           </Link>
-          <span className="-mt-4 text-gray-600">
+          <span className="-mt-4 text-gray-600 text-[16px]">
             &copy; {new Date().getFullYear()} Arverse
           </span>
           <PoweredIcon />
         </div>
-        <div className="flex flex-col gap-1 text-right text-gray-600">
-          <h3 className="font-semibold text-xl">Company</h3>
+        <div className="flex flex-col gap-[12px] text-right text-gray-600">
+          <h3 className="pb-[4px] font-medium text-[20px]">Company</h3>
           <a href="https://twitter.com/sy100x">Follow us on Twitter</a>
           <Link href="faqs">
-            <a>Help center</a>
+            <a className="text-[16px]">Help center</a>
           </Link>
           <Link href="#">
-            <a>Node details</a>
+            <a className="text-[16px]">Node details</a>
           </Link>
           <Link href="#">
-            <a>Staking guide</a>
+            <a className="text-[16px]">Staking guide</a>
           </Link>
         </div>
       </div>
-      <div className="my-20">
-        <h4 className="font-medium text-xl mb-5">Disclaimer</h4>
-        <p>
+      <div className="mt-[50px]">
+        <h4 className="text-[16px] mb-5">Disclaimer</h4>
+        <p className="text-[12px]">
           Arverse.gg (“the platform”) strives to provide the most reasonable and
           accurate information. Still all data and information presented on this
           platform may be wrong or does not reflect the current status. All

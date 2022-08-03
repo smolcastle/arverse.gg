@@ -30,9 +30,9 @@ module.exports = {
       },
       screens: {
         xs: '600px',
-        sm: '800px',
-        md: '1100px',
-        lg: '1380px'
+        sm: '750px',
+        md: '1200px',
+        lg: '1350px'
       }
     }
   },

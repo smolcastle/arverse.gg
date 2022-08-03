@@ -1,7 +1,7 @@
 const UptimeIcon = () => (
   <svg
     width="76"
-    height="39"
+    height="76"
     viewBox="0 0 76 39"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
