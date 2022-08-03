@@ -20,6 +20,18 @@
 yarn install
 ```
 
+Requirements:
+1. `CMC_API_KEY=` Coinmarketcap API key to fetch AVAX price
+2. `RPC_ENDPOINT=` AVAX RPC endpoint to fetch node data
+
+###### Copy environment variables
+
+```bash
+cp .env.example .env.local
+echo "\nCMC_API_KEY=$123" >> .env.local // replace $123 with your Coinmarketcap API key
+echo "RPC_ENDPOINT=$123" >> .env.local // replace $123 with your AVAX RPC endpoint
+```
+
 ###### Running locally on Port 3000
 
 ```bash
