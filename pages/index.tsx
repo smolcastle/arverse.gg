@@ -112,7 +112,7 @@ const Home: NextPage = () => {
           ) : (
             <h2 className="flex items-center lg:text-[330px] md:text-[250px] sm:text-[150px] text-[130px]">
               <span className="font-medium text-[64px]">$</span>
-              <span>{avax.stake * 20}</span>
+              <span>{avax.stake * avax.price}</span>
             </h2>
           )}
           <div className="w-full flex justify-center gap-2 text-[24px]">

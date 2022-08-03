@@ -111,7 +111,7 @@ const NodeID: NextPage = () => {
                   </>
                 ) : (
                   <h3 className="font-semibold text-[40px]">
-                    ${withCommas(avax.stake * 20)}
+                    ${withCommas(avax.stake * avax.price)}
                   </h3>
                 )}
               </div>
@@ -123,7 +123,7 @@ const NodeID: NextPage = () => {
           </div>
           <div className="w-[120px] h-[120px] bg-green-400">High charts</div>
         </div>
-        <div className="mt-[80px] flex">
+        <div className="mt-[80px] flex flex-wrap justify-center">
           <Link href="#">
             <a className="w-[320px] h-[320px] flex justify-center items-center text-left bg-blue-light hover:bg-blue hover:text-white transition-all">
               <div className="w-[220px] flex flex-col justify-center gap-[10px]">
