@@ -30,6 +30,7 @@ module.exports = {
           DEFAULT: '#4F4F4F'
         },
         accent: {
+          light: '#E8E8FD',
           DEFAULT: '#8B5CF6'
         }
       },

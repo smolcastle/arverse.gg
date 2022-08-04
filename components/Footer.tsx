@@ -23,7 +23,7 @@ const Footer = () => {
           <Link href="node_id">
             <a className="text-[16px]">Node details</a>
           </Link>
-          <Link href="how_to_stake">
+          <Link href="stake_guide">
             <a className="text-[16px]">Staking guide</a>
           </Link>
         </div>

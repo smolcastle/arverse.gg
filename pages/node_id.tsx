@@ -21,6 +21,7 @@ import withCommas from 'utils/withCommas'
 const NodeID: NextPage = () => {
   const [isAvax, setIsAvax] = React.useState(true)
   const [copy, setCopy] = React.useState('Copy')
+  const [daysLeft, setDaysLeft] = React.useState(300)
 
   const [avax, setAvax] = React.useState({
     price: 23.52,
@@ -38,6 +39,7 @@ const NodeID: NextPage = () => {
 
   // first time
   React.useEffect(() => {
+    setDaysLeft(330)
     getAVAX()
   }, [])
 
@@ -50,11 +52,28 @@ const NodeID: NextPage = () => {
   }, [avax])
 
   function handleCopy() {
-    setCopy('Copied')
+    setCopy('Copied!')
     setTimeout(() => {
       setCopy('Copy')
     }, 2000)
   }
+
+  const circumference = 2 * Math.PI * 54
+  function getDonutData() {
+    const consumed = circumference * (daysLeft / 360)
+    const left = circumference - consumed
+    return `${consumed} ${left}`
+  }
+
+  // React.useEffect(() => {
+  //   if (daysLeft === 0) {
+  //     setDaysLeft(300)
+  //   }
+  //   const interval = setInterval(() => {
+  //     setDaysLeft(daysLeft - 1)
+  //   }, 24 * 60 * 1000)
+  //   return () => clearInterval(interval)
+  // }, [daysLeft])
 
   return (
     <div className="w-full bg-light">
@@ -69,7 +88,7 @@ const NodeID: NextPage = () => {
           Our avalanche staking service is trusted by millions of dollars from
           both institutional and retail investors
         </h1>
-        <Link href="#">
+        <Link href="stake_guide">
           <a>
             <Button filled classNames="mt-[32px]" startIcon={<BookmarkIcon />}>
               Learn how to stake
@@ -121,11 +140,38 @@ const NodeID: NextPage = () => {
               </p>
             </div>
           </div>
-          <div className="w-[120px] h-[120px] bg-green-400">High charts</div>
+          {/* SVG Donut Chart */}
+          <div className="relative w-[120px] h-[120px]">
+            <svg className="w-[120px] h-[120px]" viewBox="0 0 120 120">
+              <circle
+                className="stroke-gray-300 fill-transparent"
+                r="54"
+                cx="60"
+                cy="60"
+                strokeWidth="12"
+              />
+              <circle
+                className="stroke-green-400 fill-transparent"
+                r="54"
+                cx="60"
+                cy="60"
+                strokeWidth="12"
+                strokeDasharray={getDonutData()}
+                strokeDashoffset={circumference / 2}
+              />
+            </svg>
+            <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+              <Tooltip message="Time left">
+                <span className="whitespace-nowrap text-[16px]">
+                  <span className="font-semibold">{daysLeft}</span> days
+                </span>
+              </Tooltip>
+            </span>
+          </div>
         </div>
         <div className="mt-[80px] flex flex-wrap justify-center">
           <Link href="#">
-            <a className="w-[320px] h-[320px] flex justify-center items-center text-left bg-blue-light hover:bg-blue hover:text-white transition-all">
+            <a className="w-[320px] h-[320px] flex justify-center items-center text-left bg-blue-light hover:bg-blue hover:text-accent-light transition-all">
               <div className="w-[220px] flex flex-col justify-center gap-[10px]">
                 <h3 className="font-black text-[28px]">Avascan</h3>
                 <span className="text-[16px]">See node status</span>
@@ -134,7 +180,7 @@ const NodeID: NextPage = () => {
             </a>
           </Link>
           <Link href="#">
-            <a className="w-[320px] h-[320px] flex justify-center items-center text-left bg-green-light hover:bg-green-dark hover:text-white transition-all">
+            <a className="w-[320px] h-[320px] flex justify-center items-center text-left bg-green-light hover:bg-green-dark hover:text-green-light transition-all">
               <div className="w-[220px] flex flex-col justify-center gap-[10px]">
                 <h3 className="font-black text-[28px]">Allnodes</h3>
                 <span className="text-[16px]">See validator info</span>
@@ -143,7 +189,7 @@ const NodeID: NextPage = () => {
             </a>
           </Link>
           <Link href="#">
-            <a className="w-[320px] h-[320px] flex justify-center items-center text-left bg-red-light hover:bg-red hover:text-white transition-all">
+            <a className="w-[320px] h-[320px] flex justify-center items-center text-left bg-red-light hover:bg-red hover:text-red-light transition-all">
               <div className="w-[220px] flex flex-col justify-center gap-[10px]">
                 <h3 className="font-black text-[28px]">Stats</h3>
                 <span className="text-[16px]">See validator stats</span>

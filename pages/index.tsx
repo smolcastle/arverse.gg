@@ -79,7 +79,7 @@ const Home: NextPage = () => {
         </div>
         <div className="mt-6 max-w-[640px] w-full flex items-stretch min-h-[300px] z-10">
           <Link href="how-to-stake-avax">
-            <a className="w-[320px] h-[320px] flex justify-center items-center text-left bg-red-light hover:bg-red hover:text-white transition-all">
+            <a className="w-[320px] h-[320px] flex justify-center items-center text-left bg-red-light hover:bg-red hover:text-red-light transition-all">
               <div className="flex flex-col justify-center gap-[10px]">
                 <h3 className="font-extrabold text-[28px]">STAKE WITH US</h3>
                 <span className="text-[16px]">
@@ -90,7 +90,7 @@ const Home: NextPage = () => {
             </a>
           </Link>
           <Link href="validator-node-id">
-            <a className="w-[320px] h-[320px] flex justify-center items-center text-left bg-green-light hover:bg-green hover:text-white transition-all">
+            <a className="w-[320px] h-[320px] flex justify-center items-center text-left bg-green-light hover:bg-green hover:text-green-light transition-all">
               <div className="flex flex-col justify-center gap-[10px]">
                 <h3 className="font-extrabold text-[28px]">NODE STATUS</h3>
                 <span className="text-[16px]">View our node ID details</span>
