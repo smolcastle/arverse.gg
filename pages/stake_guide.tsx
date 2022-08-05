@@ -14,7 +14,7 @@ import Header from 'components/Header'
 import Tooltip from 'components/Tooltip'
 import Toggle from 'components/Toggle'
 import classNames from 'utils/classNames'
-// import axios from 'axios'
+import axios from 'axios'
 // import withCommas from 'utils/withCommas'
 
 const StakeGuide: NextPage = () => {
@@ -31,25 +31,25 @@ const StakeGuide: NextPage = () => {
     stake: 92700
   })
 
-  // async function getAVAX() {
-  //   await axios
-  //     .get(`${process.env.NEXT_PUBLIC_ARVERSE_URL}/api/avax` ?? '')
-  //     .then((res) => setAvax(res.data))
-  //     .catch((err) => console.log('ERROR:', err))
-  // }
+  async function getAVAX() {
+    await axios
+      .get(`${process.env.NEXT_PUBLIC_ARVERSE_URL}/api/avax` ?? '')
+      .then((res) => setAvax(res.data))
+      .catch((err) => console.log('ERROR:', err))
+  }
 
-  // // first time
-  // React.useEffect(() => {
-  //   getAVAX()
-  // }, [])
+  // first time
+  React.useEffect(() => {
+    getAVAX()
+  }, [])
 
-  // // every 5 mins
-  // React.useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     getAVAX()
-  //   }, 300000) // 5 mins
-  //   return () => clearInterval(interval)
-  // }, [avax])
+  // every 5 mins
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      getAVAX()
+    }, 300000) // 5 mins
+    return () => clearInterval(interval)
+  }, [avax])
 
   function handleAmountChange(e: React.ChangeEvent<HTMLInputElement>) {
     setAmount(parseFloat(e.target.value) || 0)

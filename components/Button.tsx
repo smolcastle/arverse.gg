@@ -3,8 +3,8 @@ import React from 'react'
 
 type Props = {
   children: React.ReactNode
-  startIcon?: JSX.Element
-  endIcon?: JSX.Element
+  startIcon?: React.ReactNode
+  endIcon?: React.ReactNode
   classNames?: string
   outlined?: Boolean
   filled?: Boolean
