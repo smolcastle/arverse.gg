@@ -14,7 +14,7 @@ const Tooltip = ({
         <div className="px-4 relative z-20 min-w-[80px] w-full h-[32px] flex items-center justify-center font-medium text-center text-[12px] leading-none text-white whitespace-nowrap bg-gray rounded-md">
           {message}
         </div>
-        <div className=" border border-transparent border-t-[10px] border-t-gray border-x-[10px]" />
+        <div className=" border border-transparent border-t-[8px] border-t-gray border-x-[7px]" />
       </div>
     </div>
   )

@@ -17,6 +17,7 @@ import PeakIcon from './svgs/Peak'
 import StackIcon from './svgs/Stack'
 import CalculatorIcon from './svgs/Calculator'
 import PresentationIcon from './svgs/Presentation'
+import InfoIcon from './svgs/Info'
 
 export {
   ClockIcon,
@@ -37,5 +38,6 @@ export {
   PeakIcon,
   StackIcon,
   CalculatorIcon,
-  PresentationIcon
+  PresentationIcon,
+  InfoIcon
 }

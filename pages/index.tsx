@@ -1,18 +1,18 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
-import Button from '../components/Button'
+import Button from 'components/Button'
 import {
   RightArrowIcon,
   AvaxIcon,
   UptimeIcon,
   MonitorIcon,
   EnterpriseIcon
-} from '../components/icons'
+} from 'components/icons'
 import React from 'react'
-import Footer from '../components/Footer'
-import Header from '../components/Header'
-import FAQsList from '../components/FAQsList'
+import Footer from 'components/Footer'
+import Header from 'components/Header'
+import FAQsList from 'components/FAQsList'
 import axios from 'axios'
 
 const Home: NextPage = () => {
@@ -201,7 +201,7 @@ const Home: NextPage = () => {
           <h2 className="pl-[32px] text-white font-bold text-[44px] w-[275px] leading-tight z-10">
             Stake with us to earn upto 8.0% a year on your AVAX
           </h2>
-          <Link href="how-to-stake-avax">
+          <Link href="stake_guide">
             <a className="w-[320px] h-[320px] flex justify-center items-center text-left bg-white border-2 border-transparent hover:border-accent shadow-md transition-all z-10">
               <div className="flex flex-col justify-center gap-[10px]">
                 <h3 className="font-extrabold text-[28px]">STAKE WITH US</h3>

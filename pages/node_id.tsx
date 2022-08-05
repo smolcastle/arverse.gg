@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
-import Button from '../components/Button'
+import Button from 'components/Button'
 import {
   RightArrowIcon,
   BookmarkIcon,
@@ -10,10 +10,10 @@ import {
   CashIcon,
   PeakIcon,
   StackIcon
-} from '../components/icons'
+} from 'components/icons'
 import React from 'react'
-import Footer from '../components/Footer'
-import Header from '../components/Header'
+import Footer from 'components/Footer'
+import Header from 'components/Header'
 import axios from 'axios'
 import Tooltip from 'components/Tooltip'
 import withCommas from 'utils/withCommas'
@@ -236,7 +236,7 @@ const NodeID: NextPage = () => {
             </div>
           </div>
         </div>
-        <Link href="#">
+        <Link href="stake_guide">
           <a className="px-[48px] mt-[160px] w-full h-[400px] flex justify-between items-center max-w-[640px] bg-accent text-white text-left rounded-[40px]">
             <div className="w-full flex flex-col justify-center gap-[10px]">
               <h3 className="font-black text-[28px]">Have question?</h3>
