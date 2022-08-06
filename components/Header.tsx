@@ -13,7 +13,7 @@ const Header = () => {
         <Link href="node_id">
           <a>Node ID</a>
         </Link>
-        <Link href="how_to_stake">
+        <Link href="stake_guide">
           <a>Stake with us</a>
         </Link>
       </div>

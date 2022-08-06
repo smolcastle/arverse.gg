@@ -1,18 +1,18 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
-import Button from '../components/Button'
+import Button from 'components/Button'
 import {
   RightArrowIcon,
   AvaxIcon,
   UptimeIcon,
   MonitorIcon,
   EnterpriseIcon
-} from '../components/icons'
+} from 'components/icons'
 import React from 'react'
-import Footer from '../components/Footer'
-import Header from '../components/Header'
-import FAQsList from '../components/FAQsList'
+import Footer from 'components/Footer'
+import Header from 'components/Header'
+import FAQsList from 'components/FAQsList'
 import axios from 'axios'
 
 const Home: NextPage = () => {
@@ -31,16 +31,14 @@ const Home: NextPage = () => {
       .catch((err) => console.log('ERROR:', err))
   }
 
-  // first time
   React.useEffect(() => {
     getAVAX()
   }, [])
 
-  // every 5 mins
   React.useEffect(() => {
     const interval = setInterval(() => {
       getAVAX()
-    }, 300000) // 5 mins
+    }, 300000)
     return () => clearInterval(interval)
   }, [avax])
 
@@ -56,8 +54,8 @@ const Home: NextPage = () => {
         <div
           className={`absolute top-[calc(800px)] left-0 w-full ${
             isAvax
-              ? 'lg:h-[2300px] md:h-[1900px] sm:h-[1900px] h-[1800px]'
-              : 'lg:h-[2150px] md:h-[2000px] sm:h-[1800px] h-[1700px]'
+              ? 'lg:h-[2200px] md:h-[1900px] sm:h-[1800px] h-[1750px]'
+              : 'lg:h-[2000px] md:h-[1850px] sm:h-[1700px] h-[1650px]'
           } bg-accent skew-y-6`}
         />
         <h1 className="max-w-[640px] w-full font-bold text-[56px] text-center z-10">
@@ -79,7 +77,7 @@ const Home: NextPage = () => {
         </div>
         <div className="mt-6 max-w-[640px] w-full flex items-stretch min-h-[300px] z-10">
           <Link href="how-to-stake-avax">
-            <a className="w-[320px] h-[320px] flex justify-center items-center text-left bg-red-light hover:bg-red hover:text-white transition-all">
+            <a className="w-[320px] h-[320px] flex justify-center items-center text-left bg-red-light hover:bg-red hover:text-red-light transition-all">
               <div className="flex flex-col justify-center gap-[10px]">
                 <h3 className="font-extrabold text-[28px]">STAKE WITH US</h3>
                 <span className="text-[16px]">
@@ -90,7 +88,7 @@ const Home: NextPage = () => {
             </a>
           </Link>
           <Link href="validator-node-id">
-            <a className="w-[320px] h-[320px] flex justify-center items-center text-left bg-green-light hover:bg-green hover:text-white transition-all">
+            <a className="w-[320px] h-[320px] flex justify-center items-center text-left bg-green-light hover:bg-green hover:text-green-light transition-all">
               <div className="flex flex-col justify-center gap-[10px]">
                 <h3 className="font-extrabold text-[28px]">NODE STATUS</h3>
                 <span className="text-[16px]">View our node ID details</span>
@@ -201,7 +199,7 @@ const Home: NextPage = () => {
           <h2 className="pl-[32px] text-white font-bold text-[44px] w-[275px] leading-tight z-10">
             Stake with us to earn upto 8.0% a year on your AVAX
           </h2>
-          <Link href="how-to-stake-avax">
+          <Link href="stake_guide">
             <a className="w-[320px] h-[320px] flex justify-center items-center text-left bg-white border-2 border-transparent hover:border-accent shadow-md transition-all z-10">
               <div className="flex flex-col justify-center gap-[10px]">
                 <h3 className="font-extrabold text-[28px]">STAKE WITH US</h3>

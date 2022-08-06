@@ -1,7 +1,7 @@
 import { NextPage } from 'next'
-import Header from '../components/Header'
-import FAQsList from '../components/FAQsList'
-import Footer from '../components/Footer'
+import Header from 'components/Header'
+import FAQsList from 'components/FAQsList'
+import Footer from 'components/Footer'
 import Head from 'next/head'
 
 const FAQs: NextPage = () => {

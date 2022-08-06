@@ -1,6 +1,6 @@
 const BookmarkIcon = ({ className }: any) => (
   <svg
-    className={`${className} w-5 h-5`}
+    className={`${className ?? 'w-5 h-5'}`}
     viewBox="0 0 18 18"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"

@@ -2,13 +2,13 @@ import { Disclosure } from '@headlessui/react'
 import Link from 'next/link'
 import Button from './Button'
 import { CrossIcon, PlusIcon } from './icons'
-import faqs from '../assets/faqs-qna'
-import getBasePath from '../utils/getBasePath'
+import faqs from 'assets/faqs-qna'
+import getBasePath from 'utils/getBasePath'
 import Input from './Input'
 import React from 'react'
 import SmallArrowRight from './icons/svgs/SmallArrowRight'
-import getSearchResults from '../utils/getSearchResults'
-import objEqual from '../utils/objEqual'
+import getSearchResults from 'utils/getSearchResults'
+import objEqual from 'utils/objEqual'
 
 type Props = {
   limit?: number
