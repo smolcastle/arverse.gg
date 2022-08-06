@@ -54,8 +54,8 @@ const Home: NextPage = () => {
         <div
           className={`absolute top-[calc(800px)] left-0 w-full ${
             isAvax
-              ? 'lg:h-[2300px] md:h-[1900px] sm:h-[1900px] h-[1800px]'
-              : 'lg:h-[2150px] md:h-[2000px] sm:h-[1800px] h-[1700px]'
+              ? 'lg:h-[2200px] md:h-[1900px] sm:h-[1800px] h-[1750px]'
+              : 'lg:h-[2000px] md:h-[1850px] sm:h-[1700px] h-[1650px]'
           } bg-accent skew-y-6`}
         />
         <h1 className="max-w-[640px] w-full font-bold text-[56px] text-center z-10">

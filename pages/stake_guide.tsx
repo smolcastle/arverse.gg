@@ -239,7 +239,7 @@ const StakeGuide: NextPage = () => {
                         </Tooltip>
                       </span>
                       <h2 className="mt-[4px] text-[24px] font-medium">
-                        {annualRewardRate}%
+                        {annualRewardRate.toFixed(2)}%
                       </h2>
                     </div>
                     <div className="text-[12px]">
@@ -250,7 +250,7 @@ const StakeGuide: NextPage = () => {
                         </Tooltip>
                       </span>
                       <h2 className="mt-[4px] text-[24px] font-medium">
-                        {delegationFees}%
+                        {delegationFees.toFixed(2)}%
                       </h2>
                     </div>
                     <div className="text-[12px]">
@@ -262,10 +262,11 @@ const StakeGuide: NextPage = () => {
                       </span>
                       <h2 className="mt-[4px] text-[24px] font-medium text-green">
                         +{!isAvax ? '$' : ''}
-                        {isAvax
+                        {(isAvax
                           ? estimatedEarnings
                           : Math.round(estimatedEarnings * avax.price * 100) /
-                            100}{' '}
+                            100
+                        ).toFixed(2)}{' '}
                         {isAvax ? (
                           <span className="text-[16px]">AVAX</span>
                         ) : (
@@ -274,10 +275,11 @@ const StakeGuide: NextPage = () => {
                       </h2>
                       <span className="text-[16px] mt-[4px] font-medium text-gray">
                         ~ {isAvax ? '$' : ''}
-                        {!isAvax
+                        {(!isAvax
                           ? estimatedEarnings
                           : Math.round(estimatedEarnings * avax.price * 100) /
-                            100}{' '}
+                            100
+                        ).toFixed(2)}{' '}
                         {!isAvax ? 'AVAX' : ''}
                       </span>
                     </div>
