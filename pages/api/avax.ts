@@ -24,7 +24,7 @@ async function getStakedAmount() {
       1000
   )
   await axios
-    .post(`${process.env.RPC_BASE_URL}/P` ?? '', {
+    .post(`${process.env.RPC_ENDPOINT}/P` ?? '', {
       jsonrpc: '2.0',
       id: 1,
       method: 'platform.getMaxStakeAmount',
@@ -65,7 +65,7 @@ async function getTVL() {
 
 async function getUptime() {
   await axios
-    .post(`${process.env.RPC_BASE_URL}/info` ?? '', {
+    .post(`${process.env.RPC_ENDPOINT}/info` ?? '', {
       jsonrpc: '2.0',
       id: 1,
       method: 'info.uptime'
