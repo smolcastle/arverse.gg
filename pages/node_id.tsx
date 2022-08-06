@@ -37,17 +37,15 @@ const NodeID: NextPage = () => {
       .catch((err) => console.log('ERROR:', err))
   }
 
-  // first time
   React.useEffect(() => {
     setDaysLeft(330)
     getAVAX()
   }, [])
 
-  // every 5 mins
   React.useEffect(() => {
     const interval = setInterval(() => {
       getAVAX()
-    }, 300000) // 5 mins
+    }, 300000)
     return () => clearInterval(interval)
   }, [avax])
 
@@ -65,15 +63,15 @@ const NodeID: NextPage = () => {
     return `${consumed} ${left}`
   }
 
-  // React.useEffect(() => {
-  //   if (daysLeft === 0) {
-  //     setDaysLeft(300)
-  //   }
-  //   const interval = setInterval(() => {
-  //     setDaysLeft(daysLeft - 1)
-  //   }, 24 * 60 * 1000)
-  //   return () => clearInterval(interval)
-  // }, [daysLeft])
+  React.useEffect(() => {
+    if (daysLeft === 0) {
+      setDaysLeft(300)
+    }
+    const interval = setInterval(() => {
+      setDaysLeft(daysLeft - 1)
+    }, 24 * 60 * 1000)
+    return () => clearInterval(interval)
+  }, [daysLeft])
 
   return (
     <div className="w-full bg-light">
@@ -142,7 +140,10 @@ const NodeID: NextPage = () => {
           </div>
           {/* SVG Donut Chart */}
           <div className="relative w-[120px] h-[120px]">
-            <svg className="w-[120px] h-[120px]" viewBox="0 0 120 120">
+            <svg
+              className="w-[120px] h-[120px] -scale-y-100"
+              viewBox="0 0 120 120"
+            >
               <circle
                 className="stroke-gray-300 fill-transparent"
                 r="54"
@@ -157,7 +158,7 @@ const NodeID: NextPage = () => {
                 cy="60"
                 strokeWidth="12"
                 strokeDasharray={getDonutData()}
-                strokeDashoffset={circumference / 2}
+                strokeDashoffset={circumference / 4}
               />
             </svg>
             <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">

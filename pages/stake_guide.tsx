@@ -1,7 +1,5 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-// import Link from 'next/link'
-// import Button from 'components/Button'
 import {
   BookmarkIcon,
   CalculatorIcon,
@@ -15,7 +13,6 @@ import Tooltip from 'components/Tooltip'
 import Toggle from 'components/Toggle'
 import classNames from 'utils/classNames'
 import axios from 'axios'
-// import withCommas from 'utils/withCommas'
 
 const StakeGuide: NextPage = () => {
   const [isCalculating, setIsCalculating] = React.useState(false)
@@ -44,7 +41,6 @@ const StakeGuide: NextPage = () => {
       .catch((err) => console.log('ERROR:', err))
   }
 
-  // first time
   React.useEffect(() => {
     getAVAX()
     setAnnualRewardRate(9)
@@ -52,11 +48,10 @@ const StakeGuide: NextPage = () => {
     setTimeLeft(330)
   }, [])
 
-  // every 5 mins
   React.useEffect(() => {
     const interval = setInterval(() => {
       getAVAX()
-    }, 300000) // 5 mins
+    }, 300000)
     return () => clearInterval(interval)
   }, [avax])
 

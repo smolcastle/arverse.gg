@@ -31,16 +31,14 @@ const Home: NextPage = () => {
       .catch((err) => console.log('ERROR:', err))
   }
 
-  // first time
   React.useEffect(() => {
     getAVAX()
   }, [])
 
-  // every 5 mins
   React.useEffect(() => {
     const interval = setInterval(() => {
       getAVAX()
-    }, 300000) // 5 mins
+    }, 300000)
     return () => clearInterval(interval)
   }, [avax])
 
