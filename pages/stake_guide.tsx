@@ -23,6 +23,12 @@ const StakeGuide: NextPage = () => {
   const [isAvax, setIsAvax] = React.useState(false)
   const [amount, setAmount] = React.useState(0)
   const [days, setDays] = React.useState(0)
+  const [estimatedEarnings, setEstimatedEarnings] = React.useState(0)
+  const [annualRewardRate, setAnnualRewardRate] = React.useState(9)
+  const [delegationFees, setDelegationFees] = React.useState(10)
+  const [amountWarning, setAmountWarning] = React.useState(false)
+  const [daysWarning, setDaysWarning] = React.useState(false)
+  const [timeLeft, setTimeLeft] = React.useState(330)
 
   const [avax, setAvax] = React.useState({
     price: 23.52,
@@ -41,6 +47,9 @@ const StakeGuide: NextPage = () => {
   // first time
   React.useEffect(() => {
     getAVAX()
+    setAnnualRewardRate(9)
+    setDelegationFees(10)
+    setTimeLeft(330)
   }, [])
 
   // every 5 mins
@@ -52,7 +61,51 @@ const StakeGuide: NextPage = () => {
   }, [avax])
 
   function handleAmountChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setAmount(parseFloat(e.target.value) || 0)
+    let newAmount = parseFloat(e.target.value) || 0
+    if (newAmount > 1e15) return
+    setAmount(newAmount)
+
+    let netStake = avax.stake * 5 - avax.stake
+    if (
+      !newAmount ||
+      (newAmount >= 25 &&
+        newAmount <= (isAvax ? netStake : netStake * avax.price))
+    ) {
+      setAmountWarning(false)
+    } else if (newAmount) {
+      setAmountWarning(true)
+    }
+
+    if (days && newAmount) {
+      let effectiveAPY = annualRewardRate * (1 - delegationFees / 100)
+      if (!isAvax) newAmount = newAmount / avax.price
+      let newEstimatedEarnings =
+        Math.round(((((newAmount * effectiveAPY) / 100) * days) / 365) * 100) /
+        100
+      setEstimatedEarnings(newEstimatedEarnings)
+    } else setEstimatedEarnings(0)
+  }
+
+  function handleDaysChange(e: React.ChangeEvent<HTMLInputElement>) {
+    let newDays = parseInt(e.target.value) || 0
+    if (newDays > 365) return
+    setDays(newDays)
+
+    if (!newDays || (newDays >= 14 && newDays <= timeLeft)) {
+      setDaysWarning(false)
+    } else if (newDays) {
+      setDaysWarning(true)
+    }
+
+    if (newDays && amount) {
+      let effectiveAPY = annualRewardRate * (1 - delegationFees / 100)
+      let updatedAmount = isAvax ? amount : amount / avax.price
+      let newEstimatedEarnings =
+        Math.round(
+          ((((updatedAmount * effectiveAPY) / 100) * newDays) / 365) * 100
+        ) / 100
+      setEstimatedEarnings(newEstimatedEarnings)
+    } else setEstimatedEarnings(0)
   }
 
   function handleCurrencyChange() {
@@ -66,10 +119,6 @@ const StakeGuide: NextPage = () => {
       }
       setAmount(newAmount)
     }
-  }
-
-  function handleDaysChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setDays(parseFloat(e.target.value) || 0)
   }
 
   return (
@@ -125,7 +174,12 @@ const StakeGuide: NextPage = () => {
                           <span>AVAX</span>
                         </span>
                       </label>
-                      <label className="w-[240px] flex items-center border-2 border-gray px-[16px] py-[8px]">
+                      <label
+                        className={classNames(
+                          'w-[240px] flex items-center border-2 px-[16px] py-[8px]',
+                          amountWarning ? 'border-red' : 'border-gray'
+                        )}
+                      >
                         <input
                           type="text"
                           id="amount"
@@ -157,7 +211,12 @@ const StakeGuide: NextPage = () => {
                           </Tooltip>
                         </span>
                       </label>
-                      <label className="w-[240px] flex items-center border-2 border-gray px-[16px] py-[8px]">
+                      <label
+                        className={classNames(
+                          'w-[240px] flex items-center border-2 px-[16px] py-[8px]',
+                          daysWarning ? 'border-red' : 'border-gray'
+                        )}
+                      >
                         <input
                           type="text"
                           id="days"
@@ -178,39 +237,53 @@ const StakeGuide: NextPage = () => {
                   </div>
                   <div className="text-right flex flex-col items-end gap-[32px]">
                     <div className="text-[12px]">
-                      <span className="flex items-center gap-[5px]">
+                      <span className="flex items-center justify-end gap-[5px]">
                         <span>Annual reward rate</span>
                         <Tooltip message="Based on network data">
                           <InfoIcon />
                         </Tooltip>
                       </span>
                       <h2 className="mt-[4px] text-[24px] font-medium">
-                        9.00%
+                        {annualRewardRate}%
                       </h2>
                     </div>
                     <div className="text-[12px]">
-                      <span className="flex items-center gap-[5px]">
+                      <span className="flex items-center justify-end gap-[5px]">
                         <span>Delegation fee</span>
                         <Tooltip message="Deducted from the rewards earned">
                           <InfoIcon />
                         </Tooltip>
                       </span>
                       <h2 className="mt-[4px] text-[24px] font-medium">
-                        10.00%
+                        {delegationFees}%
                       </h2>
                     </div>
                     <div className="text-[12px]">
-                      <span className="flex items-center gap-[5px]">
+                      <span className="flex items-center justify-end gap-[5px]">
                         <span>Estimated earnings</span>
                         <Tooltip message="Est. earnings after fee deduction">
                           <InfoIcon />
                         </Tooltip>
                       </span>
                       <h2 className="mt-[4px] text-[24px] font-medium text-green">
-                        +$0
+                        +{!isAvax ? '$' : ''}
+                        {isAvax
+                          ? estimatedEarnings
+                          : Math.round(estimatedEarnings * avax.price * 100) /
+                            100}{' '}
+                        {isAvax ? (
+                          <span className="text-[16px]">AVAX</span>
+                        ) : (
+                          ''
+                        )}
                       </h2>
                       <span className="text-[16px] mt-[4px] font-medium text-gray">
-                        ~ 0 AVAX
+                        ~ {isAvax ? '$' : ''}
+                        {!isAvax
+                          ? estimatedEarnings
+                          : Math.round(estimatedEarnings * avax.price * 100) /
+                            100}{' '}
+                        {!isAvax ? 'AVAX' : ''}
                       </span>
                     </div>
                   </div>
