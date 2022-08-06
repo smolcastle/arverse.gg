@@ -17,12 +17,7 @@ import axios from 'axios'
 
 const Home: NextPage = () => {
   const [isAvax, setIsAvax] = React.useState(true)
-  const [avax, setAvax] = React.useState({
-    price: 23.52,
-    marketCap: 16.9,
-    TVL: 2.8,
-    stake: 92700
-  })
+  const [avax, setAvax] = React.useState<any>({})
 
   async function getAVAX() {
     await axios
@@ -41,6 +36,8 @@ const Home: NextPage = () => {
     }, 300000)
     return () => clearInterval(interval)
   }, [avax])
+
+  console.log(avax)
 
   return (
     <div className="w-full bg-light">
@@ -170,8 +167,8 @@ const Home: NextPage = () => {
               <UptimeIcon />
               <h3 className="font-bold text-[24px]">High uptime</h3>
               <span className="font-medium text-[16px] text-center">
-                Highly available and redundant validator nodes ensure 99.9%
-                uptime
+                Highly available and redundant validator nodes ensure{' '}
+                {Number(avax.uptime).toFixed(2)}% uptime
               </span>
             </div>
             <div className="pt-16 pb-24 px-5 bg-white w-[264px] flex flex-col items-center justify-center gap-[24px] rounded-3xl shadow-md">
@@ -199,7 +196,7 @@ const Home: NextPage = () => {
           <h2 className="pl-[32px] text-white font-bold text-[44px] w-[275px] leading-tight z-10">
             Stake with us to earn upto 8.0% a year on your AVAX
           </h2>
-          <Link href="stake_guide">
+          <Link href="how-to-stake-avax">
             <a className="w-[320px] h-[320px] flex justify-center items-center text-left bg-white border-2 border-transparent hover:border-accent shadow-md transition-all z-10">
               <div className="flex flex-col justify-center gap-[10px]">
                 <h3 className="font-extrabold text-[28px]">STAKE WITH US</h3>

@@ -10,10 +10,10 @@ const Header = () => {
         <Link href="faqs">
           <a>FAQs</a>
         </Link>
-        <Link href="node_id">
+        <Link href="validator-node-id">
           <a>Node ID</a>
         </Link>
-        <Link href="stake_guide">
+        <Link href="how-to-stake-avax">
           <a>Stake with us</a>
         </Link>
       </div>
