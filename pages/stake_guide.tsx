@@ -130,7 +130,7 @@ const StakeGuide: NextPage = () => {
           <h1 className="mt-[16px] text-[32px] font-medium text-center">
             AVAX staking guide
           </h1>
-          <p className="max-w-[480px] w-full font-medium text-center text-[20px] text-gray">
+          <p className="max-w-[480px] w-full font-regular text-center text-[20px] text-gray">
             Follow the instructions below to stake your AVAX with Arverse
           </p>
         </div>
