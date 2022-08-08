@@ -178,7 +178,7 @@ const NodeID: NextPage = () => {
           <Link href="#">
             <a className="w-[320px] h-[320px] flex justify-center items-center text-left bg-green-light hover:bg-green-dark hover:text-green-light transition-all">
               <div className="w-[220px] flex flex-col justify-center gap-[10px]">
-                <h3 className="font-black text-[28px]">Allnodes</h3>
+                <h3 className="font-black text-[28px]">Vscout</h3>
                 <span className="text-[16px]">See validator info</span>
                 <RightArrowIcon className="mt-[10px]" />
               </div>
@@ -196,7 +196,7 @@ const NodeID: NextPage = () => {
         </div>
         <div className="mt-[160px] text-center">
           <h2 className="font-bold text-[48px]">Benefits of staking AVAX</h2>
-          <span className="pt-[16px] text-gray text-[24px] font-medium leading-tight">
+          <span className="pt-[16px] text-gray text-[24px] font-regular leading-tight">
             Compound your AVAX holdings by
             <br /> earning 9% a year
           </span>

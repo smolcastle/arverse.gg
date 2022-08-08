@@ -9,14 +9,14 @@ const Footer = () => {
           <Link href="/">
             <a className="text-[32px] font-semibold text-accent">ARVERSE</a>
           </Link>
-          <span className="-mt-4 text-gray-600 text-[16px]">
-            &copy; {new Date().getFullYear()} Arverse
+          <span className="-mt-4 text-gray-600 text-[16px] font-light">
+            &copy; {new Date().getFullYear()} Arverse.gg
           </span>
           <PoweredIcon />
         </div>
         <div className="flex flex-col gap-[12px] text-right text-gray-600">
           <h3 className="pb-[4px] font-medium text-[20px]">Company</h3>
-          <a href="https://twitter.com/arversegg">Follow us on Twitter</a>
+          <a href="https://twitter.com/sy100x">Follow us on Twitter</a>
           <Link href="faqs">
             <a className="text-[16px]">Help center</a>
           </Link>
@@ -29,8 +29,8 @@ const Footer = () => {
         </div>
       </div>
       <div className="mt-[50px]">
-        <h4 className="text-[16px] mb-5">Disclaimer</h4>
-        <p className="text-[12px]">
+        <h4 className="text-[16px] font-light mb-5">Disclaimer</h4>
+        <p className="text-[12px] font-light">
           Arverse.gg ("the platform") strives to provide the most reasonable and
           accurate information. Still all data and information presented on this
           platform may be wrong or does not reflect the current status. All

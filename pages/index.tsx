@@ -124,7 +124,7 @@ const Home: NextPage = () => {
         </div>
         <div className="mt-[300px] self-start max-w-[640px] w-full mx-auto text-white z-10">
           <h2 className="font-bold text-[48px]">What is Avalanche?</h2>
-          <p className="mt-[80px] font-medium text-[24px]">
+          <p className="mt-[40px] font-regular text-[24px]">
             Avalanche is open, programmable smart contracts platform for
             decentralized applications. It is blazingly fast, low cost, and
             eco-friendly. Compared to Ethereum and Bitcoin, it is the fastest
@@ -134,7 +134,7 @@ const Home: NextPage = () => {
             resources, and can scale infinitely.
           </p>
         </div>
-        <div className="mt-[64px] flex flex-wrap gap-[40px] max-w-[640px] w-full mx-auto z-10">
+        <div className="mt-[40px] flex flex-wrap gap-[40px] max-w-[640px] w-full mx-auto z-10">
           <Button startIcon={<AvaxIcon />} filled>
             Avalanche website
           </Button>
