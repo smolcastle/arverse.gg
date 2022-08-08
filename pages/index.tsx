@@ -59,7 +59,7 @@ const Home: NextPage = () => {
           Compound your <span className="text-red">AVAX</span>
         </h1>
         <span className="px-4 my-4 max-w-[640px] w-full font-medium text-[24px] text-center z-10">
-          Stake your AVAX tokens and earn passive income on your investments
+          Stake your AVAX tokens and earn 9% per annum on your investments
         </span>
         <div className="my-4 flex gap-6 font-medium text-[16px] z-10">
           <span className="underline underline-offset-2 decoration-dotted text-center">
@@ -142,22 +142,20 @@ const Home: NextPage = () => {
         </div>
         <div className="mt-[110px] flex text-center justify-evenly max-w-[640px] w-full mx-auto z-10">
           <div className="flex flex-col items-center gap-1">
-            <h3 className="font-bold sm:text-4xl text-[40px]">
-              ${avax.price ?? 22.98}
-            </h3>
+            <h3 className="font-bold sm:text-4xl text-[40px]">${avax.price}</h3>
             <span className="text-[16px]">AVAX Price</span>
           </div>
           <div className="flex flex-col items-center gap-1">
             <h3 className="font-bold sm:text-4xl text-[40px]">
-              ${avax.marketCap ?? 16.5}B
+              ${avax.marketCap}B
             </h3>
             <span className="text-[16px]">AVAX marketcap</span>
           </div>
           <div className="flex flex-col items-center gap-1">
             <h3 className="font-bold sm:text-4xl text-[40px]">
-              ${avax.TVL ?? 2.8}B
+              {avax.totalStake}%
             </h3>
-            <span className="text-[16px]">Avalanche TVL</span>
+            <span className="text-[16px]">AVAX Stake</span>
           </div>
         </div>
         <div className="mt-[240px] flex flex-col justify-center items-center max-w-[920px] w-full z-10">

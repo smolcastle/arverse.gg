@@ -4,7 +4,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 type Data = {
   price: number
   marketCap: number
-  TVL: number
+  totalStake: string
   stake: number
   uptime: number
 }
@@ -12,33 +12,28 @@ type Data = {
 let data: Data = {
   price: 0,
   marketCap: 0,
-  TVL: 0,
+  totalStake: '',
   stake: 0,
   uptime: 0
 }
 
-async function getStakedAmount() {
-  let start = Math.floor(Date.now() / 1000)
-  let end = Math.floor(
-    new Date(new Date().setFullYear(new Date().getFullYear() + 1)).getTime() /
-      1000
-  )
+async function getAVAX() {
   await axios
-    .post(`${process.env.RPC_ENDPOINT}/P` ?? '', {
-      jsonrpc: '2.0',
-      id: 1,
-      method: 'platform.getMaxStakeAmount',
-      params: {
-        nodeID: process.env.NEXT_PUBLIC_NODE_ID,
-        startTime: start,
-        endTime: end
-      }
+    .get(process.env.VSCOUT_ENDPOINT ?? '')
+    .then((res) => {
+      let validator = res.data.validators?.filter(
+        (v: any) => v.nodeID === process.env.NEXT_PUBLIC_NODE_ID ?? ''
+      )[0]
+      data.stake = validator?.totalStakeAmount / 1e9 ?? 0
+      data.uptime = validator?.uptime * 100 ?? 0
+      data.totalStake = (
+        Math.round(((res.data.allStake * 100) / 1e9 / (7.2 * 1e8)) * 100) /
+          100 ?? 0
+      ).toFixed(2)
+      // console.log(data.totalStake)
     })
-    .then((res) => (data.stake = res.data?.result?.amount / 1e9))
     .catch((err) => console.log('ERROR:', err.message))
-}
 
-async function getPriceAndMarketCap() {
   const config = {
     headers: {
       'X-CMC_PRO_API_KEY': process.env.CMC_API_KEY ?? ''
@@ -57,31 +52,6 @@ async function getPriceAndMarketCap() {
         ) / 10
     })
     .catch((err) => console.log('ERROR:', err))
-}
-
-async function getTVL() {
-  data.TVL = 2.8
-}
-
-async function getUptime() {
-  await axios
-    .post(`${process.env.RPC_ENDPOINT}/info` ?? '', {
-      jsonrpc: '2.0',
-      id: 1,
-      method: 'info.uptime'
-    })
-    .then(
-      (res) =>
-        (data.uptime = parseFloat(res.data?.result?.rewardingStakePercentage))
-    )
-    .catch((err) => console.log('ERROR:', err.message))
-}
-
-function getAVAX() {
-  getStakedAmount()
-  getPriceAndMarketCap()
-  getTVL()
-  getUptime()
 }
 
 export default function handler(

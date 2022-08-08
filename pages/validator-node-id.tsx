@@ -166,8 +166,12 @@ const NodeID: NextPage = () => {
           </div>
         </div>
         <div className="mt-[80px] flex flex-wrap justify-center">
-          <Link href="#">
-            <a className="w-[320px] h-[320px] flex justify-center items-center text-left bg-blue-light hover:bg-blue hover:text-accent-light transition-all">
+          <Link href="https://avascan.info/staking/validator/NodeID-2pN3EtqAUKWvJedQvYfPSgKeonNmFn8bA">
+            <a
+              target={'_blank'}
+              rel="noopener noreferrer"
+              className="w-[320px] h-[320px] flex justify-center items-center text-left bg-blue-light hover:bg-blue hover:text-accent-light transition-all"
+            >
               <div className="w-[220px] flex flex-col justify-center gap-[10px]">
                 <h3 className="font-black text-[28px]">Avascan</h3>
                 <span className="text-[16px]">See node status</span>
@@ -175,8 +179,12 @@ const NodeID: NextPage = () => {
               </div>
             </a>
           </Link>
-          <Link href="#">
-            <a className="w-[320px] h-[320px] flex justify-center items-center text-left bg-green-light hover:bg-green-dark hover:text-green-light transition-all">
+          <Link href="https://vscout.io/validator/NodeID-2pN3EtqAUKWvJedQvYfPSgKeonNmFn8bA">
+            <a
+              target={'_blank'}
+              rel="noopener noreferrer"
+              className="w-[320px] h-[320px] flex justify-center items-center text-left bg-green-light hover:bg-green-dark hover:text-green-light transition-all"
+            >
               <div className="w-[220px] flex flex-col justify-center gap-[10px]">
                 <h3 className="font-black text-[28px]">Vscout</h3>
                 <span className="text-[16px]">See validator info</span>
@@ -184,8 +192,12 @@ const NodeID: NextPage = () => {
               </div>
             </a>
           </Link>
-          <Link href="#">
-            <a className="w-[320px] h-[320px] flex justify-center items-center text-left bg-red-light hover:bg-red hover:text-red-light transition-all">
+          <Link href="https://stats.avax.network/dashboard/validator-health-check/?nodeid=NodeID-2pN3EtqAUKWvJedQvYfPSgKeonNmFn8bA">
+            <a
+              target={'_blank'}
+              rel="noopener noreferrer"
+              className="w-[320px] h-[320px] flex justify-center items-center text-left bg-red-light hover:bg-red hover:text-red-light transition-all"
+            >
               <div className="w-[220px] flex flex-col justify-center gap-[10px]">
                 <h3 className="font-black text-[28px]">Stats</h3>
                 <span className="text-[16px]">See validator stats</span>

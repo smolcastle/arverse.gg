@@ -8,6 +8,7 @@ type Props = {
   classNames?: string
   outlined?: Boolean
   filled?: Boolean
+  full?: Boolean
 }
 
 const Button: NextPage<Props> = (props) => {
@@ -21,7 +22,9 @@ const Button: NextPage<Props> = (props) => {
           : props.filled
           ? 'bg-white text-black hover:bg-zinc-50'
           : 'text-light-600 hover:bg-light-300 hover:text-black'
-      } min-w-[160px] h-[56px] px-[18px] rounded-lg text-[16px] transition-all`}
+      } ${
+        props.full && 'w-full'
+      } h-[56px] px-[18px] rounded-lg text-[16px] transition-all`}
     >
       {props.startIcon}
       <span>{props.children}</span>
