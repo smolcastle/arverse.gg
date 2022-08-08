@@ -6,13 +6,15 @@ type Data = {
   marketCap: number
   TVL: number
   stake: number
+  uptime: number
 }
 
 let data: Data = {
   price: 0,
   marketCap: 0,
   TVL: 0,
-  stake: 0
+  stake: 0,
+  uptime: 0
 }
 
 async function getStakedAmount() {
@@ -22,7 +24,7 @@ async function getStakedAmount() {
       1000
   )
   await axios
-    .post(process.env.RPC_ENDPOINT ?? '', {
+    .post(`${process.env.RPC_ENDPOINT}/P` ?? '', {
       jsonrpc: '2.0',
       id: 1,
       method: 'platform.getMaxStakeAmount',
@@ -33,7 +35,7 @@ async function getStakedAmount() {
       }
     })
     .then((res) => (data.stake = res.data?.result?.amount / 1e9))
-    .catch((err) => console.log('ERROR:', err))
+    .catch((err) => console.log('ERROR:', err.message))
 }
 
 async function getPriceAndMarketCap() {
@@ -61,10 +63,25 @@ async function getTVL() {
   data.TVL = 2.8
 }
 
+async function getUptime() {
+  await axios
+    .post(`${process.env.RPC_ENDPOINT}/info` ?? '', {
+      jsonrpc: '2.0',
+      id: 1,
+      method: 'info.uptime'
+    })
+    .then(
+      (res) =>
+        (data.uptime = parseFloat(res.data?.result?.rewardingStakePercentage))
+    )
+    .catch((err) => console.log('ERROR:', err.message))
+}
+
 function getAVAX() {
   getStakedAmount()
   getPriceAndMarketCap()
   getTVL()
+  getUptime()
 }
 
 export default function handler(

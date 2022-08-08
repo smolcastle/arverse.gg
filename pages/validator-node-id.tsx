@@ -23,12 +23,7 @@ const NodeID: NextPage = () => {
   const [copy, setCopy] = React.useState('Copy')
   const [daysLeft, setDaysLeft] = React.useState(300)
 
-  const [avax, setAvax] = React.useState({
-    price: 23.52,
-    marketCap: 16.9,
-    TVL: 2.8,
-    stake: 92700
-  })
+  const [avax, setAvax] = React.useState<any>({})
 
   async function getAVAX() {
     await axios
@@ -86,7 +81,7 @@ const NodeID: NextPage = () => {
           Our avalanche staking service is trusted by millions of dollars from
           both institutional and retail investors
         </h1>
-        <Link href="stake_guide">
+        <Link href="how-to-stake-avax">
           <a>
             <Button filled classNames="mt-[32px]" startIcon={<BookmarkIcon />}>
               Learn how to stake
@@ -122,13 +117,13 @@ const NodeID: NextPage = () => {
                 {isAvax ? (
                   <>
                     <h3 className="font-semibold text-[40px]">
-                      {withCommas(avax.stake)}
+                      {withCommas(Number(avax.stake))}
                     </h3>
                     <span className="font-medium text-[12px]">AVAX</span>
                   </>
                 ) : (
                   <h3 className="font-semibold text-[40px]">
-                    ${withCommas(avax.stake * avax.price)}
+                    ${withCommas(Number(avax.stake * avax.price))}
                   </h3>
                 )}
               </div>
@@ -237,7 +232,7 @@ const NodeID: NextPage = () => {
             </div>
           </div>
         </div>
-        <Link href="stake_guide">
+        <Link href="how-to-stake-avax">
           <a className="px-[48px] mt-[160px] w-full h-[400px] flex justify-between items-center max-w-[640px] bg-accent text-white text-left rounded-[40px]">
             <div className="w-full flex flex-col justify-center gap-[10px]">
               <h3 className="font-black text-[28px]">Have question?</h3>

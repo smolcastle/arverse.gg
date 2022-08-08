@@ -21,8 +21,9 @@ yarn install
 ```
 
 Requirements:
+
 1. `CMC_API_KEY=` Coinmarketcap API key to fetch AVAX price
-2. `RPC_ENDPOINT=` AVAX RPC endpoint to fetch node data
+2. `RPC_ENDPOINT=` AVAX RPC base endpoint URL to fetch node data
 
 ###### Copy environment variables
 
@@ -55,7 +56,6 @@ docker-compose up
 ### Production deployment
 
 Auto deployment is enabled via Github workflow.
-
 
 ### License
 

@@ -27,12 +27,7 @@ const StakeGuide: NextPage = () => {
   const [daysWarning, setDaysWarning] = React.useState(false)
   const [timeLeft, setTimeLeft] = React.useState(330)
 
-  const [avax, setAvax] = React.useState({
-    price: 23.52,
-    marketCap: 16.9,
-    TVL: 2.8,
-    stake: 92700
-  })
+  const [avax, setAvax] = React.useState<any>({})
 
   async function getAVAX() {
     await axios
