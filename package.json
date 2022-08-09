@@ -6,7 +6,7 @@
   "homepage": "https://arverse.gg/",
   "scripts": {
     "analyze": "ANALYZE=true yarn build",
-    "dev": "next dev",
+    "dev": "NODE_OPTIONS='--inspect' next dev",
     "format": "prettier --write .",
     "build": "next build",
     "start": "next start",

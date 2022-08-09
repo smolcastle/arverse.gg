@@ -9,4 +9,4 @@ services:
       - '8000:80'
     environment:
       - CMC_API_KEY=
-      - RPC_ENDPOINT=
+      - API_ENDPOINT=
