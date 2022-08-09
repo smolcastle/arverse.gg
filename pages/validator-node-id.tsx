@@ -17,23 +17,35 @@ import Header from 'components/Header'
 import axios from 'axios'
 import Tooltip from 'components/Tooltip'
 import withCommas from 'utils/withCommas'
+import catchError from 'utils/catchError'
+import getDonutData, { circumference } from 'utils/getDonutData'
 
 const NodeID: NextPage = () => {
   const [isAvax, setIsAvax] = React.useState(true)
   const [copy, setCopy] = React.useState('Copy')
   const [daysLeft, setDaysLeft] = React.useState(300)
-
   const [avax, setAvax] = React.useState<any>({})
+  const [fraction, setFraction] = React.useState(0)
 
   async function getAVAX() {
     await axios
       .get(`${process.env.NEXT_PUBLIC_ARVERSE_URL}/api/avax` ?? '')
-      .then((res) => setAvax(res.data))
-      .catch((err) => console.log('ERROR:', err))
+      .then((res) => {
+        let avaxResponse = res.data
+        setAvax(avaxResponse)
+
+        let startTime = avaxResponse.startTime
+        let endTime = avaxResponse.endTime
+        let currTime = Math.floor(Date.now() / 1000)
+        setDaysLeft(Math.floor((endTime - currTime) / (24 * 60 * 60)))
+
+        let fraction = (endTime - currTime) / (endTime - startTime)
+        setFraction(fraction)
+      })
+      .catch(catchError)
   }
 
   React.useEffect(() => {
-    setDaysLeft(330)
     getAVAX()
   }, [])
 
@@ -49,13 +61,6 @@ const NodeID: NextPage = () => {
     setTimeout(() => {
       setCopy('Copy')
     }, 2000)
-  }
-
-  const circumference = 2 * Math.PI * 54
-  function getDonutData() {
-    const consumed = circumference * (daysLeft / 360)
-    const left = circumference - consumed
-    return `${consumed} ${left}`
   }
 
   React.useEffect(() => {
@@ -104,6 +109,9 @@ const NodeID: NextPage = () => {
               <CopyIcon />
             </Tooltip>
           </div>
+          <p className="mt-[12px] text-[16px] text-gray font-normal">
+            Running {avax.version}
+          </p>
         </div>
 
         <div className="mt-[50px] flex items-center justify-between max-w-[640px] w-full">
@@ -128,8 +136,8 @@ const NodeID: NextPage = () => {
                 )}
               </div>
               <p className="text-[16px] leading-tight">
-                You can stake your AVAX for minimum 2 weeks and earn upto 9%
-                rewards annually with us.
+                You can stake your AVAX for minimum 2 weeks and earn upto{' '}
+                {avax.rewardRate}% rewards annually with us.
               </p>
             </div>
           </div>
@@ -152,8 +160,8 @@ const NodeID: NextPage = () => {
                 cx="60"
                 cy="60"
                 strokeWidth="12"
-                strokeDasharray={getDonutData()}
-                strokeDashoffset={circumference / 4}
+                strokeDasharray={getDonutData(circumference(54), fraction)}
+                strokeDashoffset={circumference(54) / 4}
               />
             </svg>
             <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
@@ -210,7 +218,7 @@ const NodeID: NextPage = () => {
           <h2 className="font-bold text-[48px]">Benefits of staking AVAX</h2>
           <span className="pt-[16px] text-gray text-[24px] font-regular leading-tight">
             Compound your AVAX holdings by
-            <br /> earning 9% a year
+            <br /> earning {avax.rewardRate}% a year
           </span>
           <div className="mt-[80px] flex flex-col max-w-[640px] w-full">
             <div className="w-[400px] h-[400px] bg-white flex flex-col items-center justify-center gap-[8px] rounded-full">
@@ -244,7 +252,7 @@ const NodeID: NextPage = () => {
             </div>
           </div>
         </div>
-        <Link href="how-to-stake-avax">
+        <Link href="faqs">
           <a className="px-[48px] mt-[160px] w-full h-[400px] flex justify-between items-center max-w-[640px] bg-accent text-white text-left rounded-[40px]">
             <div className="w-full flex flex-col justify-center gap-[10px]">
               <h3 className="font-black text-[28px]">Have question?</h3>

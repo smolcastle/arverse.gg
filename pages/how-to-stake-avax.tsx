@@ -13,6 +13,7 @@ import Tooltip from 'components/Tooltip'
 import Toggle from 'components/Toggle'
 import classNames from 'utils/classNames'
 import axios from 'axios'
+import catchError from 'utils/catchError'
 
 const StakeGuide: NextPage = () => {
   const [isCalculating, setIsCalculating] = React.useState(false)
@@ -21,26 +22,17 @@ const StakeGuide: NextPage = () => {
   const [amount, setAmount] = React.useState(0)
   const [days, setDays] = React.useState(0)
   const [estimatedEarnings, setEstimatedEarnings] = React.useState(0)
-  const [annualRewardRate, setAnnualRewardRate] = React.useState(9)
-  const [delegationFees, setDelegationFees] = React.useState(10)
-  const [amountWarning, setAmountWarning] = React.useState(false)
-  const [daysWarning, setDaysWarning] = React.useState(false)
-  const [timeLeft, setTimeLeft] = React.useState(330)
-
   const [avax, setAvax] = React.useState<any>({})
 
   async function getAVAX() {
     await axios
       .get(`${process.env.NEXT_PUBLIC_ARVERSE_URL}/api/avax` ?? '')
       .then((res) => setAvax(res.data))
-      .catch((err) => console.log('ERROR:', err))
+      .catch(catchError)
   }
 
   React.useEffect(() => {
     getAVAX()
-    setAnnualRewardRate(9)
-    setDelegationFees(10)
-    setTimeLeft(330)
   }, [])
 
   React.useEffect(() => {
@@ -55,19 +47,8 @@ const StakeGuide: NextPage = () => {
     if (newAmount > 1e15) return
     setAmount(newAmount)
 
-    let netStake = avax.stake * 5 - avax.stake
-    if (
-      !newAmount ||
-      (newAmount >= 25 &&
-        newAmount <= (isAvax ? netStake : netStake * avax.price))
-    ) {
-      setAmountWarning(false)
-    } else if (newAmount) {
-      setAmountWarning(true)
-    }
-
     if (days && newAmount) {
-      let effectiveAPY = annualRewardRate * (1 - delegationFees / 100)
+      let effectiveAPY = avax.rewardRate * (1 - avax.delegationFee / 100)
       if (!isAvax) newAmount = newAmount / avax.price
       let newEstimatedEarnings =
         Math.round(((((newAmount * effectiveAPY) / 100) * days) / 365) * 100) /
@@ -78,17 +59,10 @@ const StakeGuide: NextPage = () => {
 
   function handleDaysChange(e: React.ChangeEvent<HTMLInputElement>) {
     let newDays = parseInt(e.target.value) || 0
-    if (newDays > 365) return
     setDays(newDays)
 
-    if (!newDays || (newDays >= 14 && newDays <= timeLeft)) {
-      setDaysWarning(false)
-    } else if (newDays) {
-      setDaysWarning(true)
-    }
-
     if (newDays && amount) {
-      let effectiveAPY = annualRewardRate * (1 - delegationFees / 100)
+      let effectiveAPY = avax.rewardRate * (1 - avax.delegationFee / 100)
       let updatedAmount = isAvax ? amount : amount / avax.price
       let newEstimatedEarnings =
         Math.round(
@@ -161,13 +135,15 @@ const StakeGuide: NextPage = () => {
                             enabled={isAvax}
                             onChange={handleCurrencyChange}
                           />
-                          <span>AVAX</span>
+                          <span className={`${isAvax ? 'text-red' : ''}`}>
+                            AVAX
+                          </span>
                         </span>
                       </label>
                       <label
                         className={classNames(
                           'w-[240px] flex items-center border-2 px-[16px] py-[8px]',
-                          amountWarning ? 'border-red' : 'border-gray'
+                          isAvax ? 'border-red' : 'border-gray'
                         )}
                       >
                         <input
@@ -201,12 +177,7 @@ const StakeGuide: NextPage = () => {
                           </Tooltip>
                         </span>
                       </label>
-                      <label
-                        className={classNames(
-                          'w-[240px] flex items-center border-2 px-[16px] py-[8px]',
-                          daysWarning ? 'border-red' : 'border-gray'
-                        )}
-                      >
+                      <label className="w-[240px] flex items-center border-2 border-gray px-[16px] py-[8px]">
                         <input
                           type="text"
                           id="days"
@@ -234,7 +205,7 @@ const StakeGuide: NextPage = () => {
                         </Tooltip>
                       </span>
                       <h2 className="mt-[4px] text-[24px] font-medium">
-                        {annualRewardRate.toFixed(2)}%
+                        {avax.rewardRate.toFixed(2)}%
                       </h2>
                     </div>
                     <div className="text-[12px]">
@@ -245,7 +216,7 @@ const StakeGuide: NextPage = () => {
                         </Tooltip>
                       </span>
                       <h2 className="mt-[4px] text-[24px] font-medium">
-                        {delegationFees.toFixed(2)}%
+                        {avax.delegationFee.toFixed(2)}%
                       </h2>
                     </div>
                     <div className="text-[12px]">

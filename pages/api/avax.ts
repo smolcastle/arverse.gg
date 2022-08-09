@@ -1,20 +1,31 @@
 import axios from 'axios'
 import type { NextApiRequest, NextApiResponse } from 'next'
+import catchError from 'utils/catchError'
 
 type Data = {
   price: number
   marketCap: number
-  totalStake: string
+  totalStake: number
   stake: number
   uptime: number
+  rewardRate: number
+  delegationFee: number
+  startTime: number
+  endTime: number
+  version: string
 }
 
 let data: Data = {
   price: 0,
   marketCap: 0,
-  totalStake: '',
+  totalStake: 0,
   stake: 0,
-  uptime: 0
+  uptime: 0,
+  rewardRate: 0,
+  delegationFee: 0,
+  version: '',
+  startTime: 0,
+  endTime: 0
 }
 
 async function getAVAX() {
@@ -26,13 +37,22 @@ async function getAVAX() {
       )[0]
       data.stake = validator?.totalStakeAmount / 1e9 ?? 0
       data.uptime = validator?.uptime * 100 ?? 0
-      data.totalStake = (
+      data.totalStake =
         Math.round(((res.data.allStake * 100) / 1e9 / (7.2 * 1e8)) * 100) /
           100 ?? 0
-      ).toFixed(2)
-      // console.log(data.totalStake)
+      data.rewardRate =
+        Math.round(
+          ((validator?.potentialReward * 100 * 365 * 24 * 3600) /
+            (validator?.stakeAmount *
+              (validator?.endTime - validator?.startTime))) *
+            100
+        ) / 100 ?? 0
+      data.delegationFee = Math.round(validator?.delegationFee * 100) / 100 ?? 0
+      data.startTime = validator?.startTime ?? 0
+      data.endTime = validator?.endTime ?? 0
+      data.version = validator?.version ?? ''
     })
-    .catch((err) => console.log('ERROR:', err.message))
+    .catch(catchError)
 
   const config = {
     headers: {
@@ -51,7 +71,7 @@ async function getAVAX() {
           (fetchedData.quote.USD.fully_diluted_market_cap / 1e9) * 10
         ) / 10
     })
-    .catch((err) => console.log('ERROR:', err))
+    .catch(catchError)
 }
 
 export default function handler(

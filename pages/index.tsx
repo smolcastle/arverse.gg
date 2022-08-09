@@ -14,6 +14,7 @@ import Footer from 'components/Footer'
 import Header from 'components/Header'
 import FAQsList from 'components/FAQsList'
 import axios from 'axios'
+import catchError from 'utils/catchError'
 
 const Home: NextPage = () => {
   const [isAvax, setIsAvax] = React.useState(true)
@@ -23,7 +24,7 @@ const Home: NextPage = () => {
     await axios
       .get(`${process.env.NEXT_PUBLIC_ARVERSE_URL}/api/avax` ?? '')
       .then((res) => setAvax(res.data))
-      .catch((err) => console.log('ERROR:', err))
+      .catch(catchError)
   }
 
   React.useEffect(() => {
@@ -36,8 +37,6 @@ const Home: NextPage = () => {
     }, 300000)
     return () => clearInterval(interval)
   }, [avax])
-
-  console.log(avax)
 
   return (
     <div className="w-full bg-light">
@@ -59,7 +58,8 @@ const Home: NextPage = () => {
           Compound your <span className="text-red">AVAX</span>
         </h1>
         <span className="px-4 my-4 max-w-[640px] w-full font-medium text-[24px] text-center z-10">
-          Stake your AVAX tokens and earn 9% per annum on your investments
+          Stake your AVAX tokens and earn {avax.rewardRate}% per annum on your
+          investments
         </span>
         <div className="my-4 flex gap-6 font-medium text-[16px] z-10">
           <span className="underline underline-offset-2 decoration-dotted text-center">

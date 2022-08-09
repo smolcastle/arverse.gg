@@ -9,6 +9,8 @@ import React from 'react'
 import SmallArrowRight from './icons/svgs/SmallArrowRight'
 import getSearchResults from 'utils/getSearchResults'
 import objEqual from 'utils/objEqual'
+import axios from 'axios'
+import catchError from 'utils/catchError'
 
 type Props = {
   limit?: number
@@ -17,21 +19,44 @@ type Props = {
 const FAQsList = (props: Props) => {
   const currentPath = getBasePath()
   const [query, setQuery] = React.useState('')
-  const [faqList, setFaqList] = React.useState<Array<any>>(faqs)
+  const [faqList, setFaqList] = React.useState<Array<any>>([])
+  const [faqsCopy, setFaqsCopy] = React.useState<Array<any>>([])
+  const [avax, setAvax] = React.useState<any>({})
+
+  async function getAVAX() {
+    await axios
+      .get(`${process.env.NEXT_PUBLIC_ARVERSE_URL}/api/avax` ?? '')
+      .then((res) => {
+        setFaqsCopy(faqs(res.data.rewardRate))
+        setAvax(res.data)
+      })
+      .catch(catchError)
+  }
+
+  React.useEffect(() => {
+    getAVAX()
+  }, [])
+
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      getAVAX()
+    }, 300000)
+    return () => clearInterval(interval)
+  }, [avax])
 
   React.useEffect(() => {
     if (query.length) {
-      let newFaqs = faqs.map((faq, index) => {
+      let newFaqs = faqsCopy.map((faq, index) => {
         let newFaq = {
           question: getSearchResults(faq.question, query),
           answer: getSearchResults(faq.answer, query)
         }
-        if (!objEqual(newFaq, faqs[index])) return newFaq
+        if (!objEqual(newFaq, faqsCopy[index])) return newFaq
       })
       newFaqs = newFaqs.filter((faq) => Boolean(faq))
       setFaqList(newFaqs)
-    } else setFaqList(faqs)
-  }, [query])
+    } else setFaqList(faqsCopy)
+  }, [query, faqsCopy])
 
   return (
     <div

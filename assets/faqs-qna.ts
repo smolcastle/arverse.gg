@@ -1,4 +1,4 @@
-const faqs = [
+const faqs = (rewardRate: any) => [
   {
     question: 'Why should you stake?',
     answer:
@@ -24,8 +24,9 @@ const faqs = [
   },
   {
     question: 'What is the staking APY for AVAX?',
-    answer:
-      'APY is how much interest you can earn by staking over a period of one year. Currently it is approximately reward rate (GET IT FROM API)'
+    answer: `APY is how much interest you can earn by staking over a period of one year. Currently it is approximately ${
+      rewardRate ?? 0
+    }%.`
   },
   {
     question: 'What is delegation fee?',
