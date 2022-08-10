@@ -3,8 +3,11 @@ import Head from 'next/head'
 import {
   BookmarkIcon,
   CalculatorIcon,
+  CopyIcon,
   InfoIcon,
-  PresentationIcon
+  PlayIcon,
+  PresentationIcon,
+  TickIcon
 } from 'components/icons'
 import React from 'react'
 import Footer from 'components/Footer'
@@ -12,35 +15,27 @@ import Header from 'components/Header'
 import Tooltip from 'components/Tooltip'
 import Toggle from 'components/Toggle'
 import classNames from 'utils/classNames'
-import axios from 'axios'
-import catchError from 'utils/catchError'
+import ExternalLink from 'components/ExternalLink'
+import useSWR from 'swr'
+import fetcher from 'utils/fetcher'
 
 const StakeGuide: NextPage = () => {
   const [isCalculating, setIsCalculating] = React.useState(false)
-  const [isTutorial, setIsTutorial] = React.useState(false)
+  const [isTutorial, setIsTutorial] = React.useState(true)
   const [isAvax, setIsAvax] = React.useState(false)
   const [amount, setAmount] = React.useState(0)
   const [days, setDays] = React.useState(0)
   const [estimatedEarnings, setEstimatedEarnings] = React.useState(0)
+  const [copy, setCopy] = React.useState('Copy')
   const [avax, setAvax] = React.useState<any>({})
 
-  async function getAVAX() {
-    await axios
-      .get(`${process.env.NEXT_PUBLIC_ARVERSE_URL}/api/avax` ?? '')
-      .then((res) => setAvax(res.data))
-      .catch(catchError)
-  }
-
+  const { data, error } = useSWR('/api/avax', fetcher)
+  console.log('😱 useSWR:', data, error)
   React.useEffect(() => {
-    getAVAX()
-  }, [])
+    setAvax(data)
+  }, [data])
 
-  React.useEffect(() => {
-    const interval = setInterval(() => {
-      getAVAX()
-    }, 300000)
-    return () => clearInterval(interval)
-  }, [avax])
+  if (!data) return <div>Loading...</div>
 
   function handleAmountChange(e: React.ChangeEvent<HTMLInputElement>) {
     let newAmount = parseFloat(e.target.value) || 0
@@ -48,8 +43,8 @@ const StakeGuide: NextPage = () => {
     setAmount(newAmount)
 
     if (days && newAmount) {
-      let effectiveAPY = avax.rewardRate * (1 - avax.delegationFee / 100)
-      if (!isAvax) newAmount = newAmount / avax.price
+      let effectiveAPY = avax?.rewardRate * (1 - avax?.delegationFee / 100)
+      if (!isAvax) newAmount = newAmount / avax?.price
       let newEstimatedEarnings =
         Math.round(((((newAmount * effectiveAPY) / 100) * days) / 365) * 100) /
         100
@@ -62,8 +57,8 @@ const StakeGuide: NextPage = () => {
     setDays(newDays)
 
     if (newDays && amount) {
-      let effectiveAPY = avax.rewardRate * (1 - avax.delegationFee / 100)
-      let updatedAmount = isAvax ? amount : amount / avax.price
+      let effectiveAPY = avax?.rewardRate * (1 - avax?.delegationFee / 100)
+      let updatedAmount = isAvax ? amount : amount / avax?.price
       let newEstimatedEarnings =
         Math.round(
           ((((updatedAmount * effectiveAPY) / 100) * newDays) / 365) * 100
@@ -74,15 +69,22 @@ const StakeGuide: NextPage = () => {
 
   function handleCurrencyChange() {
     setIsAvax(!isAvax)
-    if (typeof avax.price === 'number') {
+    if (typeof avax?.price === 'number') {
       let newAmount: number
       if (isAvax) {
-        newAmount = Math.round(amount * avax.price * 100) / 100 || 0
+        newAmount = Math.round(amount * avax?.price * 100) / 100 || 0
       } else {
-        newAmount = Math.round((amount / avax.price) * 100) / 100 || 0
+        newAmount = Math.round((amount / avax?.price) * 100) / 100 || 0
       }
       setAmount(newAmount)
     }
+  }
+
+  function handleCopy() {
+    setCopy('Copied!')
+    setTimeout(() => {
+      setCopy('Copy')
+    }, 2000)
   }
 
   return (
@@ -205,7 +207,7 @@ const StakeGuide: NextPage = () => {
                         </Tooltip>
                       </span>
                       <h2 className="mt-[4px] text-[24px] font-medium">
-                        {avax.rewardRate.toFixed(2)}%
+                        {avax?.rewardRate.toFixed(2)}%
                       </h2>
                     </div>
                     <div className="text-[12px]">
@@ -216,7 +218,7 @@ const StakeGuide: NextPage = () => {
                         </Tooltip>
                       </span>
                       <h2 className="mt-[4px] text-[24px] font-medium">
-                        {avax.delegationFee.toFixed(2)}%
+                        {avax?.delegationFee.toFixed(2)}%
                       </h2>
                     </div>
                     <div className="text-[12px]">
@@ -230,7 +232,7 @@ const StakeGuide: NextPage = () => {
                         +{!isAvax ? '$' : ''}
                         {(isAvax
                           ? estimatedEarnings
-                          : Math.round(estimatedEarnings * avax.price * 100) /
+                          : Math.round(estimatedEarnings * avax?.price * 100) /
                             100
                         ).toFixed(2)}{' '}
                         {isAvax ? (
@@ -243,7 +245,7 @@ const StakeGuide: NextPage = () => {
                         ~ {isAvax ? '$' : ''}
                         {(!isAvax
                           ? estimatedEarnings
-                          : Math.round(estimatedEarnings * avax.price * 100) /
+                          : Math.round(estimatedEarnings * avax?.price * 100) /
                             100
                         ).toFixed(2)}{' '}
                         {!isAvax ? 'AVAX' : ''}
@@ -266,13 +268,137 @@ const StakeGuide: NextPage = () => {
             >
               <PresentationIcon />
               <span className="text-[20px] font-medium">
-                Ready to stake? Follow step-by-step tutorials
+                Follow steps below to stake AVAX with us
               </span>
             </button>
             {isTutorial && (
-              <div className="w-full py-[24px] border-t border-black">
-                <div className="px-[32px]">
-                  <h1>Stake tutorial</h1>
+              <div className="w-full border-t border-black">
+                <div className="border-b-2 border-gray-200 px-[32px] py-[24px]">
+                  <span className="flex items-center gap-[16px]">
+                    <span className="text-accent text-[16px] font-medium">
+                      Step 1
+                    </span>
+                    <span
+                      className="cursor-pointer"
+                      onClick={() => console.log('step-1 clicked')}
+                    >
+                      <PlayIcon />
+                    </span>
+                  </span>
+                  <span className="block mt-[12px] text-[20px] font-medium">
+                    Login to your account on{' '}
+                    <ExternalLink href="https://wallet.avax?.network">
+                      https://wallet.avax?.network
+                    </ExternalLink>
+                    .
+                  </span>
+                  <span className="block mt-[20px] text-[16px] font-medium text-gray-light">
+                    If you don't have account on{' '}
+                    <ExternalLink href="https://wallet.avax?.network">
+                      https://wallet.avax?.network
+                    </ExternalLink>{' '}
+                    then you must create it. Then move your AVAX to the above
+                    wallet.
+                  </span>
+                  <CustomButton icon={<TickIcon />}>
+                    Mark as completed
+                  </CustomButton>
+                </div>
+                <div className="border-b-2 border-gray-200 px-[32px] py-[24px]">
+                  <span className="flex items-center gap-[16px]">
+                    <span className="text-accent text-[16px] font-medium">
+                      Step 2
+                    </span>
+                    <span
+                      className="cursor-pointer"
+                      onClick={() => console.log('step-2 clicked')}
+                    >
+                      <PlayIcon />
+                    </span>
+                  </span>
+                  <span className="block mt-[12px] text-[20px] font-medium">
+                    Click <span className="text-accent">Cross Chain</span> from
+                    the menu and transfer your AVAX to{' '}
+                    <span className="text-accent">P-Chain</span>.
+                  </span>
+                  <CustomButton icon={<TickIcon />}>
+                    Mark as completed
+                  </CustomButton>
+                </div>
+                <div className="border-b-2 border-gray-200 px-[32px] py-[24px]">
+                  <span className="flex items-center gap-[16px]">
+                    <span className="text-accent text-[16px] font-medium">
+                      Step 3
+                    </span>
+                    <span
+                      className="cursor-pointer"
+                      onClick={() => console.log('step-3 clicked')}
+                    >
+                      <PlayIcon />
+                    </span>
+                  </span>
+                  <span className="block mt-[12px] text-[20px] font-medium">
+                    Click <span className="text-accent">Earn</span> from the
+                    menu. Click{' '}
+                    <span className="text-accent">Add Delegator</span>.
+                  </span>
+                  <CustomButton icon={<TickIcon />}>
+                    Mark as completed
+                  </CustomButton>
+                </div>
+                <div className="border-b-2 border-gray-200 px-[32px] py-[24px]">
+                  <span className="flex items-center gap-[16px]">
+                    <span className="text-accent text-[16px] font-medium">
+                      Step 4
+                    </span>
+                    <span
+                      className="cursor-pointer"
+                      onClick={() => console.log('step-4 clicked')}
+                    >
+                      <PlayIcon />
+                    </span>
+                  </span>
+                  <span className="block mt-[12px] text-[20px] font-medium">
+                    In the search field, Search the below Node ID. Then click{' '}
+                    <span className="text-accent">Select</span>
+                    <div
+                      className="mx-auto mt-[12px] flex items-center gap-[16px] p-[24px] w-fit bg-accent text-white text-[16px] cursor-pointer rounded-lg"
+                      onClick={() => {
+                        navigator.clipboard.writeText(
+                          process.env.NEXT_PUBLIC_NODE_ID ?? ''
+                        )
+                        handleCopy()
+                      }}
+                    >
+                      <p>{process.env.NEXT_PUBLIC_NODE_ID}</p>
+                      <Tooltip message={copy}>
+                        <CopyIcon />
+                      </Tooltip>
+                    </div>
+                  </span>
+                  <CustomButton icon={<TickIcon />}>
+                    Mark as completed
+                  </CustomButton>
+                </div>
+                <div className="px-[32px] py-[24px]">
+                  <span className="flex items-center gap-[16px]">
+                    <span className="text-accent text-[16px] font-medium">
+                      Step 5
+                    </span>
+                    <span
+                      className="cursor-pointer"
+                      onClick={() => console.log('step-5 clicked')}
+                    >
+                      <PlayIcon />
+                    </span>
+                  </span>
+                  <span className="block mt-[12px] text-[20px] font-medium">
+                    Select Staking End Date, Enter Stake Amount and click the
+                    <span className="text-accent">Confirm button</span>.
+                  </span>
+                  <CustomButton icon={<TickIcon />}>
+                    Mark as completed
+                  </CustomButton>
                 </div>
               </div>
             )}
@@ -286,3 +412,17 @@ const StakeGuide: NextPage = () => {
 }
 
 export default StakeGuide
+
+type Props = {
+  icon?: React.ReactNode
+  children: React.ReactNode
+}
+
+const CustomButton = (props: Props) => {
+  return (
+    <button className="ml-auto mt-[16px] px-[10px] py-[10px] text-[16px] font-medium text-accent-light flex items-center gap-[10px] border-2 border-accent-light rounded-xl hover:text-accent hover:border-accent">
+      {props.icon}
+      <span>{props.children}</span>
+    </button>
+  )
+}

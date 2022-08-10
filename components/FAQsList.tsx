@@ -9,8 +9,8 @@ import React from 'react'
 import SmallArrowRight from './icons/svgs/SmallArrowRight'
 import getSearchResults from 'utils/getSearchResults'
 import objEqual from 'utils/objEqual'
-import axios from 'axios'
-import catchError from 'utils/catchError'
+import useSWR from 'swr'
+import fetcher from 'utils/fetcher'
 
 type Props = {
   limit?: number
@@ -21,28 +21,12 @@ const FAQsList = (props: Props) => {
   const [query, setQuery] = React.useState('')
   const [faqList, setFaqList] = React.useState<Array<any>>([])
   const [faqsCopy, setFaqsCopy] = React.useState<Array<any>>([])
-  const [avax, setAvax] = React.useState<any>({})
 
-  async function getAVAX() {
-    await axios
-      .get(`${process.env.NEXT_PUBLIC_ARVERSE_URL}/api/avax` ?? '')
-      .then((res) => {
-        setFaqsCopy(faqs(res.data.rewardRate))
-        setAvax(res.data)
-      })
-      .catch(catchError)
-  }
-
+  const { data, error } = useSWR('/api/avax', fetcher)
+  console.log('😱 useSWR:', data, error)
   React.useEffect(() => {
-    getAVAX()
-  }, [])
-
-  React.useEffect(() => {
-    const interval = setInterval(() => {
-      getAVAX()
-    }, 300000)
-    return () => clearInterval(interval)
-  }, [avax])
+    setFaqsCopy(faqs(data?.rewardRate, data?.remainingCapacity))
+  }, [data])
 
   React.useEffect(() => {
     if (query.length) {
@@ -56,7 +40,9 @@ const FAQsList = (props: Props) => {
       newFaqs = newFaqs.filter((faq) => Boolean(faq))
       setFaqList(newFaqs)
     } else setFaqList(faqsCopy)
-  }, [query, faqsCopy])
+  }, [query, setFaqList, faqsCopy])
+
+  if (!data) return <div>Loading...</div>
 
   return (
     <div

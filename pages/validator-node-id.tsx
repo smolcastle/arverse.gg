@@ -14,47 +14,34 @@ import {
 import React from 'react'
 import Footer from 'components/Footer'
 import Header from 'components/Header'
-import axios from 'axios'
 import Tooltip from 'components/Tooltip'
 import withCommas from 'utils/withCommas'
-import catchError from 'utils/catchError'
 import getDonutData, { circumference } from 'utils/getDonutData'
+import useSWR from 'swr'
+import fetcher from 'utils/fetcher'
 
 const NodeID: NextPage = () => {
   const [isAvax, setIsAvax] = React.useState(true)
   const [copy, setCopy] = React.useState('Copy')
   const [daysLeft, setDaysLeft] = React.useState(300)
-  const [avax, setAvax] = React.useState<any>({})
   const [fraction, setFraction] = React.useState(0)
+  const [avax, setAvax] = React.useState<any>({})
 
-  async function getAVAX() {
-    await axios
-      .get(`${process.env.NEXT_PUBLIC_ARVERSE_URL}/api/avax` ?? '')
-      .then((res) => {
-        let avaxResponse = res.data
-        setAvax(avaxResponse)
-
-        let startTime = avaxResponse.startTime
-        let endTime = avaxResponse.endTime
-        let currTime = Math.floor(Date.now() / 1000)
-        setDaysLeft(Math.floor((endTime - currTime) / (24 * 60 * 60)))
-
-        let fraction = (endTime - currTime) / (endTime - startTime)
-        setFraction(fraction)
-      })
-      .catch(catchError)
-  }
-
+  const { data, error } = useSWR('/api/avax', fetcher)
+  console.log('😱 useSWR:', data, error)
   React.useEffect(() => {
-    getAVAX()
-  }, [])
+    setAvax(data)
 
-  React.useEffect(() => {
-    const interval = setInterval(() => {
-      getAVAX()
-    }, 300000)
-    return () => clearInterval(interval)
-  }, [avax])
+    let startTime = data?.startTime
+    let endTime = data?.endTime
+    let currTime = Math.floor(Date.now() / 1000)
+    setDaysLeft(Math.floor((endTime - currTime) / (24 * 60 * 60)))
+
+    let fraction = (endTime - currTime) / (endTime - startTime)
+    setFraction(fraction)
+  }, [data])
+
+  if (!data) return <div>Loading...</div>
 
   function handleCopy() {
     setCopy('Copied!')
@@ -62,16 +49,6 @@ const NodeID: NextPage = () => {
       setCopy('Copy')
     }, 2000)
   }
-
-  React.useEffect(() => {
-    if (daysLeft === 0) {
-      setDaysLeft(300)
-    }
-    const interval = setInterval(() => {
-      setDaysLeft(daysLeft - 1)
-    }, 24 * 60 * 1000)
-    return () => clearInterval(interval)
-  }, [daysLeft])
 
   return (
     <div className="w-full bg-light">
@@ -110,7 +87,7 @@ const NodeID: NextPage = () => {
             </Tooltip>
           </div>
           <p className="mt-[12px] text-[16px] text-gray font-normal">
-            Running {avax.version}
+            Running {avax?.version}
           </p>
         </div>
 
@@ -125,19 +102,19 @@ const NodeID: NextPage = () => {
                 {isAvax ? (
                   <>
                     <h3 className="font-semibold text-[40px]">
-                      {withCommas(Number(avax.stake))}
+                      {withCommas(Number(avax?.stake))}
                     </h3>
                     <span className="font-medium text-[12px]">AVAX</span>
                   </>
                 ) : (
                   <h3 className="font-semibold text-[40px]">
-                    ${withCommas(Number(avax.stake * avax.price))}
+                    ${withCommas(Number(avax?.stake * avax?.price))}
                   </h3>
                 )}
               </div>
               <p className="text-[16px] leading-tight">
                 You can stake your AVAX for minimum 2 weeks and earn upto{' '}
-                {avax.rewardRate}% rewards annually with us.
+                {avax?.rewardRate}% rewards annually with us.
               </p>
             </div>
           </div>
@@ -167,7 +144,10 @@ const NodeID: NextPage = () => {
             <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
               <Tooltip message="Time left">
                 <span className="whitespace-nowrap text-[16px]">
-                  <span className="font-semibold">{daysLeft}</span> days
+                  <span className="font-semibold">
+                    {daysLeft > 0 ? daysLeft : 0}
+                  </span>{' '}
+                  days
                 </span>
               </Tooltip>
             </span>
@@ -178,7 +158,7 @@ const NodeID: NextPage = () => {
             <a
               target={'_blank'}
               rel="noopener noreferrer"
-              className="w-[320px] h-[320px] flex justify-center items-center text-left bg-blue-light hover:bg-blue hover:text-accent-light transition-all"
+              className="w-[320px] h-[320px] flex justify-center items-center text-left bg-blue-light hover:bg-blue hover:text-blue-light transition-all"
             >
               <div className="w-[220px] flex flex-col justify-center gap-[10px]">
                 <h3 className="font-black text-[28px]">Avascan</h3>
@@ -200,7 +180,7 @@ const NodeID: NextPage = () => {
               </div>
             </a>
           </Link>
-          <Link href="https://stats.avax.network/dashboard/validator-health-check/?nodeid=NodeID-2pN3EtqAUKWvJedQvYfPSgKeonNmFn8bA">
+          <Link href="https://stats.avax?.network/dashboard/validator-health-check/?nodeid=NodeID-2pN3EtqAUKWvJedQvYfPSgKeonNmFn8bA">
             <a
               target={'_blank'}
               rel="noopener noreferrer"
@@ -218,7 +198,7 @@ const NodeID: NextPage = () => {
           <h2 className="font-bold text-[48px]">Benefits of staking AVAX</h2>
           <span className="pt-[16px] text-gray text-[24px] font-regular leading-tight">
             Compound your AVAX holdings by
-            <br /> earning {avax.rewardRate}% a year
+            <br /> earning {avax?.rewardRate}% a year
           </span>
           <div className="mt-[80px] flex flex-col max-w-[640px] w-full">
             <div className="w-[400px] h-[400px] bg-white flex flex-col items-center justify-center gap-[8px] rounded-full">

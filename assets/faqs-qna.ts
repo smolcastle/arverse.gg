@@ -1,4 +1,6 @@
-const faqs = (rewardRate: any) => [
+import withCommas from 'utils/withCommas'
+
+const faqs = (rewardRate: any, remainingCapacity: any) => [
   {
     question: 'Why should you stake?',
     answer:
@@ -15,7 +17,9 @@ const faqs = (rewardRate: any) => [
   },
   {
     question: 'What is the maximum AVAX amount I can stake with Arverse?',
-    answer: 'You can stake upto remainingCapacity AVAX with Arverse validator.'
+    answer: `You can stake upto ${withCommas(
+      Number(remainingCapacity)
+    )} AVAX with Arverse validator.`
   },
   {
     question: 'Are staking rewards taxable?',

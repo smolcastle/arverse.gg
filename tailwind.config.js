@@ -27,10 +27,11 @@ module.exports = {
           DEFAULT: '#6D6DF2'
         },
         gray: {
+          light: '#828282',
           DEFAULT: '#4F4F4F'
         },
         accent: {
-          light: '#E8E8FD',
+          light: '#CBB7FB',
           DEFAULT: '#8B5CF6'
         }
       },
