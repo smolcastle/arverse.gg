@@ -12,6 +12,7 @@ type Data = {
   delegationFee: number
   startTime: number
   endTime: number
+  remainingCapacity: number
   version: string
 }
 
@@ -25,12 +26,13 @@ let data: Data = {
   delegationFee: 0,
   version: '',
   startTime: 0,
+  remainingCapacity: 0,
   endTime: 0
 }
 
 async function getAVAX() {
   await axios
-    .get(process.env.VSCOUT_ENDPOINT ?? '')
+    .get(`${process.env.API_ENDPOINT}/v/api/validators`)
     .then((res) => {
       let validator = res.data.validators?.filter(
         (v: any) => v.nodeID === process.env.NEXT_PUBLIC_NODE_ID ?? ''
@@ -50,6 +52,8 @@ async function getAVAX() {
       data.delegationFee = Math.round(validator?.delegationFee * 100) / 100 ?? 0
       data.startTime = validator?.startTime ?? 0
       data.endTime = validator?.endTime ?? 0
+      data.remainingCapacity =
+        Math.round((validator?.remainingCapacity / 1e9) * 100) / 100 ?? 0
       data.version = validator?.version ?? ''
     })
     .catch(catchError)
