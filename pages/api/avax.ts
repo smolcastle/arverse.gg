@@ -1,44 +1,63 @@
 import axios from 'axios'
 import type { NextApiRequest, NextApiResponse } from 'next'
+import catchError from 'utils/catchError'
 
 type Data = {
   price: number
   marketCap: number
-  TVL: number
+  totalStake: number
   stake: number
   uptime: number
+  rewardRate: number
+  delegationFee: number
+  startTime: number
+  endTime: number
+  remainingCapacity: number
+  version: string
 }
 
 let data: Data = {
   price: 0,
   marketCap: 0,
-  TVL: 0,
+  totalStake: 0,
   stake: 0,
-  uptime: 0
+  uptime: 0,
+  rewardRate: 0,
+  delegationFee: 0,
+  version: '',
+  startTime: 0,
+  remainingCapacity: 0,
+  endTime: 0
 }
 
-async function getStakedAmount() {
-  let start = Math.floor(Date.now() / 1000)
-  let end = Math.floor(
-    new Date(new Date().setFullYear(new Date().getFullYear() + 1)).getTime() /
-      1000
-  )
+async function getAVAX() {
   await axios
-    .post(`${process.env.RPC_ENDPOINT}/P` ?? '', {
-      jsonrpc: '2.0',
-      id: 1,
-      method: 'platform.getMaxStakeAmount',
-      params: {
-        nodeID: process.env.NEXT_PUBLIC_NODE_ID,
-        startTime: start,
-        endTime: end
-      }
+    .get(`${process.env.API_ENDPOINT}/v/api/validators`)
+    .then((res) => {
+      let validator = res.data.validators?.filter(
+        (v: any) => v.nodeID === process.env.NEXT_PUBLIC_NODE_ID ?? ''
+      )[0]
+      data.stake = validator?.totalStakeAmount / 1e9 ?? 0
+      data.uptime = validator?.uptime * 100 ?? 0
+      data.totalStake =
+        Math.round(((res.data.allStake * 100) / 1e9 / (7.2 * 1e8)) * 100) /
+          100 ?? 0
+      data.rewardRate =
+        Math.round(
+          ((validator?.potentialReward * 100 * 365 * 24 * 3600) /
+            (validator?.stakeAmount *
+              (validator?.endTime - validator?.startTime))) *
+            100
+        ) / 100 ?? 0
+      data.delegationFee = Math.round(validator?.delegationFee * 100) / 100 ?? 0
+      data.startTime = validator?.startTime ?? 0
+      data.endTime = validator?.endTime ?? 0
+      data.remainingCapacity =
+        Math.round((validator?.remainingCapacity / 1e9) * 100) / 100 ?? 0
+      data.version = validator?.version ?? ''
     })
-    .then((res) => (data.stake = res.data?.result?.amount / 1e9))
-    .catch((err) => console.log('ERROR:', err.message))
-}
+    .catch(catchError)
 
-async function getPriceAndMarketCap() {
   const config = {
     headers: {
       'X-CMC_PRO_API_KEY': process.env.CMC_API_KEY ?? ''
@@ -56,32 +75,7 @@ async function getPriceAndMarketCap() {
           (fetchedData.quote.USD.fully_diluted_market_cap / 1e9) * 10
         ) / 10
     })
-    .catch((err) => console.log('ERROR:', err))
-}
-
-async function getTVL() {
-  data.TVL = 2.8
-}
-
-async function getUptime() {
-  await axios
-    .post(`${process.env.RPC_ENDPOINT}/info` ?? '', {
-      jsonrpc: '2.0',
-      id: 1,
-      method: 'info.uptime'
-    })
-    .then(
-      (res) =>
-        (data.uptime = parseFloat(res.data?.result?.rewardingStakePercentage))
-    )
-    .catch((err) => console.log('ERROR:', err.message))
-}
-
-function getAVAX() {
-  getStakedAmount()
-  getPriceAndMarketCap()
-  getTVL()
-  getUptime()
+    .catch(catchError)
 }
 
 export default function handler(

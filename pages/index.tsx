@@ -13,31 +13,20 @@ import React from 'react'
 import Footer from 'components/Footer'
 import Header from 'components/Header'
 import FAQsList from 'components/FAQsList'
-import axios from 'axios'
+import useSWR from 'swr'
+import fetcher from 'utils/fetcher'
 
-const Home: NextPage = () => {
+const Home: NextPage<any> = () => {
   const [isAvax, setIsAvax] = React.useState(true)
   const [avax, setAvax] = React.useState<any>({})
 
-  async function getAVAX() {
-    await axios
-      .get(`${process.env.NEXT_PUBLIC_ARVERSE_URL}/api/avax` ?? '')
-      .then((res) => setAvax(res.data))
-      .catch((err) => console.log('ERROR:', err))
-  }
-
+  const { data, error } = useSWR('/api/avax', fetcher)
+  console.log('😱 useSWR:', data, error)
   React.useEffect(() => {
-    getAVAX()
-  }, [])
+    setAvax(data)
+  }, [data])
 
-  React.useEffect(() => {
-    const interval = setInterval(() => {
-      getAVAX()
-    }, 300000)
-    return () => clearInterval(interval)
-  }, [avax])
-
-  console.log(avax)
+  if (!data) return <div>Loading...</div>
 
   return (
     <div className="w-full bg-light">
@@ -59,7 +48,8 @@ const Home: NextPage = () => {
           Compound your <span className="text-red">AVAX</span>
         </h1>
         <span className="px-4 my-4 max-w-[640px] w-full font-medium text-[24px] text-center z-10">
-          Stake your AVAX tokens and earn passive income on your investments
+          Stake your AVAX tokens and earn {avax?.rewardRate}% per annum on your
+          investments
         </span>
         <div className="my-4 flex gap-6 font-medium text-[16px] z-10">
           <span className="underline underline-offset-2 decoration-dotted text-center">
@@ -102,12 +92,12 @@ const Home: NextPage = () => {
         <div className="mt-[60px] z-10 text-white text-center font-extralight">
           {isAvax ? (
             <h2 className="lg:text-[448px] md:text-[300px] sm:text-[216px] text-[190px]">
-              {avax.stake}
+              {avax?.stake}
             </h2>
           ) : (
             <h2 className="flex items-center lg:text-[330px] md:text-[250px] sm:text-[150px] text-[130px]">
               <span className="font-medium text-[64px]">$</span>
-              <span>{avax.stake * avax.price}</span>
+              <span>{avax?.stake * avax?.price}</span>
             </h2>
           )}
           <div className="w-full flex justify-center gap-2 text-[24px]">
@@ -143,21 +133,21 @@ const Home: NextPage = () => {
         <div className="mt-[110px] flex text-center justify-evenly max-w-[640px] w-full mx-auto z-10">
           <div className="flex flex-col items-center gap-1">
             <h3 className="font-bold sm:text-4xl text-[40px]">
-              ${avax.price ?? 22.98}
+              ${avax?.price}
             </h3>
             <span className="text-[16px]">AVAX Price</span>
           </div>
           <div className="flex flex-col items-center gap-1">
             <h3 className="font-bold sm:text-4xl text-[40px]">
-              ${avax.marketCap ?? 16.5}B
+              ${avax?.marketCap}B
             </h3>
             <span className="text-[16px]">AVAX marketcap</span>
           </div>
           <div className="flex flex-col items-center gap-1">
             <h3 className="font-bold sm:text-4xl text-[40px]">
-              ${avax.TVL ?? 2.8}B
+              {avax?.totalStake}%
             </h3>
-            <span className="text-[16px]">Avalanche TVL</span>
+            <span className="text-[16px]">AVAX Stake</span>
           </div>
         </div>
         <div className="mt-[240px] flex flex-col justify-center items-center max-w-[920px] w-full z-10">
@@ -168,7 +158,7 @@ const Home: NextPage = () => {
               <h3 className="font-bold text-[24px]">High uptime</h3>
               <span className="font-medium text-[16px] text-center">
                 Highly available and redundant validator nodes ensure{' '}
-                {Number(avax.uptime).toFixed(2)}% uptime
+                {Number(avax?.uptime).toFixed(2)}% uptime
               </span>
             </div>
             <div className="pt-16 pb-24 px-5 bg-white w-[264px] flex flex-col items-center justify-center gap-[24px] rounded-3xl shadow-md">
@@ -194,7 +184,7 @@ const Home: NextPage = () => {
 
         <div className="relative mt-[275px] mb-[160px] flex items-center justify-between gap-[16px] max-w-[640px] w-full mx-auto">
           <h2 className="pl-[32px] text-white font-bold text-[44px] w-[275px] leading-tight z-10">
-            Stake with us to earn upto 8.0% a year on your AVAX
+            Stake with us to earn upto {avax?.rewardRate}% a year on your AVAX
           </h2>
           <Link href="how-to-stake-avax">
             <a className="w-[320px] h-[320px] flex justify-center items-center text-left bg-white border-2 border-transparent hover:border-accent shadow-md transition-all z-10">

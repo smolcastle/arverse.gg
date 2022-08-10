@@ -9,6 +9,8 @@ import React from 'react'
 import SmallArrowRight from './icons/svgs/SmallArrowRight'
 import getSearchResults from 'utils/getSearchResults'
 import objEqual from 'utils/objEqual'
+import useSWR from 'swr'
+import fetcher from 'utils/fetcher'
 
 type Props = {
   limit?: number
@@ -17,21 +19,30 @@ type Props = {
 const FAQsList = (props: Props) => {
   const currentPath = getBasePath()
   const [query, setQuery] = React.useState('')
-  const [faqList, setFaqList] = React.useState<Array<any>>(faqs)
+  const [faqList, setFaqList] = React.useState<Array<any>>([])
+  const [faqsCopy, setFaqsCopy] = React.useState<Array<any>>([])
+
+  const { data, error } = useSWR('/api/avax', fetcher)
+  console.log('😱 useSWR:', data, error)
+  React.useEffect(() => {
+    setFaqsCopy(faqs(data?.rewardRate, data?.remainingCapacity))
+  }, [data])
 
   React.useEffect(() => {
     if (query.length) {
-      let newFaqs = faqs.map((faq, index) => {
+      let newFaqs = faqsCopy.map((faq, index) => {
         let newFaq = {
           question: getSearchResults(faq.question, query),
           answer: getSearchResults(faq.answer, query)
         }
-        if (!objEqual(newFaq, faqs[index])) return newFaq
+        if (!objEqual(newFaq, faqsCopy[index])) return newFaq
       })
       newFaqs = newFaqs.filter((faq) => Boolean(faq))
       setFaqList(newFaqs)
-    } else setFaqList(faqs)
-  }, [query])
+    } else setFaqList(faqsCopy)
+  }, [query, setFaqList, faqsCopy])
+
+  if (!data) return <div>Loading...</div>
 
   return (
     <div
@@ -70,22 +81,22 @@ const FAQsList = (props: Props) => {
           )}
         </div>
       )}
-      <div className="w-full flex justify-center gap-20 border-b border-dashed border-black pb-[40px]">
-        <dl className="w-full space-y-[40px] divide-y divide-dashed divide-black">
+      <div className="w-full flex justify-center border-b border-dashed border-black pb-[24px]">
+        <dl className="w-full space-y-[24px] divide-y divide-dashed divide-black">
           {faqList.map((faq: any, index: number) => {
             if (props.limit && index >= props.limit) return
             return (
               <Disclosure
                 as="div"
                 key={index}
-                className={index ? 'pt-[40px]' : ''}
+                className={index ? 'pt-[24px]' : ''}
               >
                 {({ open }) => (
                   <>
                     <dt className="">
                       <Disclosure.Button className="text-left w-full flex justify-between items-center">
                         <span
-                          className="font-semibold text-[40px] leading-snug"
+                          className="font-semibold text-[32px] leading-snug"
                           dangerouslySetInnerHTML={{
                             __html: faq.question
                           }}
@@ -95,7 +106,7 @@ const FAQsList = (props: Props) => {
                         </span>
                       </Disclosure.Button>
                     </dt>
-                    <Disclosure.Panel as="dd" className="mt-[24px] pr-12">
+                    <Disclosure.Panel as="dd" className="mt-[16px] pr-12">
                       <p
                         className="text-[24px] leading-snug"
                         dangerouslySetInnerHTML={{
@@ -112,8 +123,10 @@ const FAQsList = (props: Props) => {
       </div>
       {currentPath === '/' && (
         <Link href="/faqs">
-          <a className="mt-[80px]">
-            <Button filled>More FAQs</Button>
+          <a className="mt-[80px] w-full">
+            <Button filled full>
+              Visit help center
+            </Button>
           </a>
         </Link>
       )}

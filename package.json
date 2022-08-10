@@ -6,7 +6,7 @@
   "homepage": "https://arverse.gg/",
   "scripts": {
     "analyze": "ANALYZE=true yarn build",
-    "dev": "next dev",
+    "dev": "NODE_OPTIONS='--inspect' next dev",
     "format": "prettier --write .",
     "build": "next build",
     "start": "next start",
@@ -23,7 +23,8 @@
     "highcharts": "^10.2.0",
     "next": "^12.2.3",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "swr": "^1.3.0"
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^12.2.3",
