@@ -15,13 +15,23 @@ module.exports = {
         },
         green: {
           light: '#E8FCE8',
-          DEFAULT: '#40E840'
+          DEFAULT: '#40E840',
+          dark: '#2CC099'
         },
         red: {
           light: '#FCE8E8',
           DEFAULT: '#E84142'
         },
+        blue: {
+          light: '#E8E8FD',
+          DEFAULT: '#6D6DF2'
+        },
+        gray: {
+          light: '#828282',
+          DEFAULT: '#4F4F4F'
+        },
         accent: {
+          light: '#CBB7FB',
           DEFAULT: '#8B5CF6'
         }
       },
@@ -30,9 +40,9 @@ module.exports = {
       },
       screens: {
         xs: '600px',
-        sm: '800px',
-        md: '1100px',
-        lg: '1380px'
+        sm: '750px',
+        md: '1200px',
+        lg: '1350px'
       }
     }
   },

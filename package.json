@@ -1,12 +1,12 @@
 {
   "name": "arverse",
   "sideEffects": false,
-  "version": "0.2.0",
+  "version": "0.4.0",
   "private": true,
   "homepage": "https://arverse.gg/",
   "scripts": {
     "analyze": "ANALYZE=true yarn build",
-    "dev": "next dev",
+    "dev": "NODE_OPTIONS='--inspect' next dev",
     "format": "prettier --write .",
     "build": "next build",
     "start": "next start",
@@ -20,24 +20,26 @@
   "dependencies": {
     "@headlessui/react": "^1.6.6",
     "axios": "^0.27.2",
+    "highcharts": "^10.2.0",
     "next": "^12.2.3",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "swr": "^1.3.0"
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^12.2.3",
     "@tailwindcss/forms": "0.5.2",
     "@types/node": "17.0.35",
     "@types/react": "18.0.9",
+    "@types/react-dom": "18.0.5",
     "@types/styled-components": "^5.1.25",
+    "autoprefixer": "10.4.7",
     "eslint": "8.6.0",
     "eslint-config-next": "12.0.7",
     "eslint-config-prettier": "^8.3.0",
-    "prettier": "^2.5.1",
     "husky": "^8.0.1",
-    "@types/react-dom": "18.0.5",
-    "autoprefixer": "10.4.7",
     "postcss": "8.4.14",
+    "prettier": "^2.5.1",
     "tailwindcss": "3.1.2",
     "typescript": "4.7.2"
   }

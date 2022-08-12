@@ -1,6 +1,6 @@
-const RightArrowIcon = (className: any) => (
+const RightArrowIcon = ({ className }: any) => (
   <svg
-    className={`${className} w-16 h-16`}
+    className={`${className} w-[54px] h-[54px]`}
     viewBox="0 0 16 16"
     fill="currentColor"
     xmlns="http://www.w3.org/2000/svg"

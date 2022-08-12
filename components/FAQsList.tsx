@@ -2,13 +2,15 @@ import { Disclosure } from '@headlessui/react'
 import Link from 'next/link'
 import Button from './Button'
 import { CrossIcon, PlusIcon } from './icons'
-import faqs from '../assets/faqs-qna'
-import getBasePath from '../utils/getBasePath'
+import faqs from 'assets/faqs-qna'
+import getBasePath from 'utils/getBasePath'
 import Input from './Input'
 import React from 'react'
 import SmallArrowRight from './icons/svgs/SmallArrowRight'
-import getSearchResults from '../utils/getSearchResults'
-import objEqual from '../utils/isEqualObjects'
+import getSearchResults from 'utils/getSearchResults'
+import objEqual from 'utils/objEqual'
+import useSWR from 'swr'
+import fetcher from 'utils/fetcher'
 
 type Props = {
   limit?: number
@@ -17,65 +19,85 @@ type Props = {
 const FAQsList = (props: Props) => {
   const currentPath = getBasePath()
   const [query, setQuery] = React.useState('')
-  const [faqList, setFaqList] = React.useState<Array<any>>(faqs)
+  const [faqList, setFaqList] = React.useState<Array<any>>([])
+  const [faqsCopy, setFaqsCopy] = React.useState<Array<any>>([])
+
+  const { data } = useSWR('/api/avax', fetcher)
+  React.useEffect(() => {
+    setFaqsCopy(faqs(data?.rewardRate, data?.remainingCapacity))
+  }, [data])
 
   React.useEffect(() => {
     if (query.length) {
-      let newFaqs = faqs.map((faq, index) => {
+      let newFaqs = faqsCopy.map((faq, index) => {
         let newFaq = {
           question: getSearchResults(faq.question, query),
           answer: getSearchResults(faq.answer, query)
         }
-        if (!objEqual(newFaq, faqs[index])) return newFaq
+        if (!objEqual(newFaq, faqsCopy[index])) return newFaq
       })
       newFaqs = newFaqs.filter((faq) => Boolean(faq))
       setFaqList(newFaqs)
-    } else setFaqList(faqs)
-  }, [query])
+    } else setFaqList(faqsCopy)
+  }, [query, setFaqList, faqsCopy])
+
+  if (!data) return <div>Loading...</div>
 
   return (
-    <div className="px-4 sm:py-40 py-20 flex flex-col justify-center items-center max-w-[800px] w-full mx-auto z-10">
-      <h2 className="font-bold text-4xl mb-16">
-        {currentPath === '/' ? 'FAQs' : 'Help Center'}
-      </h2>
+    <div
+      className={`${
+        currentPath === '/' ? 'mt-[200px]' : 'mt-[140px] mb-[250px]'
+      } px-[30px] flex flex-col justify-center items-center max-w-[700px] w-full mx-auto z-10`}
+    >
+      {currentPath === '/' ? (
+        <h2 className="font-bold text-[48px] mb-[120px]">FAQs</h2>
+      ) : (
+        <h2 className="font-bold text-[48px] mb-[32px]">Help Center</h2>
+      )}
       {currentPath === '/faqs' && (
-        <div className="mb-16 w-full">
+        <div className="mb-[80px] w-full">
           <Input
             placeholder="Search your question here..."
-            className="text-2xl py-6 px-6"
+            className="text-[24px] py-6 px-6"
             value={query}
             onChange={(e: React.FormEvent<HTMLInputElement>) => {
               setQuery(e.currentTarget.value)
             }}
           />
           {query.length ? (
-            <div className="mt-4">
-              {faqList.length} matches found{' '}
-              <a
-                href="#faqs"
-                className="text-accent inline-flex items-center gap-2 font-medium"
+            <div className="mt-4 text-[16px]">
+              {faqList.length} matches found.{' '}
+              <span
+                className="cursor-pointer text-accent inline-flex items-center gap-[4px] font-semibold"
+                onClick={() => {
+                  setQuery('')
+                }}
               >
                 <span>Show all</span>
                 <SmallArrowRight />
-              </a>
+              </span>
             </div>
           ) : (
             ''
           )}
         </div>
       )}
-      <div className="w-full flex justify-center gap-20">
-        <dl className="w-full space-y-6 divide-y divide-dashed divide-black">
+      <div className="w-full flex justify-center border-b border-dashed border-black pb-[24px]">
+        <dl className="w-full space-y-[24px] divide-y divide-dashed divide-black">
           {faqList.map((faq: any, index: number) => {
             if (props.limit && index >= props.limit) return
             return (
-              <Disclosure as="div" key={index} className="pt-6">
+              <Disclosure
+                as="div"
+                key={index}
+                className={index ? 'pt-[24px]' : ''}
+              >
                 {({ open }) => (
                   <>
-                    <dt className="text-lg">
-                      <Disclosure.Button className="text-left w-full flex justify-between items-start">
+                    <dt className="">
+                      <Disclosure.Button className="text-left w-full flex justify-between items-center">
                         <span
-                          className="font-semibold text-3xl"
+                          className="font-semibold text-[32px] leading-snug"
                           dangerouslySetInnerHTML={{
                             __html: faq.question
                           }}
@@ -85,9 +107,9 @@ const FAQsList = (props: Props) => {
                         </span>
                       </Disclosure.Button>
                     </dt>
-                    <Disclosure.Panel as="dd" className="mt-6 pr-12">
+                    <Disclosure.Panel as="dd" className="mt-[16px] pr-12">
                       <p
-                        className="text-2xl"
+                        className="text-[24px] leading-snug"
                         dangerouslySetInnerHTML={{
                           __html: faq.answer
                         }}
@@ -102,8 +124,10 @@ const FAQsList = (props: Props) => {
       </div>
       {currentPath === '/' && (
         <Link href="/faqs">
-          <a className="mt-20">
-            <Button filled>More FAQs</Button>
+          <a className="mt-[80px] w-full">
+            <Button filled full>
+              Visit help center
+            </Button>
           </a>
         </Link>
       )}
