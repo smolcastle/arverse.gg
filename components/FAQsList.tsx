@@ -22,8 +22,7 @@ const FAQsList = (props: Props) => {
   const [faqList, setFaqList] = React.useState<Array<any>>([])
   const [faqsCopy, setFaqsCopy] = React.useState<Array<any>>([])
 
-  const { data, error } = useSWR('/api/avax', fetcher)
-  console.log('😱 useSWR:', data, error)
+  const { data } = useSWR('/api/avax', fetcher)
   React.useEffect(() => {
     setFaqsCopy(faqs(data?.rewardRate, data?.remainingCapacity))
   }, [data])
@@ -68,13 +67,15 @@ const FAQsList = (props: Props) => {
           {query.length ? (
             <div className="mt-4 text-[16px]">
               {faqList.length} matches found.{' '}
-              <a
-                href="#faqs"
-                className="text-accent inline-flex items-center gap-[4px] font-semibold"
+              <span
+                className="cursor-pointer text-accent inline-flex items-center gap-[4px] font-semibold"
+                onClick={() => {
+                  setQuery('')
+                }}
               >
                 <span>Show all</span>
                 <SmallArrowRight />
-              </a>
+              </span>
             </div>
           ) : (
             ''

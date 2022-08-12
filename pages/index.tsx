@@ -20,8 +20,7 @@ const Home: NextPage<any> = () => {
   const [isAvax, setIsAvax] = React.useState(true)
   const [avax, setAvax] = React.useState<any>({})
 
-  const { data, error } = useSWR('/api/avax', fetcher)
-  console.log('😱 useSWR:', data, error)
+  const { data } = useSWR('/api/avax', fetcher)
   React.useEffect(() => {
     setAvax(data)
   }, [data])

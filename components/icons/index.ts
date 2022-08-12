@@ -20,6 +20,7 @@ import PresentationIcon from './svgs/Presentation'
 import InfoIcon from './svgs/Info'
 import PlayIcon from './svgs/Play'
 import TickIcon from './svgs/Tick'
+import CrossFilledIcon from './svgs/CrossFilled'
 
 export {
   ClockIcon,
@@ -43,5 +44,6 @@ export {
   PresentationIcon,
   InfoIcon,
   PlayIcon,
-  TickIcon
+  TickIcon,
+  CrossFilledIcon
 }
