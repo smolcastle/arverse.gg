@@ -20,8 +20,7 @@ const Home: NextPage<any> = () => {
   const [isAvax, setIsAvax] = React.useState(true)
   const [avax, setAvax] = React.useState<any>({})
 
-  const { data, error } = useSWR('/api/avax', fetcher)
-  console.log('😱 useSWR:', data, error)
+  const { data } = useSWR('/api/avax', fetcher)
   React.useEffect(() => {
     setAvax(data)
   }, [data])
@@ -62,7 +61,7 @@ const Home: NextPage<any> = () => {
             Enterprise grade
           </span>
         </div>
-        <div className="mt-6 max-w-[640px] w-full flex items-stretch min-h-[300px] z-10">
+        <div className="mt-6 max-w-[640px] w-full flex items-stretch justify-center flex-wrap min-h-[300px] z-10">
           <Link href="how-to-stake-avax">
             <a className="w-[320px] h-[320px] flex justify-center items-center text-left bg-red-light hover:bg-red hover:text-red-light transition-all">
               <div className="flex flex-col justify-center gap-[10px]">

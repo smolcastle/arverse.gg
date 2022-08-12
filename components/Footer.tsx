@@ -16,7 +16,13 @@ const Footer = () => {
         </div>
         <div className="flex flex-col gap-[12px] text-right text-gray-600">
           <h3 className="pb-[4px] font-medium text-[20px]">Company</h3>
-          <a href="https://twitter.com/sy100x">Follow us on Twitter</a>
+          <a
+            href="https://twitter.com/arversegg"
+            target={'_blank'}
+            rel="noopener noreferrer"
+          >
+            Follow us on Twitter
+          </a>
           <Link href="faqs">
             <a className="text-[16px]">Help center</a>
           </Link>
