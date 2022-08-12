@@ -30,7 +30,9 @@ const Home: NextPage<any> = () => {
   return (
     <div className="w-full bg-light">
       <Head>
-        <title>Arverse</title>
+        <title>
+          Arverse | Avalanche Validator, Earn Staking Rewards on AVAX
+        </title>
       </Head>
 
       <Header />

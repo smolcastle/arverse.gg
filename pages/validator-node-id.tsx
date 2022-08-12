@@ -53,7 +53,9 @@ const NodeID: NextPage = () => {
   return (
     <div className="w-full bg-light">
       <Head>
-        <title>Arverse</title>
+        <title>
+          Arverse | Avalanche Validator, Earn Staking Rewards on AVAX
+        </title>
       </Head>
 
       <Header />
@@ -87,7 +89,7 @@ const NodeID: NextPage = () => {
             </Tooltip>
           </div>
           <p className="mt-[12px] text-[16px] text-gray font-normal">
-            Running {avax?.version}
+            running v{avax?.version?.substring(10)}
           </p>
         </div>
 
@@ -179,7 +181,7 @@ const NodeID: NextPage = () => {
               </div>
             </a>
           </Link>
-          <Link href="https://stats.avax?.network/dashboard/validator-health-check/?nodeid=NodeID-2pN3EtqAUKWvJedQvYfPSgKeonNmFn8bA">
+          <Link href="https://stats.avax.network/dashboard/validator-health-check/?nodeid=NodeID-2pN3EtqAUKWvJedQvYfPSgKeonNmFn8bA">
             <a
               target={'_blank'}
               rel="noopener noreferrer"

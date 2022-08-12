@@ -8,7 +8,9 @@ const FAQs: NextPage = () => {
   return (
     <div className="bg-light">
       <Head>
-        <title>Arverse</title>
+        <title>
+          Arverse | Avalanche Validator, Earn Staking Rewards on AVAX
+        </title>
       </Head>
 
       <Header />
