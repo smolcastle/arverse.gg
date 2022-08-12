@@ -118,7 +118,6 @@ const NodeID: NextPage = () => {
               </p>
             </div>
           </div>
-          {/* SVG Donut Chart */}
           <div className="relative w-[120px] h-[120px]">
             <svg
               className="w-[120px] h-[120px] -scale-y-100"

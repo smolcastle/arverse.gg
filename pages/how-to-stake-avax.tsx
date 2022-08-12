@@ -27,8 +27,8 @@ import Modal from 'components/Modal'
 import { Transition } from '@headlessui/react'
 
 const StakeGuide: NextPage = () => {
-  const [isCalculating, setIsCalculating] = React.useState(true)
-  const [isTutorial, setIsTutorial] = React.useState(true)
+  const [isCalculating, setIsCalculating] = React.useState(false)
+  const [isTutorial, setIsTutorial] = React.useState(false)
   const [isAvax, setIsAvax] = React.useState(false)
   const [amount, setAmount] = React.useState(0)
   const [days, setDays] = React.useState(0)
