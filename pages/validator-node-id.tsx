@@ -19,6 +19,8 @@ import withCommas from 'utils/withCommas'
 import getDonutData, { circumference } from 'utils/getDonutData'
 import useSWR from 'swr'
 import fetcher from 'utils/fetcher'
+import handleCopy from 'utils/copyToClipboard'
+import Loader from 'components/Loader'
 
 const NodeID: NextPage = () => {
   const [isAvax, setIsAvax] = React.useState(true)
@@ -27,8 +29,7 @@ const NodeID: NextPage = () => {
   const [fraction, setFraction] = React.useState(0)
   const [avax, setAvax] = React.useState<any>({})
 
-  const { data, error } = useSWR('/api/avax', fetcher)
-  console.log('😱 useSWR:', data, error)
+  const { data } = useSWR('/api/avax', fetcher)
   React.useEffect(() => {
     setAvax(data)
 
@@ -42,13 +43,6 @@ const NodeID: NextPage = () => {
   }, [data])
 
   if (!data) return <div>Loading...</div>
-
-  function handleCopy() {
-    setCopy('Copied!')
-    setTimeout(() => {
-      setCopy('Copy')
-    }, 2000)
-  }
 
   return (
     <div className="w-full bg-light">
@@ -80,7 +74,7 @@ const NodeID: NextPage = () => {
               navigator.clipboard.writeText(
                 process.env.NEXT_PUBLIC_NODE_ID ?? ''
               )
-              handleCopy()
+              handleCopy(setCopy)
             }}
           >
             <p>{process.env.NEXT_PUBLIC_NODE_ID}</p>
@@ -88,8 +82,13 @@ const NodeID: NextPage = () => {
               <CopyIcon />
             </Tooltip>
           </div>
-          <p className="mt-[12px] text-[16px] text-gray font-normal">
-            running v{avax?.version?.substring(10)}
+          <p className="flex items-center gap-3 mt-[12px] text-[16px] text-gray font-normal">
+            running{' '}
+            {avax?.version ? (
+              `v${avax?.version?.substring(10)}`
+            ) : (
+              <Loader inline size="sm" />
+            )}
           </p>
         </div>
 
@@ -103,15 +102,21 @@ const NodeID: NextPage = () => {
               >
                 {isAvax ? (
                   <>
-                    <h3 className="font-semibold text-[40px]">
-                      {withCommas(Number(avax?.stake))}
-                    </h3>
+                    {avax?.stake ? (
+                      <h3 className="font-semibold text-[40px]">
+                        {withCommas(Number(avax?.stake))}
+                      </h3>
+                    ) : (
+                      <Loader inline size="md" />
+                    )}
                     <span className="font-medium text-[12px]">AVAX</span>
                   </>
-                ) : (
+                ) : avax?.stake ? (
                   <h3 className="font-semibold text-[40px]">
                     ${withCommas(Number(avax?.stake * avax?.price))}
                   </h3>
+                ) : (
+                  <Loader inline size="md" />
                 )}
               </div>
               <p className="text-[16px] leading-tight">
@@ -143,14 +148,18 @@ const NodeID: NextPage = () => {
               />
             </svg>
             <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-              <Tooltip message="Time left">
-                <span className="whitespace-nowrap text-[16px]">
-                  <span className="font-semibold">
-                    {daysLeft > 0 ? daysLeft : 0}
-                  </span>{' '}
-                  days
-                </span>
-              </Tooltip>
+              {avax?.stake ? (
+                <Tooltip message="Time left">
+                  <span className="whitespace-nowrap text-[16px]">
+                    <span className="font-semibold">
+                      {daysLeft > 0 ? daysLeft : 0}
+                    </span>{' '}
+                    days
+                  </span>
+                </Tooltip>
+              ) : (
+                <Loader inline size="lg" />
+              )}
             </span>
           </div>
         </div>

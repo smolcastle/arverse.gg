@@ -1,8 +1,9 @@
 import axios from 'axios'
+import { avax } from 'helpers/avax-data'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import catchError from 'utils/catchError'
 
-type Data = {
+export type Data = {
   price: number
   marketCap: number
   totalStake: number
@@ -82,6 +83,25 @@ export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  getAVAX()
-  res.status(200).json(data)
+  let resData = avax.data()
+
+  if (resData.price > 0) {
+    let diffInMinutes =
+      (new Date().getTime() - new Date(resData.createdAt).getTime()) / 1000 / 60
+    if (diffInMinutes > 5) {
+      getAVAX()
+      if (data.price > 0 && data.stake > 0) {
+        avax.update(data)
+        resData = data
+      }
+    }
+  } else {
+    getAVAX()
+    if (data.price > 0 && data.stake > 0) {
+      avax.update(data)
+      resData = data
+    }
+  }
+
+  res.status(200).json(resData)
 }

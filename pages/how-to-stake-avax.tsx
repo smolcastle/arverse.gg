@@ -25,6 +25,7 @@ import step4 from 'assets/image/stake-steps/Step_4.png'
 import step5 from 'assets/image/stake-steps/Step_5.png'
 import Modal from 'components/Modal'
 import { Transition } from '@headlessui/react'
+import handleCopy from 'utils/copyToClipboard'
 
 const StakeGuide: NextPage = () => {
   const [isCalculating, setIsCalculating] = React.useState(false)
@@ -129,13 +130,6 @@ const StakeGuide: NextPage = () => {
       }
       setAmount(newAmount)
     }
-  }
-
-  function handleCopy() {
-    setCopy('Copied!')
-    setTimeout(() => {
-      setCopy('Copy')
-    }, 2000)
   }
 
   function handleStepPreview(step: number) {
@@ -389,7 +383,7 @@ const StakeGuide: NextPage = () => {
               </span>
             </div>
             <div className="w-full border-t border-black">
-              <div className="border-b-2 border-gray-200 flex items-center justify-between flex-wrap w-full px-[32px] py-[32px]">
+              <div className="border-b-2 border-gray-200 flex items-center justify-between flex-wrap w-full px-[32px] py-[32px] transition-all duration-1000">
                 <span className="flex items-center gap-[16px]">
                   <span className="text-accent text-[16px] font-medium">
                     Step 1
@@ -546,7 +540,7 @@ const StakeGuide: NextPage = () => {
                           navigator.clipboard.writeText(
                             process.env.NEXT_PUBLIC_NODE_ID ?? ''
                           )
-                          handleCopy()
+                          handleCopy(setCopy)
                         }}
                       >
                         <p>{process.env.NEXT_PUBLIC_NODE_ID}</p>
