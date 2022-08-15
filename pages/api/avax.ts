@@ -1,7 +1,8 @@
 import axios from 'axios'
 import { avax } from 'helpers/avax-data'
 import type { NextApiRequest, NextApiResponse } from 'next'
-import catchError from 'utils/catchError'
+import areFieldsValid from 'utils/areFieldsValid'
+import { getMinutesElapsed } from 'utils/elapsedTime'
 
 export type Data = {
   price: number
@@ -38,26 +39,25 @@ async function getAVAX() {
       let validator = res.data.validators?.filter(
         (v: any) => v.nodeID === process.env.NEXT_PUBLIC_NODE_ID ?? ''
       )[0]
-      data.stake = validator?.totalStakeAmount / 1e9 ?? 0
-      data.uptime = validator?.uptime * 100 ?? 0
+      data.stake = validator?.totalStakeAmount / 1e9
+      data.uptime = validator?.uptime * 100
       data.totalStake =
-        Math.round(((res.data.allStake * 100) / 1e9 / (7.2 * 1e8)) * 100) /
-          100 ?? 0
+        Math.round(((res.data.allStake * 100) / 1e9 / (7.2 * 1e8)) * 100) / 100
       data.rewardRate =
         Math.round(
           ((validator?.potentialReward * 100 * 365 * 24 * 3600) /
             (validator?.stakeAmount *
               (validator?.endTime - validator?.startTime))) *
             100
-        ) / 100 ?? 0
-      data.delegationFee = Math.round(validator?.delegationFee * 100) / 100 ?? 0
-      data.startTime = validator?.startTime ?? 0
-      data.endTime = validator?.endTime ?? 0
+        ) / 100
+      data.delegationFee = Math.round(validator?.delegationFee * 100) / 100
+      data.startTime = validator?.startTime
+      data.endTime = validator?.endTime
       data.remainingCapacity =
-        Math.round((validator?.remainingCapacity / 1e9) * 100) / 100 ?? 0
-      data.version = validator?.version ?? ''
+        Math.round((validator?.remainingCapacity / 1e9) * 100) / 100
+      data.version = `v${validator?.version?.substring(10)}` ?? ''
     })
-    .catch(catchError)
+    .catch((err) => console.log(err.message))
 
   const config = {
     headers: {
@@ -76,7 +76,16 @@ async function getAVAX() {
           (fetchedData.quote.USD.fully_diluted_market_cap / 1e9) * 10
         ) / 10
     })
-    .catch(catchError)
+    .catch((err) => console.log(err.message))
+}
+
+const fetchData = (resData?: Data) => {
+  getAVAX()
+  if (areFieldsValid(data)) {
+    avax.update(data)
+    resData = data
+  }
+  return resData
 }
 
 export default function handler(
@@ -85,23 +94,10 @@ export default function handler(
 ) {
   let resData = avax.data()
 
-  if (resData.price > 0) {
-    let diffInMinutes =
-      (new Date().getTime() - new Date(resData.createdAt).getTime()) / 1000 / 60
-    if (diffInMinutes > 5) {
-      getAVAX()
-      if (data.price > 0 && data.stake > 0) {
-        avax.update(data)
-        resData = data
-      }
-    }
-  } else {
-    getAVAX()
-    if (data.price > 0 && data.stake > 0) {
-      avax.update(data)
-      resData = data
-    }
-  }
+  if (areFieldsValid(resData)) {
+    let minElapsed = getMinutesElapsed(new Date(resData.createdAt), new Date())
+    if (minElapsed >= 5) resData = fetchData(resData)
+  } else resData = fetchData(resData)
 
   res.status(200).json(resData)
 }

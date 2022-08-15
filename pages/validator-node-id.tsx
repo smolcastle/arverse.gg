@@ -35,14 +35,12 @@ const NodeID: NextPage = () => {
 
     let startTime = data?.startTime
     let endTime = data?.endTime
-    let currTime = Math.floor(Date.now() / 1000)
-    setDaysLeft(Math.floor((endTime - currTime) / (24 * 60 * 60)))
+    let currTime = Math.round(Date.now() / 1000)
+    setDaysLeft(Math.round((endTime - currTime) / (24 * 60 * 60)))
 
     let fraction = (endTime - currTime) / (endTime - startTime)
     setFraction(fraction)
   }, [data])
-
-  if (!data) return <div>Loading...</div>
 
   return (
     <div className="w-full bg-light">
@@ -84,11 +82,7 @@ const NodeID: NextPage = () => {
           </div>
           <p className="flex items-center gap-3 mt-[12px] text-[16px] text-gray font-normal">
             running{' '}
-            {avax?.version ? (
-              `v${avax?.version?.substring(10)}`
-            ) : (
-              <Loader inline size="sm" />
-            )}
+            {avax?.version ? avax?.version : <Loader inline size="sm" />}
           </p>
         </div>
 

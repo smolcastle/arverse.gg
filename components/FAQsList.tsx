@@ -30,7 +30,7 @@ const FAQsList = (props: Props) => {
   React.useEffect(() => {
     if (query.length) {
       let newFaqs = faqsCopy.map((faq, index) => {
-        let newFaq = {
+        let newFaq: object = {
           question: getSearchResults(faq.question, query),
           answer: getSearchResults(faq.answer, query)
         }
@@ -40,8 +40,6 @@ const FAQsList = (props: Props) => {
       setFaqList(newFaqs)
     } else setFaqList(faqsCopy)
   }, [query, setFaqList, faqsCopy])
-
-  if (!data) return <div>Loading...</div>
 
   return (
     <div
