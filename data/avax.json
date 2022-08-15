@@ -1,7 +1,7 @@
 {
-  "price": 28.11,
-  "marketCap": 20.2,
-  "totalStake": 36.93,
+  "price": 27.77,
+  "marketCap": 20,
+  "totalStake": 36.9,
   "stake": 92700,
   "uptime": 99.9,
   "rewardRate": 9.22,
@@ -10,5 +10,5 @@
   "startTime": "1655991485",
   "remainingCapacity": 370800,
   "endTime": "1687527485",
-  "createdAt": "2022-08-15T17:03:21.732Z"
+  "createdAt": "2022-08-15T21:06:33.064Z"
 }
