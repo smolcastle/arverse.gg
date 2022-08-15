@@ -26,7 +26,7 @@ const NodeID: NextPage = () => {
   const [isAvax, setIsAvax] = React.useState(true)
   const [copy, setCopy] = React.useState('Copy')
   const [daysLeft, setDaysLeft] = React.useState(300)
-  const [fraction, setFraction] = React.useState(0)
+  const [fraction, setFraction] = React.useState(-1)
   const [avax, setAvax] = React.useState<any>({})
 
   const { data } = useSWR('/api/avax', fetcher)
@@ -137,7 +137,11 @@ const NodeID: NextPage = () => {
                 cx="60"
                 cy="60"
                 strokeWidth="12"
-                strokeDasharray={getDonutData(circumference(54), fraction)}
+                strokeDasharray={
+                  Boolean(fraction) && fraction >= 0
+                    ? getDonutData(circumference(54), fraction)
+                    : getDonutData(circumference(54), 0)
+                }
                 strokeDashoffset={circumference(54) / 4}
               />
             </svg>

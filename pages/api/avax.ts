@@ -37,7 +37,7 @@ async function getAVAX() {
     .get(`${process.env.API_ENDPOINT}/v/api/validators`)
     .then((res) => {
       let validator = res.data.validators?.filter(
-        (v: any) => v.nodeID === process.env.NEXT_PUBLIC_NODE_ID ?? ''
+        (v: any) => v.nodeID === process.env.NEXT_PUBLIC_NODE_ID
       )[0]
       data.stake = validator?.totalStakeAmount / 1e9
       data.uptime = validator?.uptime * 100
@@ -55,17 +55,17 @@ async function getAVAX() {
       data.endTime = validator?.endTime
       data.remainingCapacity =
         Math.round((validator?.remainingCapacity / 1e9) * 100) / 100
-      data.version = `v${validator?.version?.substring(10)}` ?? ''
+      data.version = `v${validator?.version?.substring(10)}`
     })
     .catch((err) => console.log(err.message))
 
   const config = {
     headers: {
-      'X-CMC_PRO_API_KEY': process.env.CMC_API_KEY ?? ''
+      'X-CMC_PRO_API_KEY': `${process.env.CMC_API_KEY}`
     }
   }
   await axios
-    .get(process.env.CMC_ENDPOINT ?? '', config)
+    .get(`${process.env.CMC_ENDPOINT}`, config)
     .then((res) => {
       let fetchedData = res.data?.data?.filter(
         (curr: any) => curr.symbol === 'AVAX'
@@ -83,9 +83,8 @@ const fetchData = (resData?: Data) => {
   getAVAX()
   if (areFieldsValid(data)) {
     avax.update(data)
-    resData = data
+    resData = data // eslint-disable-line
   }
-  return resData
 }
 
 export default function handler(
@@ -96,8 +95,8 @@ export default function handler(
 
   if (areFieldsValid(resData)) {
     let minElapsed = getMinutesElapsed(new Date(resData.createdAt), new Date())
-    if (minElapsed >= 5) resData = fetchData(resData)
-  } else resData = fetchData(resData)
+    if (minElapsed >= 5) fetchData(resData)
+  } else fetchData(resData)
 
   res.status(200).json(resData)
 }
