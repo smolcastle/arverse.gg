@@ -133,15 +133,27 @@ const Home: NextPage<any> = () => {
             eco-friendly. Compared to Ethereum and Bitcoin, it is the fastest
             blockchain in terms of time-to-finality. What makes Avalanche unique
             are the subnets. Subnets are isolated networks that can be deployed
-            with Avalalanche. Subnets don’t compete with other apps for network
+            with Avalalanche. Subnets don't compete with other apps for network
             resources, and can scale infinitely.
           </p>
         </div>
         <div className="mt-[40px] flex flex-wrap gap-[40px] max-w-[640px] w-full mx-auto z-10">
-          <Button startIcon={<AvaxIcon />} filled>
-            Avalanche website
-          </Button>
-          <Button filled>Learn more about subnets</Button>
+          <a
+            href="https://www.avax.network/"
+            target={'_blank'}
+            rel="noreferrer noopener"
+          >
+            <Button startIcon={<AvaxIcon />} filled>
+              Avalanche website
+            </Button>
+          </a>
+          <a
+            href="https://www.avax.network/subnets"
+            target={'_blank'}
+            rel="noreferrer noopener"
+          >
+            <Button filled>Learn more about subnets</Button>
+          </a>
         </div>
         <div className="mt-[110px] flex text-center justify-evenly max-w-[640px] w-full mx-auto z-10">
           <div className="flex flex-col items-center gap-1">

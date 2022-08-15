@@ -68,9 +68,11 @@ const StakeGuide: NextPage = () => {
       setStep5Marked
     ]
 
-    const allOpenSteps = JSON.parse(localStorage.getItem('openSteps') || '[]')
+    const storedOpenSteps = JSON.parse(
+      localStorage.getItem('openSteps') || '[]'
+    )
 
-    const allStepsOpen = [
+    const allOpenSteps = [
       setIsStep1Open,
       setIsStep2Open,
       setIsStep3Open,
@@ -82,12 +84,10 @@ const StakeGuide: NextPage = () => {
       allSteps[i](allMarkedSteps[i] ?? false)
     }
 
-    for (let i = 0; i < allStepsOpen.length; i++) {
-      allStepsOpen[i](allOpenSteps[i] ?? true)
+    for (let i = 0; i < allOpenSteps.length; i++) {
+      allOpenSteps[i](storedOpenSteps[i] ?? true)
     }
   }, [])
-
-  if (!data) return <div>Loading...</div>
 
   function handleAmountChange(e: React.ChangeEvent<HTMLInputElement>) {
     let newAmount = parseFloat(e.target.value) || 0
@@ -139,7 +139,7 @@ const StakeGuide: NextPage = () => {
 
   function handleStepMarked(setIsStepOpen: any, step: number, setMarked: any) {
     setIsStepOpen((step: boolean) => !step)
-    let allStepsOpenList = [
+    let allOpenStepsList = [
       isStep1Open,
       isStep2Open,
       isStep3Open,
@@ -149,7 +149,7 @@ const StakeGuide: NextPage = () => {
       if (index === step - 1) return !item
       return item
     })
-    localStorage.setItem('openSteps', JSON.stringify(allStepsOpenList))
+    localStorage.setItem('openSteps', JSON.stringify(allOpenStepsList))
     let isMarked
     setMarked((marked: boolean) => {
       isMarked = marked
