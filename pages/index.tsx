@@ -15,6 +15,7 @@ import Header from 'components/Header'
 import FAQsList from 'components/FAQsList'
 import useSWR from 'swr'
 import fetcher from 'utils/fetcher'
+import Loader from 'components/Loader'
 
 const Home: NextPage<any> = () => {
   const [isAvax, setIsAvax] = React.useState(true)
@@ -25,12 +26,12 @@ const Home: NextPage<any> = () => {
     setAvax(data)
   }, [data])
 
-  if (!data) return <div>Loading...</div>
-
   return (
     <div className="w-full bg-light">
       <Head>
-        <title>Arverse</title>
+        <title>
+          Arverse | Avalanche Validator, Earn Staking Rewards on AVAX
+        </title>
       </Head>
 
       <Header />
@@ -46,10 +47,14 @@ const Home: NextPage<any> = () => {
         <h1 className="max-w-[640px] w-full font-bold text-[56px] text-center z-10">
           Compound your <span className="text-red">AVAX</span>
         </h1>
-        <span className="px-4 my-4 max-w-[640px] w-full font-medium text-[24px] text-center z-10">
-          Stake your AVAX tokens and earn {avax?.rewardRate}% per annum on your
-          investments
-        </span>
+        {avax?.rewardRate > 0 ? (
+          <span className="px-4 my-4 max-w-[640px] w-full font-medium text-[24px] text-center z-10">
+            Stake your AVAX tokens and earn {avax?.rewardRate}% per annum on
+            your investments
+          </span>
+        ) : (
+          <Loader />
+        )}
         <div className="my-4 flex gap-6 font-medium text-[16px] z-10">
           <span className="underline underline-offset-2 decoration-dotted text-center">
             Fully decentralized
@@ -90,13 +95,22 @@ const Home: NextPage<any> = () => {
         </div>
         <div className="mt-[60px] z-10 text-white text-center font-extralight">
           {isAvax ? (
-            <h2 className="lg:text-[448px] md:text-[300px] sm:text-[216px] text-[190px]">
-              {avax?.stake}
-            </h2>
+            avax?.stake ? (
+              <h2 className="lg:text-[448px] md:text-[300px] sm:text-[216px] text-[190px]">
+                {avax?.stake}
+              </h2>
+            ) : (
+              <Loader />
+            )
           ) : (
             <h2 className="flex items-center lg:text-[330px] md:text-[250px] sm:text-[150px] text-[130px]">
               <span className="font-medium text-[64px]">$</span>
-              <span>{avax?.stake * avax?.price}</span>
+
+              {avax?.price > 0 ? (
+                <span>{avax?.stake * avax?.price}</span>
+              ) : (
+                <Loader />
+              )}
             </h2>
           )}
           <div className="w-full flex justify-center gap-2 text-[24px]">
@@ -131,21 +145,33 @@ const Home: NextPage<any> = () => {
         </div>
         <div className="mt-[110px] flex text-center justify-evenly max-w-[640px] w-full mx-auto z-10">
           <div className="flex flex-col items-center gap-1">
-            <h3 className="font-bold sm:text-4xl text-[40px]">
-              ${avax?.price}
-            </h3>
+            {avax?.price > 0 ? (
+              <h3 className="font-bold sm:text-4xl text-[40px]">
+                ${avax?.price}
+              </h3>
+            ) : (
+              <Loader />
+            )}
             <span className="text-[16px]">AVAX Price</span>
           </div>
           <div className="flex flex-col items-center gap-1">
-            <h3 className="font-bold sm:text-4xl text-[40px]">
-              ${avax?.marketCap}B
-            </h3>
+            {avax?.price > 0 ? (
+              <h3 className="font-bold sm:text-4xl text-[40px]">
+                ${avax?.marketCap}B
+              </h3>
+            ) : (
+              <Loader />
+            )}
             <span className="text-[16px]">AVAX marketcap</span>
           </div>
           <div className="flex flex-col items-center gap-1">
-            <h3 className="font-bold sm:text-4xl text-[40px]">
-              {avax?.totalStake}%
-            </h3>
+            {avax?.price > 0 ? (
+              <h3 className="font-bold sm:text-4xl text-[40px]">
+                {avax?.totalStake}%
+              </h3>
+            ) : (
+              <Loader />
+            )}
             <span className="text-[16px]">AVAX Stake</span>
           </div>
         </div>

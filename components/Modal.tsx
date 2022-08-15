@@ -12,7 +12,7 @@ type Props = {
 const Modal: NextPage<Props> = (props) => {
   return (
     <Transition.Root show={props.open} as={Fragment}>
-      <Dialog as="div" className="relative z-10" onClose={props.onClick}>
+      <Dialog as="div" className="relative z-50" onClose={props.onClick}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
