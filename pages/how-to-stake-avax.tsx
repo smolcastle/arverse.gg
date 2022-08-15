@@ -380,10 +380,10 @@ const StakeGuide: NextPage = () => {
                 <Transition.Root show={step1Open} as={Fragment}>
                   <Transition.Child
                     as={Fragment}
-                    enter="ease-in-out duration-200"
+                    enter="linear duration-50"
                     enterFrom="opacity-0"
                     enterTo="opacity-100"
-                    leave="ease-in-out duration-200"
+                    leave="linear duration-50"
                     leaveFrom="opacity-100"
                     leaveTo="opacity-0"
                   >
@@ -430,10 +430,10 @@ const StakeGuide: NextPage = () => {
                 <Transition.Root show={step2Open} as={Fragment}>
                   <Transition.Child
                     as={Fragment}
-                    enter="ease-in-out duration-200"
+                    enter="linear duration-50"
                     enterFrom="opacity-0"
                     enterTo="opacity-100"
-                    leave="ease-in-out duration-200"
+                    leave="linear duration-50"
                     leaveFrom="opacity-100"
                     leaveTo="opacity-0"
                   >
@@ -468,10 +468,10 @@ const StakeGuide: NextPage = () => {
                 <Transition.Root show={step3Open} as={Fragment}>
                   <Transition.Child
                     as={Fragment}
-                    enter="ease-in-out duration-200"
+                    enter="linear duration-50"
                     enterFrom="opacity-0"
                     enterTo="opacity-100"
-                    leave="ease-in-out duration-200"
+                    leave="linear duration-50"
                     leaveFrom="opacity-100"
                     leaveTo="opacity-0"
                   >
@@ -506,10 +506,10 @@ const StakeGuide: NextPage = () => {
                 <Transition.Root show={step4Open} as={Fragment}>
                   <Transition.Child
                     as={Fragment}
-                    enter="ease-in-out duration-200"
+                    enter="linear duration-50"
                     enterFrom="opacity-0"
                     enterTo="opacity-100"
-                    leave="ease-in-out duration-200"
+                    leave="linear duration-50"
                     leaveFrom="opacity-100"
                     leaveTo="opacity-0"
                   >
@@ -557,10 +557,10 @@ const StakeGuide: NextPage = () => {
                 <Transition.Root show={step5Open} as={Fragment}>
                   <Transition.Child
                     as={Fragment}
-                    enter="ease-in-out duration-200"
+                    enter="linear duration-50"
                     enterFrom="opacity-0"
                     enterTo="opacity-100"
-                    leave="ease-in-out duration-200"
+                    leave="linear duration-50"
                     leaveFrom="opacity-100"
                     leaveTo="opacity-0"
                   >
