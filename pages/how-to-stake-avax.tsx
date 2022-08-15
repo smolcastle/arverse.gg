@@ -18,11 +18,11 @@ import classNames from 'utils/classNames'
 import ExternalLink from 'components/ExternalLink'
 import useSWR from 'swr'
 import fetcher from 'utils/fetcher'
-import step1 from 'assets/image/stake-steps/Step_1.png'
-import step2 from 'assets/image/stake-steps/Step_2.png'
-import step3 from 'assets/image/stake-steps/Step_3.png'
-import step4 from 'assets/image/stake-steps/Step_4.png'
-import step5 from 'assets/image/stake-steps/Step_5.png'
+import step1 from 'assets/image/stake-steps/Step_1.jpg'
+import step2 from 'assets/image/stake-steps/Step_2.jpg'
+import step3 from 'assets/image/stake-steps/Step_3.jpg'
+import step4 from 'assets/image/stake-steps/Step_4.jpg'
+import step5 from 'assets/image/stake-steps/Step_5.jpg'
 import Modal from 'components/Modal'
 import { Transition } from '@headlessui/react'
 import handleCopy from 'utils/copyToClipboard'
@@ -583,7 +583,7 @@ const StakeGuide: NextPage = () => {
                     leaveTo="opacity-0"
                   >
                     <span className="block mt-[12px] text-[20px] font-medium">
-                      Select Staking End Date, Enter Stake Amount and click the
+                      Select Staking End Date, Enter Stake Amount and click the{' '}
                       <span className="text-accent">Confirm button</span>.
                     </span>
                   </Transition.Child>
