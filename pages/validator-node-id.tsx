@@ -218,7 +218,7 @@ const NodeID: NextPage = () => {
           </Link>
         </div>
         <div className="mt-[160px] text-center">
-          <h2 className="mx-auto font-bold text-[48px] max-w-[640px]">
+          <h2 className="mx-auto font-bold text-[40px] max-w-[640px]">
             Benefits of staking on Avalanche
           </h2>
           <p className="mx-auto max-w-[640px] w-full pt-[16px] text-gray text-[24px] font-regular leading-tight">
