@@ -12,14 +12,12 @@ RUN yarn install
 # Rebuild the source code only when needed
 FROM node:16-alpine AS builder
 ARG CMC_API_KEY
-ARG API_ENDPOINT
 
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN mv .env.example .env
-RUN echo "\nCMC_API_KEY=$CMC_API_KEY" >> .env
-RUN echo "API_ENDPOINT=$API_ENDPOINT" >> .env
+RUN echo "CMC_API_KEY=${CMC_API_KEY}" >> .env
 RUN mkdir data && echo '{}' > data/avax.json
 
 RUN yarn build
@@ -37,6 +35,7 @@ COPY --from=builder /app/package.json ./package.json
 
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
+COPY --from=builder /app/data ./data
 
 EXPOSE 80
 
