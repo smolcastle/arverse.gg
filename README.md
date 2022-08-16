@@ -41,7 +41,7 @@ yarn dev
 ###### Build docker image. Add your CMC_API_KEY to docker-compose.yml
 
 ```bash
-docker-compose build
+docker-compose build --build-arg CMC_API_KEY="{YOUR_CMC_API_KEY}"
 ```
 
 ###### Run docker container on Port 8000

@@ -7,6 +7,3 @@ services:
     build: .
     ports:
       - '8000:80'
-    environment:
-      - CMC_API_KEY=
-      - API_ENDPOINT=https://vscout.io
