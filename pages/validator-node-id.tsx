@@ -26,7 +26,7 @@ const NodeID: NextPage = () => {
   const [isAvax, setIsAvax] = React.useState(true)
   const [copy, setCopy] = React.useState('Copy')
   const [daysLeft, setDaysLeft] = React.useState(300)
-  const [fraction, setFraction] = React.useState(0)
+  const [fraction, setFraction] = React.useState(-1)
   const [avax, setAvax] = React.useState<any>({})
 
   const { data } = useSWR('/api/avax', fetcher)
@@ -46,8 +46,13 @@ const NodeID: NextPage = () => {
     <div className="w-full bg-light">
       <Head>
         <title>
-          Arverse | Avalanche Validator, Earn Staking Rewards on AVAX
+          Arverse | Avalanche Validator Node ID Details
         </title>
+        <meta name="description" content="Our high uptime avalanche validator node is trusted by millions of dollars from both institutional and retail investors." />
+        <meta property='og:title' content="Arverse | Avalanche Validator Node ID Details" />
+        <meta property='og:og:description' content="Our high uptime avalanche validator node is trusted by millions of dollars from both institutional and retail investors." />
+        <meta property='og:url' content="https://arverse.gg/validator-node-id" />
+        <meta property="og:type" content="website" />
       </Head>
 
       <Header />
@@ -137,7 +142,11 @@ const NodeID: NextPage = () => {
                 cx="60"
                 cy="60"
                 strokeWidth="12"
-                strokeDasharray={getDonutData(circumference(54), fraction)}
+                strokeDasharray={
+                  Boolean(fraction) && fraction >= 0
+                    ? getDonutData(circumference(54), fraction)
+                    : getDonutData(circumference(54), 0)
+                }
                 strokeDashoffset={circumference(54) / 4}
               />
             </svg>

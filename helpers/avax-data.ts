@@ -16,5 +16,9 @@ function update(data: Data) {
 }
 
 function saveData() {
-  fs.writeFileSync('data/avax.json', JSON.stringify(avaxData, null, 2))
+  fs.writeFile('data/avax.json', JSON.stringify(avaxData, null, 2), (err: any) => {
+    if (err) {
+      console.log(err);
+    }
+  })
 }

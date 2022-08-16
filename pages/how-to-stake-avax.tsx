@@ -42,11 +42,11 @@ const StakeGuide: NextPage = () => {
   const [step3Marked, setStep3Marked] = React.useState(false)
   const [step4Marked, setStep4Marked] = React.useState(false)
   const [step5Marked, setStep5Marked] = React.useState(false)
-  const [isStep1Open, setIsStep1Open] = React.useState(true)
-  const [isStep2Open, setIsStep2Open] = React.useState(true)
-  const [isStep3Open, setIsStep3Open] = React.useState(true)
-  const [isStep4Open, setIsStep4Open] = React.useState(true)
-  const [isStep5Open, setIsStep5Open] = React.useState(true)
+  const [step1Open, setStep1Open] = React.useState(true)
+  const [step2Open, setStep2Open] = React.useState(true)
+  const [step3Open, setStep3Open] = React.useState(true)
+  const [step4Open, setStep4Open] = React.useState(true)
+  const [step5Open, setStep5Open] = React.useState(true)
 
   const stepsImgList = [step1, step2, step3, step4, step5]
 
@@ -68,24 +68,17 @@ const StakeGuide: NextPage = () => {
       setStep5Marked
     ]
 
-    const storedOpenSteps = JSON.parse(
-      localStorage.getItem('openSteps') || '[]'
-    )
-
     const allOpenSteps = [
-      setIsStep1Open,
-      setIsStep2Open,
-      setIsStep3Open,
-      setIsStep4Open,
-      setIsStep5Open
+      setStep1Open,
+      setStep2Open,
+      setStep3Open,
+      setStep4Open,
+      setStep5Open
     ]
 
     for (let i = 0; i < allSteps.length; i++) {
       allSteps[i](allMarkedSteps[i] ?? false)
-    }
-
-    for (let i = 0; i < allOpenSteps.length; i++) {
-      allOpenSteps[i](storedOpenSteps[i] ?? true)
+      if (allMarkedSteps[i]) allOpenSteps[i](false)
     }
   }, [])
 
@@ -137,19 +130,8 @@ const StakeGuide: NextPage = () => {
     setOpen(true)
   }
 
-  function handleStepMarked(setIsStepOpen: any, step: number, setMarked: any) {
-    setIsStepOpen((step: boolean) => !step)
-    let allOpenStepsList = [
-      isStep1Open,
-      isStep2Open,
-      isStep3Open,
-      isStep4Open,
-      isStep5Open
-    ].map((item, index) => {
-      if (index === step - 1) return !item
-      return item
-    })
-    localStorage.setItem('openSteps', JSON.stringify(allOpenStepsList))
+  function handleStepMarked(setStepOpen: any, step: number, setMarked: any) {
+    setStepOpen((step: boolean) => !step)
     let isMarked
     setMarked((marked: boolean) => {
       isMarked = marked
@@ -178,8 +160,13 @@ const StakeGuide: NextPage = () => {
     <div className="w-full bg-light">
       <Head>
         <title>
-          Arverse | Avalanche Validator, Earn Staking Rewards on AVAX
+          Arverse | Avax Staking Guide, Earn Rewards Upto 9%
         </title>
+        <meta name="description" content="Follow our staking guide to learn how to stake your AVAX with us. Earn upto 9% annually on your AVAX with Arverse." />
+        <meta property='og:title' content="Arverse | Avax Staking Guide, Earn Rewards Upto 9%" />
+        <meta property='og:og:description' content="Follow our staking guide to learn how to stake your AVAX with us. Earn upto 9% annually on your AVAX with Arverse." />
+        <meta property='og:url' content="https://arverse.gg/how-to-stake-avax" />
+        <meta property="og:type" content="website" />
       </Head>
 
       <Header />
@@ -188,6 +175,7 @@ const StakeGuide: NextPage = () => {
         open={open}
         onClick={setOpen}
         imgUrl={stepsImgList[step - 1]?.src}
+        altText={`Step ${step} Preview`}
       />
 
       <main className="pt-[140px] px-4 flex flex-col items-center mx-auto z-10">
@@ -395,13 +383,13 @@ const StakeGuide: NextPage = () => {
                     <PlayIcon />
                   </span>
                 </span>
-                <Transition.Root show={isStep1Open} as={Fragment}>
+                <Transition.Root show={step1Open} as={Fragment}>
                   <Transition.Child
                     as={Fragment}
-                    enter="ease-in-out duration-200"
+                    enter="linear duration-50"
                     enterFrom="opacity-0"
                     enterTo="opacity-100"
-                    leave="ease-in-out duration-200"
+                    leave="linear duration-50"
                     leaveFrom="opacity-100"
                     leaveTo="opacity-0"
                   >
@@ -427,10 +415,10 @@ const StakeGuide: NextPage = () => {
                 <CustomButton
                   icon={<TickIcon />}
                   onClick={() =>
-                    handleStepMarked(setIsStep1Open, 1, setStep1Marked)
+                    handleStepMarked(setStep1Open, 1, setStep1Marked)
                   }
                   marked={step1Marked}
-                  open={isStep1Open}
+                  open={step1Open}
                 />
               </div>
               <div className="border-b-2 border-gray-200 flex items-center justify-between flex-wrap w-full px-[32px] py-[32px]">
@@ -445,13 +433,13 @@ const StakeGuide: NextPage = () => {
                     <PlayIcon />
                   </span>
                 </span>
-                <Transition.Root show={isStep2Open} as={Fragment}>
+                <Transition.Root show={step2Open} as={Fragment}>
                   <Transition.Child
                     as={Fragment}
-                    enter="ease-in-out duration-200"
+                    enter="linear duration-50"
                     enterFrom="opacity-0"
                     enterTo="opacity-100"
-                    leave="ease-in-out duration-200"
+                    leave="linear duration-50"
                     leaveFrom="opacity-100"
                     leaveTo="opacity-0"
                   >
@@ -465,10 +453,10 @@ const StakeGuide: NextPage = () => {
                 <CustomButton
                   icon={<TickIcon />}
                   onClick={() =>
-                    handleStepMarked(setIsStep2Open, 2, setStep2Marked)
+                    handleStepMarked(setStep2Open, 2, setStep2Marked)
                   }
                   marked={step2Marked}
-                  open={isStep2Open}
+                  open={step2Open}
                 />
               </div>
               <div className="border-b-2 border-gray-200 flex items-center justify-between flex-wrap w-full px-[32px] py-[32px]">
@@ -483,13 +471,13 @@ const StakeGuide: NextPage = () => {
                     <PlayIcon />
                   </span>
                 </span>
-                <Transition.Root show={isStep3Open} as={Fragment}>
+                <Transition.Root show={step3Open} as={Fragment}>
                   <Transition.Child
                     as={Fragment}
-                    enter="ease-in-out duration-200"
+                    enter="linear duration-50"
                     enterFrom="opacity-0"
                     enterTo="opacity-100"
-                    leave="ease-in-out duration-200"
+                    leave="linear duration-50"
                     leaveFrom="opacity-100"
                     leaveTo="opacity-0"
                   >
@@ -503,10 +491,10 @@ const StakeGuide: NextPage = () => {
                 <CustomButton
                   icon={<TickIcon />}
                   onClick={() =>
-                    handleStepMarked(setIsStep3Open, 3, setStep3Marked)
+                    handleStepMarked(setStep3Open, 3, setStep3Marked)
                   }
                   marked={step3Marked}
-                  open={isStep3Open}
+                  open={step3Open}
                 />
               </div>
               <div className="border-b-2 border-gray-200 flex items-center justify-between flex-wrap w-full px-[32px] py-[32px]">
@@ -521,13 +509,13 @@ const StakeGuide: NextPage = () => {
                     <PlayIcon />
                   </span>
                 </span>
-                <Transition.Root show={isStep4Open} as={Fragment}>
+                <Transition.Root show={step4Open} as={Fragment}>
                   <Transition.Child
                     as={Fragment}
-                    enter="ease-in-out duration-200"
+                    enter="linear duration-50"
                     enterFrom="opacity-0"
                     enterTo="opacity-100"
-                    leave="ease-in-out duration-200"
+                    leave="linear duration-50"
                     leaveFrom="opacity-100"
                     leaveTo="opacity-0"
                   >
@@ -554,10 +542,10 @@ const StakeGuide: NextPage = () => {
                 <CustomButton
                   icon={<TickIcon />}
                   onClick={() =>
-                    handleStepMarked(setIsStep4Open, 4, setStep4Marked)
+                    handleStepMarked(setStep4Open, 4, setStep4Marked)
                   }
                   marked={step4Marked}
-                  open={isStep4Open}
+                  open={step4Open}
                 />
               </div>
               <div className="border-b-2 border-gray-200 flex items-center justify-between flex-wrap w-full px-[32px] py-[32px]">
@@ -572,13 +560,13 @@ const StakeGuide: NextPage = () => {
                     <PlayIcon />
                   </span>
                 </span>
-                <Transition.Root show={isStep5Open} as={Fragment}>
+                <Transition.Root show={step5Open} as={Fragment}>
                   <Transition.Child
                     as={Fragment}
-                    enter="ease-in-out duration-200"
+                    enter="linear duration-50"
                     enterFrom="opacity-0"
                     enterTo="opacity-100"
-                    leave="ease-in-out duration-200"
+                    leave="linear duration-50"
                     leaveFrom="opacity-100"
                     leaveTo="opacity-0"
                   >
@@ -591,10 +579,10 @@ const StakeGuide: NextPage = () => {
                 <CustomButton
                   icon={<TickIcon />}
                   onClick={() =>
-                    handleStepMarked(setIsStep5Open, 5, setStep5Marked)
+                    handleStepMarked(setStep5Open, 5, setStep5Marked)
                   }
                   marked={step5Marked}
-                  open={isStep5Open}
+                  open={step5Open}
                 />
               </div>
               {allMarked && (

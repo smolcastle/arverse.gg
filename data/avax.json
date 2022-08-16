@@ -1,14 +1,14 @@
 {
-  "price": 27.88,
-  "marketCap": 20.1,
-  "totalStake": 36.92,
+  "price": 28.01,
+  "marketCap": 20.2,
+  "totalStake": 36.88,
   "stake": 92700,
   "uptime": 99.9,
   "rewardRate": 9.22,
   "delegationFee": 10,
-  "version": "avalanche/1.7.17",
+  "version": "v1.7.17",
   "startTime": "1655991485",
   "remainingCapacity": 370800,
   "endTime": "1687527485",
-  "createdAt": "2022-08-15T14:23:50.874Z"
+  "createdAt": "2022-08-16T10:29:07.485Z"
 }
