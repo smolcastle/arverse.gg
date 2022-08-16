@@ -159,13 +159,23 @@ const StakeGuide: NextPage = () => {
   return (
     <div className="w-full bg-light">
       <Head>
-        <title>
-          Arverse | Avax Staking Guide, Earn Rewards Upto 9%
-        </title>
-        <meta name="description" content="Follow our staking guide to learn how to stake your AVAX with us. Earn upto 9% annually on your AVAX with Arverse." />
-        <meta property='og:title' content="Arverse | Avax Staking Guide, Earn Rewards Upto 9%" />
-        <meta property='og:og:description' content="Follow our staking guide to learn how to stake your AVAX with us. Earn upto 9% annually on your AVAX with Arverse." />
-        <meta property='og:url' content="https://arverse.gg/how-to-stake-avax" />
+        <title>Arverse | Avax Staking Guide, Earn Rewards Upto 9%</title>
+        <meta
+          name="description"
+          content="Follow our staking guide to learn how to stake your AVAX with us. Earn upto 9% annually on your AVAX with Arverse."
+        />
+        <meta
+          property="og:title"
+          content="Arverse | Avax Staking Guide, Earn Rewards Upto 9%"
+        />
+        <meta
+          property="og:og:description"
+          content="Follow our staking guide to learn how to stake your AVAX with us. Earn upto 9% annually on your AVAX with Arverse."
+        />
+        <meta
+          property="og:url"
+          content="https://arverse.gg/how-to-stake-avax"
+        />
         <meta property="og:type" content="website" />
       </Head>
 

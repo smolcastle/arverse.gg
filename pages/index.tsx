@@ -32,10 +32,19 @@ const Home: NextPage<any> = () => {
         <title>
           Arverse | Avalanche Validator, Earn Staking Rewards on AVAX
         </title>
-        <meta name="description" content="Arverse is building validator solutions for Avalanche Blockchain. You can stake your AVAX with us and earn upto 9% annually." />
-        <meta property='og:title' content="Arverse | Avalanche Validator, Earn Staking Rewards on AVAX" />
-        <meta property='og:og:description' content="Arverse is building validator solutions for Avalanche Blockchain. You can stake your AVAX with us and earn upto 9% annually." />
-        <meta property='og:url' content="https://arverse.gg/" />
+        <meta
+          name="description"
+          content="Arverse is building validator solutions for Avalanche Blockchain. You can stake your AVAX with us and earn upto 9% annually."
+        />
+        <meta
+          property="og:title"
+          content="Arverse | Avalanche Validator, Earn Staking Rewards on AVAX"
+        />
+        <meta
+          property="og:og:description"
+          content="Arverse is building validator solutions for Avalanche Blockchain. You can stake your AVAX with us and earn upto 9% annually."
+        />
+        <meta property="og:url" content="https://arverse.gg/" />
         <meta property="og:type" content="website" />
       </Head>
 
