@@ -177,6 +177,7 @@ const StakeGuide: NextPage = () => {
           content="https://arverse.gg/how-to-stake-avax"
         />
         <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://arverse.gg/cover.jpg" />
       </Head>
 
       <Header />
