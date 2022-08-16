@@ -218,13 +218,13 @@ const NodeID: NextPage = () => {
           </Link>
         </div>
         <div className="mt-[160px] text-center">
-          <h2 className="font-bold text-[48px] max-w-[640px]">
-            Benefits of staking AVAX
+          <h2 className="mx-auto font-bold text-[48px] max-w-[640px]">
+            Benefits of staking on Avalanche
           </h2>
-          <span className="pt-[16px] text-gray text-[24px] font-regular leading-tight">
-            Compound your AVAX holdings by
-            <br /> earning {avax?.rewardRate}% a year
-          </span>
+          <p className="mx-auto max-w-[640px] w-full pt-[16px] text-gray text-[24px] font-regular leading-tight">
+            Avalanche has the least requirements for becoming delegators among
+            all the PoS blockchains
+          </p>
           <div className="mt-[80px] flex flex-col max-w-[640px] w-full">
             <div className="w-[400px] h-[400px] bg-white flex flex-col items-center justify-center gap-[8px] rounded-full">
               <CashIcon />
@@ -235,7 +235,7 @@ const NodeID: NextPage = () => {
                 You can start staking with as low as 25 AVAX with us.
               </span>
             </div>
-            <div className="-my-[45px] ml-auto w-[400px] h-[400px] bg-white flex flex-col items-center justify-center gap-[8px] rounded-full">
+            <div className="-my-[80px] ml-auto w-[400px] h-[400px] bg-white flex flex-col items-center justify-center gap-[8px] rounded-full">
               <PeakIcon />
               <h3 className="mt-[16px] font-semibold text-[24px]">
                 Easy to earn

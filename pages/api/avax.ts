@@ -32,7 +32,7 @@ export default async function handler(
     !areFieldsValid(data) ||
     (areFieldsValid(data) && checkRefreshTime(data.createdAt, 5))
   ) {
-    console.log(data, "is valid or not let's see")
+    // console.log(data, "is valid or not let's see")
     await axios
       .get(`${process.env.API_ENDPOINT}/v/api/validators`)
       .then((res) => {
