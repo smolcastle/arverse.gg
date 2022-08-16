@@ -160,8 +160,13 @@ const StakeGuide: NextPage = () => {
     <div className="w-full bg-light">
       <Head>
         <title>
-          Arverse | Avalanche Validator, Earn Staking Rewards on AVAX
+          Arverse | Avax Staking Guide, Earn Rewards Upto 9%
         </title>
+        <meta name="description" content="Follow our staking guide to learn how to stake your AVAX with us. Earn upto 9% annually on your AVAX with Arverse." />
+        <meta property='og:title' content="Arverse | Avax Staking Guide, Earn Rewards Upto 9%" />
+        <meta property='og:og:description' content="Follow our staking guide to learn how to stake your AVAX with us. Earn upto 9% annually on your AVAX with Arverse." />
+        <meta property='og:url' content="https://arverse.gg/how-to-stake-avax" />
+        <meta property="og:type" content="website" />
       </Head>
 
       <Header />
@@ -170,6 +175,7 @@ const StakeGuide: NextPage = () => {
         open={open}
         onClick={setOpen}
         imgUrl={stepsImgList[step - 1]?.src}
+        altText={`Step ${step} Preview`}
       />
 
       <main className="pt-[140px] px-4 flex flex-col items-center mx-auto z-10">

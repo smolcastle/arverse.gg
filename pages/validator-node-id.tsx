@@ -46,8 +46,13 @@ const NodeID: NextPage = () => {
     <div className="w-full bg-light">
       <Head>
         <title>
-          Arverse | Avalanche Validator, Earn Staking Rewards on AVAX
+          Arverse | Avalanche Validator Node ID Details
         </title>
+        <meta name="description" content="Our high uptime avalanche validator node is trusted by millions of dollars from both institutional and retail investors." />
+        <meta property='og:title' content="Arverse | Avalanche Validator Node ID Details" />
+        <meta property='og:og:description' content="Our high uptime avalanche validator node is trusted by millions of dollars from both institutional and retail investors." />
+        <meta property='og:url' content="https://arverse.gg/validator-node-id" />
+        <meta property="og:type" content="website" />
       </Head>
 
       <Header />

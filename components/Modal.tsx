@@ -7,6 +7,7 @@ type Props = {
   open: boolean
   onClick: any
   imgUrl: string
+  altText: string
 }
 
 const Modal: NextPage<Props> = (props) => {
@@ -42,7 +43,7 @@ const Modal: NextPage<Props> = (props) => {
                   <img
                     src={props.imgUrl}
                     className="w-full rounded-md border border-transparent shadow-sm"
-                    alt="preview"
+                    alt={props.altText}
                   />
                   <span
                     className="absolute top-2 right-2 cursor-pointer"
