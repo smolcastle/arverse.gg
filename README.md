@@ -17,7 +17,7 @@
 ###### Installing dependencies
 
 ```bash
-yarn install
+➜ yarn install
 ```
 
 Requirements:
@@ -33,21 +33,21 @@ Requirements:
 ###### Running locally on Port 3000
 
 ```bash
-yarn dev
+➜ yarn dev
 ```
 
 ### Docker deployment
 
-###### Build docker image
+###### Build docker image. Add your CMC_API_KEY to docker-compose.yml
 
 ```bash
-docker-compose build
+➜ docker-compose build
 ```
 
 ###### Run docker container on Port 8000
 
 ```bash
-docker-compose up
+➜ docker-compose up
 ```
 
 ### Production deployment
