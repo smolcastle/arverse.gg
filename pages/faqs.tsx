@@ -23,6 +23,7 @@ const FAQs: NextPage = () => {
         />
         <meta property="og:url" content="https://arverse.gg/faqs" />
         <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://arverse.gg/cover.jpg" />
       </Head>
 
       <Header />

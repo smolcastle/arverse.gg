@@ -63,6 +63,7 @@ const NodeID: NextPage = () => {
           content="https://arverse.gg/validator-node-id"
         />
         <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://arverse.gg/cover.jpg" />
       </Head>
 
       <Header />
