@@ -20,6 +20,7 @@ COPY . .
 RUN mv .env.example .env
 RUN echo "\nCMC_API_KEY=$CMC_API_KEY" >> .env
 RUN echo "API_ENDPOINT=$API_ENDPOINT" >> .env
+RUN mkdir data && echo '{}' > data/avax.json
 
 RUN yarn build
 

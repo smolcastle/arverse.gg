@@ -17,40 +17,37 @@
 ###### Installing dependencies
 
 ```bash
-yarn install
+➜ yarn install
 ```
 
 Requirements:
 
 1. `CMC_API_KEY=` Coinmarketcap API key to fetch AVAX price
-2. `API_ENDPOINT=` API endpoint to fetch node data
 
-###### Copy environment variables
+###### Run setup
 
 ```bash
-cp .env.example .env.local
-echo "\nCMC_API_KEY=$123" >> .env.local // replace $123 with your Coinmarketcap API key
-echo "API_ENDPOINT=$123" >> .env.local // replace $123 with your API endpoint to fetch node data
+➜ ./setup.sh YOUR_CMC_API_KEY
 ```
 
 ###### Running locally on Port 3000
 
 ```bash
-yarn dev
+➜ yarn dev
 ```
 
 ### Docker deployment
 
-###### Build docker image
+###### Build docker image. Add your CMC_API_KEY to docker-compose.yml
 
 ```bash
-docker-compose build
+➜ docker-compose build
 ```
 
 ###### Run docker container on Port 8000
 
 ```bash
-docker-compose up
+➜ docker-compose up
 ```
 
 ### Production deployment
