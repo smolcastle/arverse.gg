@@ -8,13 +8,13 @@ const Header = () => {
       </Link>
       <div className="flex sm:gap-8 gap-[40px] font-medium text-[1rem]">
         <Link href="faqs">
-          <a>FAQs</a>
+          <a>Help Center</a>
         </Link>
         <Link href="validator-node-id">
           <a>Node ID</a>
         </Link>
         <Link href="how-to-stake-avax">
-          <a>Stake with us</a>
+          <a>Staking Guide</a>
         </Link>
       </div>
     </header>

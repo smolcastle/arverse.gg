@@ -34,7 +34,7 @@ const Home: NextPage<any> = () => {
         </title>
         <meta
           name="description"
-          content="Arverse is building validator solutions for Avalanche Blockchain. You can stake your AVAX with us and earn upto 9% annually."
+          content="Arverse is a non-custodial staking provider for Avalanche blockchain. You can stake AVAX and earn up to 9.22% per annum."
         />
         <meta
           property="og:title"
@@ -42,7 +42,7 @@ const Home: NextPage<any> = () => {
         />
         <meta
           property="og:og:description"
-          content="Arverse is building validator solutions for Avalanche Blockchain. You can stake your AVAX with us and earn upto 9% annually."
+          content="Arverse is a non-custodial staking provider for Avalanche blockchain. You can stake AVAX and earn up to 9.22% per annum."
         />
         <meta property="og:url" content="https://arverse.gg/" />
         <meta property="og:type" content="website" />
@@ -58,13 +58,14 @@ const Home: NextPage<any> = () => {
               : 'lg:h-[2000px] md:h-[1850px] sm:h-[1700px] h-[1650px]'
           } bg-accent skew-y-6`}
         />
-        <h1 className="max-w-[640px] w-full font-bold text-[56px] text-center z-10">
-          Compound your <span className="text-red">AVAX</span>
+        <h1 className="max-w-[640px] w-full font-bold text-[44px] text-center z-10">
+          Stake, Earn, Grow your <span className="text-red">AVAX</span>
         </h1>
         {avax?.rewardRate > 0 ? (
           <span className="px-4 my-4 max-w-[640px] w-full font-medium text-[24px] text-center z-10">
-            Stake your AVAX tokens and earn {avax?.rewardRate}% per annum on
-            your investments
+            Arverse is a non-custodial staking provider for Avalanche
+            blockchain. You can stake AVAX and earn up to {avax?.rewardRate}%
+            per annum.
           </span>
         ) : (
           <Loader />
@@ -84,9 +85,9 @@ const Home: NextPage<any> = () => {
           <Link href="how-to-stake-avax">
             <a className="w-[320px] h-[320px] flex justify-center items-center text-left bg-red-light hover:bg-red hover:text-red-light transition-all">
               <div className="flex flex-col justify-center gap-[10px]">
-                <h3 className="font-extrabold text-[28px]">STAKE WITH US</h3>
+                <h3 className="font-extrabold text-[28px]">STAKING GUIDE</h3>
                 <span className="text-[16px]">
-                  Follow step by step tutorials
+                  Follow step by step tutorial
                 </span>
                 <RightArrowIcon className="mt-[10px]" />
               </div>
@@ -104,7 +105,8 @@ const Home: NextPage<any> = () => {
         </div>
         <div className="mt-[280px] lg:max-w-[1000px] max-w-[640px] w-full z-10 text-white">
           <h2 className="mx-auto text-center leading-snug font-semibold lg:text-[48px] text-[32px]">
-            Stake with one of the largest validators of the Avalanche Blockchain
+            Arverse is trusted by millions of dollars from both institutional
+            and retail investors
           </h2>
         </div>
         <div className="mt-[60px] z-10 text-white text-center font-extralight">
@@ -234,15 +236,15 @@ const Home: NextPage<any> = () => {
         <FAQsList limit={3} />
 
         <div className="relative mt-[275px] mb-[160px] flex items-center justify-between gap-[16px] max-w-[640px] w-full mx-auto">
-          <h2 className="pl-[32px] text-white font-bold text-[44px] w-[275px] leading-tight z-10">
-            Stake with us to earn upto {avax?.rewardRate}% a year on your AVAX
+          <h2 className="pl-[32px] text-white font-bold text-[44px] w-[280px] leading-tight z-10">
+            Stake to Arverse and earn up to {avax?.rewardRate}% per on your AVAX
           </h2>
           <Link href="how-to-stake-avax">
             <a className="w-[320px] h-[320px] flex justify-center items-center text-left bg-white border-2 border-transparent hover:border-accent shadow-md transition-all z-10">
               <div className="flex flex-col justify-center gap-[10px]">
-                <h3 className="font-extrabold text-[28px]">STAKE WITH US</h3>
+                <h3 className="font-extrabold text-[28px]">STAKING GUIDE</h3>
                 <span className="text-[16px]">
-                  Follow step by step tutorials
+                  Follow these five simple steps
                 </span>
                 <RightArrowIcon className="mt-[10px]" />
               </div>

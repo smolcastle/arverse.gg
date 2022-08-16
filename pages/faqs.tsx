@@ -8,14 +8,14 @@ const FAQs: NextPage = () => {
   return (
     <div className="bg-light">
       <Head>
-        <title>Arverse | Avalanche Validator, Help Center</title>
+        <title>Arverse | Avalanche Validator, Frequently Asked Questions</title>
         <meta
           name="description"
           content="Answers to most of your questions related to Arverse staking solution for Avalanche. If you have any other question, feel free to DM us on Twitter."
         />
         <meta
           property="og:title"
-          content="Arverse | Avalanche Validator, Help Center"
+          content="Arverse | Avalanche Validator, Frequently Asked Questions"
         />
         <meta
           property="og:og:description"

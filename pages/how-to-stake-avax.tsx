@@ -159,18 +159,18 @@ const StakeGuide: NextPage = () => {
   return (
     <div className="w-full bg-light">
       <Head>
-        <title>Arverse | Avax Staking Guide, Earn Rewards Upto 9%</title>
+        <title>Arverse | Avax Staking Guide, Earn Rewards up to 9%</title>
         <meta
           name="description"
-          content="Follow our staking guide to learn how to stake your AVAX with us. Earn upto 9% annually on your AVAX with Arverse."
+          content="Follow our staking guide to learn how to stake your AVAX with us. Earn up to 9% annually on your AVAX staking."
         />
         <meta
           property="og:title"
-          content="Arverse | Avax Staking Guide, Earn Rewards Upto 9%"
+          content="Arverse | Avax Staking Guide, Earn Rewards up to 9%"
         />
         <meta
           property="og:og:description"
-          content="Follow our staking guide to learn how to stake your AVAX with us. Earn upto 9% annually on your AVAX with Arverse."
+          content="Follow our staking guide to learn how to stake your AVAX with us. Earn up to 9% annually on your AVAX staking."
         />
         <meta
           property="og:url"
@@ -192,10 +192,11 @@ const StakeGuide: NextPage = () => {
         <div className="max-w-[640px] w-full flex flex-col items-center gap-[16px]">
           <BookmarkIcon className="w-[60px] h-[60px]" />
           <h1 className="mt-[16px] text-[32px] font-medium text-center">
-            AVAX staking guide
+            Become an Avalanche Delegator
           </h1>
-          <p className="max-w-[480px] w-full font-regular text-center text-[20px] text-gray">
-            Follow the instructions below to stake your AVAX with Arverse
+          <p className="max-w-[640px] w-full font-regular text-center text-[20px] text-gray">
+            Help us secure the avalanche network by staking your AVAX to Arverse
+            and earn rewards
           </p>
         </div>
         <div className="relative mt-[50px] max-w-[640px] w-full transition-all duration-300">
@@ -211,7 +212,7 @@ const StakeGuide: NextPage = () => {
             >
               <CalculatorIcon />
               <span className="text-[20px] font-medium">
-                Calculate your earnings
+                Staking rewards calculator
               </span>
             </button>
             <Transition
@@ -377,7 +378,7 @@ const StakeGuide: NextPage = () => {
             <div className="w-full h-[80px] px-[32px] flex items-center gap-[8px]">
               <PresentationIcon />
               <span className="text-[20px] font-medium">
-                Follow steps below to stake AVAX with us
+                Follow these steps to stake your AVAX
               </span>
             </div>
             <div className="w-full border-t border-black">

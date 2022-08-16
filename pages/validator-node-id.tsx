@@ -69,7 +69,7 @@ const NodeID: NextPage = () => {
 
       <main className="pt-[140px] px-4 flex flex-col items-center mx-auto min-h-screen z-10">
         <h1 className="max-w-[640px] w-full font-medium text-[32px] leading-tight text-center z-10">
-          Our avalanche staking service is trusted by millions of dollars from
+          Our avalanche validator node is trusted by millions of dollars from
           both institutional and retail investors
         </h1>
         <Link href="how-to-stake-avax">
@@ -129,7 +129,7 @@ const NodeID: NextPage = () => {
                 )}
               </div>
               <p className="text-[16px] leading-tight">
-                You can stake your AVAX for minimum 2 weeks and earn upto{' '}
+                You can stake your AVAX for minimum 2 weeks and earn up to{' '}
                 {avax?.rewardRate}% rewards annually with us.
               </p>
             </div>
@@ -218,7 +218,9 @@ const NodeID: NextPage = () => {
           </Link>
         </div>
         <div className="mt-[160px] text-center">
-          <h2 className="font-bold text-[48px]">Benefits of staking AVAX</h2>
+          <h2 className="font-bold text-[48px] max-w-[640px]">
+            Benefits of staking AVAX
+          </h2>
           <span className="pt-[16px] text-gray text-[24px] font-regular leading-tight">
             Compound your AVAX holdings by
             <br /> earning {avax?.rewardRate}% a year

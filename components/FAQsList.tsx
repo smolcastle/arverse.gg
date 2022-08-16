@@ -48,9 +48,9 @@ const FAQsList = (props: Props) => {
       } px-[30px] flex flex-col justify-center items-center max-w-[700px] w-full mx-auto z-10`}
     >
       {currentPath === '/' ? (
-        <h2 className="font-bold text-[48px] mb-[120px]">FAQs</h2>
+        <h2 className="font-bold text-[48px] mb-[120px]">F.A.Qs</h2>
       ) : (
-        <h2 className="font-bold text-[48px] mb-[32px]">Help Center</h2>
+        <h1 className="font-bold text-[48px] mb-[32px]">Help Center</h1>
       )}
       {currentPath === '/faqs' && (
         <div className="mb-[80px] w-full">
