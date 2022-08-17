@@ -26,6 +26,7 @@ import step5 from 'assets/image/stake-steps/5.jpg'
 import Modal from 'components/Modal'
 import { Transition } from '@headlessui/react'
 import handleCopy from 'utils/copyToClipboard'
+import Loader from 'components/Loader'
 
 const StakeGuide: NextPage = () => {
   const [isCalculating, setIsCalculating] = React.useState(false)
@@ -47,6 +48,7 @@ const StakeGuide: NextPage = () => {
   const [step3Open, setStep3Open] = React.useState(true)
   const [step4Open, setStep4Open] = React.useState(true)
   const [step5Open, setStep5Open] = React.useState(true)
+  const [isDataFetched, setIsDataFetched] = React.useState(false)
 
   const stepsImgList = [step1, step2, step3, step4, step5]
 
@@ -59,6 +61,8 @@ const StakeGuide: NextPage = () => {
     const allMarkedSteps = JSON.parse(
       localStorage.getItem('markedSteps') || '[]'
     )
+
+    setIsDataFetched(true)
 
     const allSteps = [
       setStep1Marked,
@@ -383,227 +387,236 @@ const StakeGuide: NextPage = () => {
               </span>
             </div>
             <div className="w-full border-t border-black">
-              <div className="border-b-2 border-gray-200 flex items-center justify-between flex-wrap w-full px-[32px] py-[32px] transition-all duration-1000">
-                <span className="flex items-center gap-[16px]">
-                  <span className="text-accent text-[16px] font-medium">
-                    Step 1
-                  </span>
-                  <span
-                    className="cursor-pointer"
-                    onClick={() => handleStepPreview(1)}
-                  >
-                    <PlayIcon />
-                  </span>
-                </span>
-                <Transition.Root show={step1Open} as={Fragment}>
-                  <Transition.Child
-                    as={Fragment}
-                    enter="linear duration-50"
-                    enterFrom="opacity-0"
-                    enterTo="opacity-100"
-                    leave="linear duration-50"
-                    leaveFrom="opacity-100"
-                    leaveTo="opacity-0"
-                  >
-                    <span>
-                      <span className="block mt-[12px] text-[20px] font-medium">
-                        Login to your account on{' '}
-                        <ExternalLink href="https://wallet.avax.network">
-                          https://wallet.avax.network
-                        </ExternalLink>
-                        .
+              {isDataFetched ? (
+                <>
+                  <div className="border-b-2 border-gray-200 flex items-center justify-between flex-wrap w-full px-[32px] py-[32px] transition-all duration-1000">
+                    <span className="flex items-center gap-[16px]">
+                      <span className="text-accent text-[16px] font-medium">
+                        Step 1
                       </span>
-                      <span className="block mt-[20px] text-[16px] font-medium text-gray-light">
-                        If you don't have account on{' '}
-                        <ExternalLink href="https://wallet.avax.network">
-                          https://wallet.avax.network
-                        </ExternalLink>{' '}
-                        then you must create it. Then move your AVAX to the
-                        above wallet.
-                      </span>
-                    </span>
-                  </Transition.Child>
-                </Transition.Root>
-                <CustomButton
-                  icon={<TickIcon />}
-                  onClick={() =>
-                    handleStepMarked(setStep1Open, 1, setStep1Marked)
-                  }
-                  marked={step1Marked}
-                  open={step1Open}
-                />
-              </div>
-              <div className="border-b-2 border-gray-200 flex items-center justify-between flex-wrap w-full px-[32px] py-[32px]">
-                <span className="flex items-center gap-[16px]">
-                  <span className="text-accent text-[16px] font-medium">
-                    Step 2
-                  </span>
-                  <span
-                    className="cursor-pointer"
-                    onClick={() => handleStepPreview(2)}
-                  >
-                    <PlayIcon />
-                  </span>
-                </span>
-                <Transition.Root show={step2Open} as={Fragment}>
-                  <Transition.Child
-                    as={Fragment}
-                    enter="linear duration-50"
-                    enterFrom="opacity-0"
-                    enterTo="opacity-100"
-                    leave="linear duration-50"
-                    leaveFrom="opacity-100"
-                    leaveTo="opacity-0"
-                  >
-                    <span className="block mt-[12px] text-[20px] font-medium">
-                      Click <span className="text-accent">Cross Chain</span>{' '}
-                      from the menu and transfer your AVAX to{' '}
-                      <span className="text-accent">P-Chain</span>.
-                    </span>
-                  </Transition.Child>
-                </Transition.Root>
-                <CustomButton
-                  icon={<TickIcon />}
-                  onClick={() =>
-                    handleStepMarked(setStep2Open, 2, setStep2Marked)
-                  }
-                  marked={step2Marked}
-                  open={step2Open}
-                />
-              </div>
-              <div className="border-b-2 border-gray-200 flex items-center justify-between flex-wrap w-full px-[32px] py-[32px]">
-                <span className="flex items-center gap-[16px]">
-                  <span className="text-accent text-[16px] font-medium">
-                    Step 3
-                  </span>
-                  <span
-                    className="cursor-pointer"
-                    onClick={() => handleStepPreview(3)}
-                  >
-                    <PlayIcon />
-                  </span>
-                </span>
-                <Transition.Root show={step3Open} as={Fragment}>
-                  <Transition.Child
-                    as={Fragment}
-                    enter="linear duration-50"
-                    enterFrom="opacity-0"
-                    enterTo="opacity-100"
-                    leave="linear duration-50"
-                    leaveFrom="opacity-100"
-                    leaveTo="opacity-0"
-                  >
-                    <span className="w-full block mt-[12px] text-[20px] font-medium">
-                      Click <span className="text-accent">Earn</span> from the
-                      menu. Click{' '}
-                      <span className="text-accent">Add Delegator</span>.
-                    </span>
-                  </Transition.Child>
-                </Transition.Root>
-                <CustomButton
-                  icon={<TickIcon />}
-                  onClick={() =>
-                    handleStepMarked(setStep3Open, 3, setStep3Marked)
-                  }
-                  marked={step3Marked}
-                  open={step3Open}
-                />
-              </div>
-              <div className="border-b-2 border-gray-200 flex items-center justify-between flex-wrap w-full px-[32px] py-[32px]">
-                <span className="flex items-center gap-[16px]">
-                  <span className="text-accent text-[16px] font-medium">
-                    Step 4
-                  </span>
-                  <span
-                    className="cursor-pointer"
-                    onClick={() => handleStepPreview(4)}
-                  >
-                    <PlayIcon />
-                  </span>
-                </span>
-                <Transition.Root show={step4Open} as={Fragment}>
-                  <Transition.Child
-                    as={Fragment}
-                    enter="linear duration-50"
-                    enterFrom="opacity-0"
-                    enterTo="opacity-100"
-                    leave="linear duration-50"
-                    leaveFrom="opacity-100"
-                    leaveTo="opacity-0"
-                  >
-                    <span className="block mt-[12px] text-[20px] font-medium">
-                      In the search field, Search the below Node ID. Then click{' '}
-                      <span className="text-accent">Select</span>
-                      <div
-                        className="mx-auto mt-[12px] flex items-center gap-[16px] p-[24px] w-fit bg-accent text-white text-[16px] cursor-pointer rounded-lg"
-                        onClick={() => {
-                          navigator.clipboard.writeText(
-                            process.env.NEXT_PUBLIC_NODE_ID ?? ''
-                          )
-                          handleCopy(setCopy)
-                        }}
+                      <span
+                        className="cursor-pointer"
+                        onClick={() => handleStepPreview(1)}
                       >
-                        <p>{process.env.NEXT_PUBLIC_NODE_ID}</p>
-                        <Tooltip message={copy}>
-                          <CopyIcon />
-                        </Tooltip>
-                      </div>
+                        <PlayIcon />
+                      </span>
                     </span>
-                  </Transition.Child>
-                </Transition.Root>
-                <CustomButton
-                  icon={<TickIcon />}
-                  onClick={() =>
-                    handleStepMarked(setStep4Open, 4, setStep4Marked)
-                  }
-                  marked={step4Marked}
-                  open={step4Open}
-                />
-              </div>
-              <div className="border-b-2 border-gray-200 flex items-center justify-between flex-wrap w-full px-[32px] py-[32px]">
-                <span className="flex items-center gap-[16px]">
-                  <span className="text-accent text-[16px] font-medium">
-                    Step 5
-                  </span>
-                  <span
-                    className="cursor-pointer"
-                    onClick={() => handleStepPreview(5)}
-                  >
-                    <PlayIcon />
-                  </span>
-                </span>
-                <Transition.Root show={step5Open} as={Fragment}>
-                  <Transition.Child
-                    as={Fragment}
-                    enter="linear duration-50"
-                    enterFrom="opacity-0"
-                    enterTo="opacity-100"
-                    leave="linear duration-50"
-                    leaveFrom="opacity-100"
-                    leaveTo="opacity-0"
-                  >
-                    <span className="block mt-[12px] text-[20px] font-medium">
-                      Select Staking End Date, Enter Stake Amount and click the{' '}
-                      <span className="text-accent">Confirm button</span>.
+                    <Transition.Root show={step1Open} as={Fragment}>
+                      <Transition.Child
+                        as={Fragment}
+                        enter="linear duration-50"
+                        enterFrom="opacity-0"
+                        enterTo="opacity-100"
+                        leave="linear duration-50"
+                        leaveFrom="opacity-100"
+                        leaveTo="opacity-0"
+                      >
+                        <span>
+                          <span className="block mt-[12px] text-[20px] font-medium">
+                            Login to your account on{' '}
+                            <ExternalLink href="https://wallet.avax.network">
+                              https://wallet.avax.network
+                            </ExternalLink>
+                            .
+                          </span>
+                          <span className="block mt-[20px] text-[16px] font-medium text-gray-light">
+                            If you don't have account on{' '}
+                            <ExternalLink href="https://wallet.avax.network">
+                              https://wallet.avax.network
+                            </ExternalLink>{' '}
+                            then you must create it. Then move your AVAX to the
+                            above wallet.
+                          </span>
+                        </span>
+                      </Transition.Child>
+                    </Transition.Root>
+                    <CustomButton
+                      icon={<TickIcon />}
+                      onClick={() =>
+                        handleStepMarked(setStep1Open, 1, setStep1Marked)
+                      }
+                      marked={step1Marked}
+                      open={step1Open}
+                    />
+                  </div>
+                  <div className="border-b-2 border-gray-200 flex items-center justify-between flex-wrap w-full px-[32px] py-[32px]">
+                    <span className="flex items-center gap-[16px]">
+                      <span className="text-accent text-[16px] font-medium">
+                        Step 2
+                      </span>
+                      <span
+                        className="cursor-pointer"
+                        onClick={() => handleStepPreview(2)}
+                      >
+                        <PlayIcon />
+                      </span>
                     </span>
-                  </Transition.Child>
-                </Transition.Root>
-                <CustomButton
-                  icon={<TickIcon />}
-                  onClick={() =>
-                    handleStepMarked(setStep5Open, 5, setStep5Marked)
-                  }
-                  marked={step5Marked}
-                  open={step5Open}
-                />
-              </div>
-              {allMarked && (
-                <div className="px-[32px] pt-[32px] pb-[120px] text-[16px] text-accent text-center">
-                  <p className="text-[24px] font-medium">🎉 🥳 🎊</p>
-                  <p>
-                    Congratulations. Thank you for choosing us as your staking
-                    partner.
-                  </p>
+                    <Transition.Root show={step2Open} as={Fragment}>
+                      <Transition.Child
+                        as={Fragment}
+                        enter="linear duration-50"
+                        enterFrom="opacity-0"
+                        enterTo="opacity-100"
+                        leave="linear duration-50"
+                        leaveFrom="opacity-100"
+                        leaveTo="opacity-0"
+                      >
+                        <span className="block mt-[12px] text-[20px] font-medium">
+                          Click <span className="text-accent">Cross Chain</span>{' '}
+                          from the menu and transfer your AVAX to{' '}
+                          <span className="text-accent">P-Chain</span>.
+                        </span>
+                      </Transition.Child>
+                    </Transition.Root>
+                    <CustomButton
+                      icon={<TickIcon />}
+                      onClick={() =>
+                        handleStepMarked(setStep2Open, 2, setStep2Marked)
+                      }
+                      marked={step2Marked}
+                      open={step2Open}
+                    />
+                  </div>
+                  <div className="border-b-2 border-gray-200 flex items-center justify-between flex-wrap w-full px-[32px] py-[32px]">
+                    <span className="flex items-center gap-[16px]">
+                      <span className="text-accent text-[16px] font-medium">
+                        Step 3
+                      </span>
+                      <span
+                        className="cursor-pointer"
+                        onClick={() => handleStepPreview(3)}
+                      >
+                        <PlayIcon />
+                      </span>
+                    </span>
+                    <Transition.Root show={step3Open} as={Fragment}>
+                      <Transition.Child
+                        as={Fragment}
+                        enter="linear duration-50"
+                        enterFrom="opacity-0"
+                        enterTo="opacity-100"
+                        leave="linear duration-50"
+                        leaveFrom="opacity-100"
+                        leaveTo="opacity-0"
+                      >
+                        <span className="w-full block mt-[12px] text-[20px] font-medium">
+                          Click <span className="text-accent">Earn</span> from
+                          the menu. Click{' '}
+                          <span className="text-accent">Add Delegator</span>.
+                        </span>
+                      </Transition.Child>
+                    </Transition.Root>
+                    <CustomButton
+                      icon={<TickIcon />}
+                      onClick={() =>
+                        handleStepMarked(setStep3Open, 3, setStep3Marked)
+                      }
+                      marked={step3Marked}
+                      open={step3Open}
+                    />
+                  </div>
+                  <div className="border-b-2 border-gray-200 flex items-center justify-between flex-wrap w-full px-[32px] py-[32px]">
+                    <span className="flex items-center gap-[16px]">
+                      <span className="text-accent text-[16px] font-medium">
+                        Step 4
+                      </span>
+                      <span
+                        className="cursor-pointer"
+                        onClick={() => handleStepPreview(4)}
+                      >
+                        <PlayIcon />
+                      </span>
+                    </span>
+                    <Transition.Root show={step4Open} as={Fragment}>
+                      <Transition.Child
+                        as={Fragment}
+                        enter="linear duration-50"
+                        enterFrom="opacity-0"
+                        enterTo="opacity-100"
+                        leave="linear duration-50"
+                        leaveFrom="opacity-100"
+                        leaveTo="opacity-0"
+                      >
+                        <span className="block mt-[12px] text-[20px] font-medium">
+                          In the search field, Search the below Node ID. Then
+                          click <span className="text-accent">Select</span>
+                          <div
+                            className="mx-auto mt-[12px] flex items-center gap-[16px] p-[24px] w-fit bg-accent text-white text-[16px] cursor-pointer rounded-lg"
+                            onClick={() => {
+                              navigator.clipboard.writeText(
+                                process.env.NEXT_PUBLIC_NODE_ID ?? ''
+                              )
+                              handleCopy(setCopy)
+                            }}
+                          >
+                            <p>{process.env.NEXT_PUBLIC_NODE_ID}</p>
+                            <Tooltip message={copy}>
+                              <CopyIcon />
+                            </Tooltip>
+                          </div>
+                        </span>
+                      </Transition.Child>
+                    </Transition.Root>
+                    <CustomButton
+                      icon={<TickIcon />}
+                      onClick={() =>
+                        handleStepMarked(setStep4Open, 4, setStep4Marked)
+                      }
+                      marked={step4Marked}
+                      open={step4Open}
+                    />
+                  </div>
+                  <div className="border-b-2 border-gray-200 flex items-center justify-between flex-wrap w-full px-[32px] py-[32px]">
+                    <span className="flex items-center gap-[16px]">
+                      <span className="text-accent text-[16px] font-medium">
+                        Step 5
+                      </span>
+                      <span
+                        className="cursor-pointer"
+                        onClick={() => handleStepPreview(5)}
+                      >
+                        <PlayIcon />
+                      </span>
+                    </span>
+                    <Transition.Root show={step5Open} as={Fragment}>
+                      <Transition.Child
+                        as={Fragment}
+                        enter="linear duration-50"
+                        enterFrom="opacity-0"
+                        enterTo="opacity-100"
+                        leave="linear duration-50"
+                        leaveFrom="opacity-100"
+                        leaveTo="opacity-0"
+                      >
+                        <span className="block mt-[12px] text-[20px] font-medium">
+                          Select Staking End Date, Enter Stake Amount and click
+                          the{' '}
+                          <span className="text-accent">Confirm button</span>.
+                        </span>
+                      </Transition.Child>
+                    </Transition.Root>
+                    <CustomButton
+                      icon={<TickIcon />}
+                      onClick={() =>
+                        handleStepMarked(setStep5Open, 5, setStep5Marked)
+                      }
+                      marked={step5Marked}
+                      open={step5Open}
+                    />
+                  </div>
+                  {allMarked && (
+                    <div className="px-[32px] pt-[32px] pb-[120px] text-[16px] text-accent text-center">
+                      <p className="text-[24px] font-medium">🎉 🥳 🎊</p>
+                      <p>
+                        Congratulations. Thank you for choosing us as your
+                        staking partner.
+                      </p>
+                    </div>
+                  )}
+                </>
+              ) : (
+                <div className="py-[32px] px-[32px]">
+                  <Loader />
                 </div>
               )}
             </div>
