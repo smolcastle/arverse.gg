@@ -114,7 +114,7 @@ const Home: NextPage<any> = () => {
           {isAvax ? (
             avax?.stake ? (
               <h2 className="lg:text-[448px] md:text-[300px] sm:text-[216px] text-[190px]">
-                {avax?.stake}
+                {Math.floor(avax?.stake)}
               </h2>
             ) : (
               <Loader />
@@ -124,7 +124,7 @@ const Home: NextPage<any> = () => {
               <span className="font-medium text-[64px]">$</span>
 
               {avax?.price > 0 ? (
-                <span>{avax?.stake * avax?.price}</span>
+                <span>{Math.floor(avax?.stake * avax?.price)}</span>
               ) : (
                 <Loader />
               )}
