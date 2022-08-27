@@ -114,7 +114,7 @@ const NodeID: NextPage = () => {
                   <>
                     {avax?.stake ? (
                       <h3 className="font-semibold text-[40px]">
-                        {withCommas(Number(avax?.stake))}
+                        {withCommas(Math.floor(avax?.stake))}
                       </h3>
                     ) : (
                       <Loader inline size="md" />
@@ -123,7 +123,7 @@ const NodeID: NextPage = () => {
                   </>
                 ) : avax?.stake ? (
                   <h3 className="font-semibold text-[40px]">
-                    ${withCommas(Number(avax?.stake * avax?.price))}
+                    ${withCommas(Math.floor(avax?.stake * avax?.price))}
                   </h3>
                 ) : (
                   <Loader inline size="md" />
