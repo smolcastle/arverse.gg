@@ -11,6 +11,7 @@ import {
 } from 'components/icons'
 import React from 'react'
 import Footer from 'components/Footer'
+import withCommas from 'utils/withCommas'
 import Header from 'components/Header'
 import FAQsList from 'components/FAQsList'
 import useSWR from 'swr'
@@ -113,18 +114,18 @@ const Home: NextPage<any> = () => {
         <div className="mt-[60px] z-10 text-white text-center font-extralight">
           {isAvax ? (
             avax?.stake ? (
-              <h2 className="lg:text-[448px] md:text-[300px] sm:text-[216px] text-[190px]">
-                {Math.floor(avax?.stake)}
+              <h2 className="lg:text-[320px] md:text-[200px] sm:text-[116px] text-[90px]">
+                {withCommas(Math.floor(avax?.stake))}
               </h2>
             ) : (
               <Loader />
             )
           ) : (
-            <h2 className="flex items-center lg:text-[330px] md:text-[250px] sm:text-[150px] text-[130px]">
+            <h2 className="flex items-center lg:text-[320px] md:text-[200px] sm:text-[116px] text-[70px]">
               <span className="font-medium text-[64px]">$</span>
 
               {avax?.price > 0 ? (
-                <span>{Math.floor(avax?.stake * avax?.price)}</span>
+                <span>{withCommas(Math.floor(avax?.stake * avax?.price))}</span>
               ) : (
                 <Loader />
               )}
