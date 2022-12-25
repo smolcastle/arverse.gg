@@ -7,13 +7,13 @@ const faqs = (rewardRate: any, remainingCapacity: any) => [
       'When you stake your AVAX to us, you help secure the network. The more you stake, the more secure it becomes. In return, the network rewards stakers in the form of newly created AVAX tokens.'
   },
   {
-    question: 'What is the minimum amount I can stake to Arverse?',
+    question: 'What is the minimum amount I can stake to Beetroot?',
     answer: '25 AVAX.'
   },
   {
     question: 'What is delegation fee?',
     answer:
-      'Delegation fee is the portion of the rewards that are paid to Arverse validator. Currently it is 10%. Note that this fee is deducted from your rewards. Example: you earn 90 AVAX from staking. 9 AVAX (10% fee) goes to Arverse validator. Your effective earning becomes 81 AVAX.'
+      'Delegation fee is the portion of the rewards that are paid to Beetroot validator. Currently it is 10%. Note that this fee is deducted from your rewards. Example: you earn 90 AVAX from staking. 9 AVAX (10% fee) goes to Beetroot validator. Your effective earning becomes 81 AVAX.'
   },
   {
     question: 'Are staking rewards taxable?',
@@ -21,10 +21,10 @@ const faqs = (rewardRate: any, remainingCapacity: any) => [
       'Depending on your jurisdiction, staking reward taxation may vary. We recommend consulting a tax advisor to ensure you stay compliant while minimizing your tax burden.'
   },
   {
-    question: 'What is the maximum AVAX amount I can stake to Arverse?',
+    question: 'What is the maximum AVAX amount I can stake to Beetroot?',
     answer: `You can stake up to ${withCommas(
       Number(remainingCapacity)
-    )} AVAX to Arverse validator.`
+    )} AVAX to Beetroot validator.`
   },
   {
     question: 'When can I unstake my AVAX?',
@@ -52,9 +52,9 @@ const faqs = (rewardRate: any, remainingCapacity: any) => [
       'The validator validates transactions and mine new blocks on Avalanche network and its subnets.'
   },
   {
-    question: 'Are your funds safe with Arverse?',
+    question: 'Are your funds safe with Beetroot?',
     answer:
-      'Arverse is a non-custodial staking provider which means that Arverse can never access your staked AVAX. Unlike custodial staking providers such as Kraken, Binance, Coinbase, where your funds are controlled by the exchanges, with Arverse, your funds are 100% in your control.'
+      'Beetroot is a non-custodial staking provider which means that Beetroot can never access your staked AVAX. Unlike custodial staking providers such as Kraken, Binance, Coinbase, where your funds are controlled by the exchanges, with Beetroot, your funds are 100% in your control.'
   },
   {
     question: 'What is the staking APY for AVAX?',
@@ -63,9 +63,9 @@ const faqs = (rewardRate: any, remainingCapacity: any) => [
     }%.`
   },
   {
-    question: 'Is Arverse secure?',
+    question: 'Is Beetroot secure?',
     answer:
-      'Arverse is a highly secure validator infrastructure developed by a team of top security engineers.'
+      'Beetroot is a highly secure validator infrastructure developed by a team of top security engineers.'
   }
 ]
 

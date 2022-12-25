@@ -8,22 +8,22 @@ const FAQs: NextPage = () => {
   return (
     <div className="bg-light">
       <Head>
-        <title>Arverse | Avalanche Validator, Frequently Asked Questions</title>
+        <title>Beetroot | Avalanche Validator, Frequently Asked Questions</title>
         <meta
           name="description"
-          content="Answers to most of your questions related to Arverse staking solution for Avalanche. If you have any other question, feel free to DM us on Twitter."
+          content="Answers to most of your questions related to Beetroot staking solution for Avalanche. If you have any other question, feel free to DM us on Twitter."
         />
         <meta
           property="og:title"
-          content="Arverse | Avalanche Validator, Frequently Asked Questions"
+          content="Beetroot | Avalanche Validator, Frequently Asked Questions"
         />
         <meta
           property="og:og:description"
-          content="Answers to most of your questions related to Arverse staking solution for Avalanche. If you have any other question, feel free to DM us on Twitter."
+          content="Answers to most of your questions related to Beetroot staking solution for Avalanche. If you have any other question, feel free to DM us on Twitter."
         />
-        <meta property="og:url" content="https://arverse.gg/faqs" />
+        <meta property="og:url" content="https://beetroot.ai/faqs" />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content="https://arverse.gg/cover.jpg" />
+        <meta property="og:image" content="https://beetroot.ai/cover.jpg" />
       </Head>
 
       <Header />

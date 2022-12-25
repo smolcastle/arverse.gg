@@ -33,6 +33,10 @@ module.exports = {
         accent: {
           light: '#CBB7FB',
           DEFAULT: '#8B5CF6'
+        },
+        broot: {
+          light: '#a65b73',
+          DEFAULT: '#aa234e'
         }
       },
       boxShadow: {

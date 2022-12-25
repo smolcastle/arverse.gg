@@ -3,9 +3,12 @@ import Link from 'next/link'
 const Header = () => {
   return (
     <header className="px-[30px] flex justify-between items-center pt-[50px] max-w-[700px] w-full mx-auto z-50">
-      <Link href="/">
-        <a className="text-[2rem] font-semibold text-accent">ARVERSE</a>
-      </Link>
+      <div className='flex sm:gap-2'>
+        <img src='/beetroot.png' alt='Logo' style={{ width: '48px', height: '48px'}}/>
+        <Link href="/">
+          <a className="text-[2rem] font-semibold text-broot">Beetroot</a>
+        </Link>
+      </div>
       <div className="flex sm:gap-8 gap-[40px] font-medium text-[1rem]">
         <Link href="faqs">
           <a>Help Center</a>

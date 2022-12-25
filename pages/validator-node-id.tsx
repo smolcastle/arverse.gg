@@ -45,14 +45,14 @@ const NodeID: NextPage = () => {
   return (
     <div className="w-full bg-light">
       <Head>
-        <title>Arverse | Avalanche Validator Node ID Details</title>
+        <title>Beetroot | Avalanche Validator Node ID Details</title>
         <meta
           name="description"
           content="Our high uptime avalanche validator node is trusted by millions of dollars from both institutional and retail investors."
         />
         <meta
           property="og:title"
-          content="Arverse | Avalanche Validator Node ID Details"
+          content="Beetroot | Avalanche Validator Node ID Details"
         />
         <meta
           property="og:og:description"
@@ -60,10 +60,10 @@ const NodeID: NextPage = () => {
         />
         <meta
           property="og:url"
-          content="https://arverse.gg/validator-node-id"
+          content="https://beetroot.ai/validator-node-id"
         />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content="https://arverse.gg/cover.jpg" />
+        <meta property="og:image" content="https://beetroot.ai/cover.jpg" />
       </Head>
 
       <Header />
