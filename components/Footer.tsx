@@ -7,17 +7,17 @@ const Footer = () => {
       <div className="flex justify-between items-start">
         <div className="flex flex-col gap-4">
           <Link href="/">
-            <a className="text-[32px] font-semibold text-accent">ARVERSE</a>
+            <a className="text-[32px] font-semibold text-broot">Beetroot</a>
           </Link>
           <span className="-mt-4 text-gray-600 text-[16px] font-light">
-            &copy; {new Date().getFullYear()} Arverse.gg
+            &copy; {new Date().getFullYear()} Beetroot.ai
           </span>
           <PoweredIcon />
         </div>
         <div className="flex flex-col gap-[12px] text-right text-gray-600">
           <h3 className="pb-[4px] font-medium text-[20px]">Company</h3>
           <a
-            href="https://twitter.com/arversegg"
+            href="https://twitter.com/beetrootai"
             target={'_blank'}
             rel="noopener noreferrer"
           >
@@ -37,11 +37,11 @@ const Footer = () => {
       <div className="mt-[50px]">
         <h4 className="text-[16px] font-light mb-5">Disclaimer</h4>
         <p className="text-[12px] font-light">
-          Arverse.gg ("the platform") strives to provide the most reasonable and
+          Beetroot.ai ("the platform") strives to provide the most reasonable and
           accurate information. Still all data and information presented on this
           platform may be wrong or does not reflect the current status. All
-          information is subject to change and arverse.gg does not guarantee
-          accuracy or completeness. The metrics arverse.gg has developed and
+          information is subject to change and beetroot.ai does not guarantee
+          accuracy or completeness. The metrics beetroot.ai has developed and
           presents on this platform are based on it's own methodology and may be
           misinterpreted by the user. The annualized staking yields and annual
           issuance rates presented on the platform are mostly based on current
@@ -56,7 +56,7 @@ const Footer = () => {
           <br />
           Any data or information presented on this platform should not be
           considered investment advice, financial advice, trading advice or any
-          other sort of advice. Arverse.gg never recommends or endorsed any
+          other sort of advice. Beetroot.ai never recommends or endorsed any
           investment decision such as buying, selling or holding a digital
           asset. Do not use any data or information presented on this platform
           as the only reference for your investment decision. The data may be
@@ -65,7 +65,7 @@ const Footer = () => {
           any digital asset. Only make investment decisions after evaluating
           many different sources, information provider and opinions. Digital
           Assets should be considered a very risky investment class. Do not
-          invest anything that you can't afford to loose. Arverse.gg will not be
+          invest anything that you can't afford to loose. Beetroot.ai will not be
           held responsible for any investment decision you make based on the
           information provided on the platform.
         </p>

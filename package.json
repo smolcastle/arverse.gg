@@ -3,7 +3,7 @@
   "sideEffects": false,
   "version": "1.0.2",
   "private": true,
-  "homepage": "https://arverse.gg/",
+  "homepage": "https://beetroot.ai/",
   "scripts": {
     "analyze": "ANALYZE=true yarn build",
     "dev": "NODE_OPTIONS='--inspect' next dev",

@@ -31,23 +31,23 @@ const Home: NextPage<any> = () => {
     <div className="w-full bg-light">
       <Head>
         <title>
-          Arverse | Avalanche Validator, Earn Staking Rewards on AVAX
+          Beetroot | Avalanche Validator, Earn Staking Rewards on AVAX
         </title>
         <meta
           name="description"
-          content="Arverse is a non-custodial staking provider for Avalanche blockchain. You can stake AVAX and earn up to 9.22% per annum."
+          content="Beetroot is a non-custodial staking provider for Avalanche blockchain. You can stake AVAX and earn up to 9.22% per annum."
         />
         <meta
           property="og:title"
-          content="Arverse | Avalanche Validator, Earn Staking Rewards on AVAX"
+          content="Beetroot | Avalanche Validator, Earn Staking Rewards on AVAX"
         />
         <meta
           property="og:og:description"
-          content="Arverse is a non-custodial staking provider for Avalanche blockchain. You can stake AVAX and earn up to 9.22% per annum."
+          content="Beetroot is a non-custodial staking provider for Avalanche blockchain. You can stake AVAX and earn up to 9.22% per annum."
         />
-        <meta property="og:url" content="https://arverse.gg/" />
+        <meta property="og:url" content="https://beetroot.ai/" />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content="https://arverse.gg/cover.jpg" />
+        <meta property="og:image" content="https://beetroot.ai/cover.jpg" />
       </Head>
 
       <Header />
@@ -65,7 +65,7 @@ const Home: NextPage<any> = () => {
         </h1>
         {avax?.rewardRate > 0 ? (
           <span className="px-4 my-4 max-w-[640px] w-full font-medium text-[24px] text-center z-10">
-            Arverse is a non-custodial staking provider for Avalanche
+            Beetroot is a non-custodial staking provider for Avalanche
             blockchain. You can stake AVAX and earn up to {avax?.rewardRate}%
             per annum.
           </span>
@@ -107,7 +107,7 @@ const Home: NextPage<any> = () => {
         </div>
         <div className="mt-[280px] lg:max-w-[1000px] max-w-[640px] w-full z-10 text-white">
           <h2 className="mx-auto text-center leading-snug font-semibold lg:text-[48px] text-[32px]">
-            Arverse is trusted by millions of dollars from both institutional
+            Beetroot is trusted by millions of dollars from both institutional
             and retail investors
           </h2>
         </div>
@@ -239,7 +239,7 @@ const Home: NextPage<any> = () => {
 
         <div className="relative mt-[275px] mb-[160px] flex items-center justify-between gap-[16px] max-w-[640px] w-full mx-auto">
           <h2 className="pl-[32px] text-white font-bold text-[44px] w-[280px] leading-tight z-10">
-            Stake to Arverse and earn up to {avax?.rewardRate}% per on your AVAX
+            Stake to Beetroot and earn up to {avax?.rewardRate}% per on your AVAX
           </h2>
           <Link href="how-to-stake-avax">
             <a className="w-[320px] h-[320px] flex justify-center items-center text-left bg-white border-2 border-transparent hover:border-accent shadow-md transition-all z-10">

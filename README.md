@@ -1,4 +1,4 @@
-<h2 align="center">Arverse: Validator Node for Avalanche Blockchain</h2>
+<h2 align="center">Beetroot: Validator Node for Avalanche Blockchain</h2>
 
 <p align="center">
 <a href="https://github.com/smol-ninja/arverse.gg/actions/workflows/deploy.yml"><img alt="Github Actions Build Status" src="https://github.com/smol-ninja/arverse.gg/actions/workflows/deploy.yml/badge.svg"></a>
@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-<a href="https://arverse.gg">Live version - Arverse.gg</a>
+<a href="https://beetroot.ai">Live version - Beetroot.ai</a>
 <p>
 
 ### To start development
@@ -56,4 +56,4 @@ Auto deployment is enabled via Github workflow.
 
 ### License
 
-(c) Arverse.gg, 2022 - [All rights reserved](LICENSE).
+(c) Beetroot.ai, 2022 - [All rights reserved](LICENSE).

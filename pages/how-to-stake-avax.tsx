@@ -163,14 +163,14 @@ const StakeGuide: NextPage = () => {
   return (
     <div className="w-full bg-light">
       <Head>
-        <title>Arverse | Avax Staking Guide, Earn Rewards up to 9%</title>
+        <title>Beetroot | Avax Staking Guide, Earn Rewards up to 9%</title>
         <meta
           name="description"
           content="Follow our staking guide to learn how to stake your AVAX with us. Earn up to 9% annually on your AVAX staking."
         />
         <meta
           property="og:title"
-          content="Arverse | Avax Staking Guide, Earn Rewards up to 9%"
+          content="Beetroot | Avax Staking Guide, Earn Rewards up to 9%"
         />
         <meta
           property="og:og:description"
@@ -178,10 +178,10 @@ const StakeGuide: NextPage = () => {
         />
         <meta
           property="og:url"
-          content="https://arverse.gg/how-to-stake-avax"
+          content="https://beetroot.ai/how-to-stake-avax"
         />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content="https://arverse.gg/cover.jpg" />
+        <meta property="og:image" content="https://beetroot.ai/cover.jpg" />
       </Head>
 
       <Header />
@@ -200,7 +200,7 @@ const StakeGuide: NextPage = () => {
             Become an Avalanche Delegator
           </h1>
           <p className="max-w-[640px] w-full font-regular text-center text-[20px] text-gray">
-            Help us secure the avalanche network by staking your AVAX to Arverse
+            Help us secure the avalanche network by staking your AVAX to Beetroot
             and earn rewards
           </p>
         </div>
