@@ -53,16 +53,16 @@ const Home: NextPage<any> = () => {
       <Header />
 
       <main className="pt-[140px] px-4 flex flex-col items-center justify-center gap-6 mx-auto min-h-screen z-10">
+        <h1 className="max-w-[640px] w-full font-bold text-[44px] text-center z-10">
+          Stake, Earn, Grow your <span className="text-red">AVAX</span>
+        </h1>
         <div
-          className={`absolute top-[calc(800px)] left-0 w-full ${
+          className={`absolute top-[calc(700px)] left-0 w-full ${
             isAvax
               ? 'lg:h-[2200px] md:h-[1900px] sm:h-[1800px] h-[1750px]'
               : 'lg:h-[2000px] md:h-[1850px] sm:h-[1700px] h-[1650px]'
           } bg-accent skew-y-6`}
         />
-        <h1 className="max-w-[640px] w-full font-bold text-[44px] text-center z-10">
-          Stake, Earn, Grow your <span className="text-red">AVAX</span>
-        </h1>
         {avax?.rewardRate > 0 ? (
           <span className="px-4 my-4 max-w-[640px] w-full font-medium text-[24px] text-center z-10">
             Beetroot is a non-custodial staking provider for Avalanche
