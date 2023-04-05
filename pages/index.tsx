@@ -57,11 +57,7 @@ const Home: NextPage<any> = () => {
           Stake, Earn, Grow your <span className="text-red">AVAX</span>
         </h1>
         <div
-          className={`absolute top-[calc(700px)] left-0 w-full ${
-            isAvax
-              ? 'lg:h-[2200px] md:h-[1900px] sm:h-[1800px] h-[1750px]'
-              : 'lg:h-[2000px] md:h-[1850px] sm:h-[1700px] h-[1650px]'
-          } bg-accent skew-y-6`}
+          className={`absolute top-[calc(700px)] left-0 w-full lg:h-[2200px] md:h-[1900px] sm:h-[1800px] h-[1750px] bg-accent skew-y-6`}
         />
         {avax?.rewardRate > 0 ? (
           <span className="px-4 my-4 max-w-[640px] w-full font-medium text-[24px] text-center z-10">

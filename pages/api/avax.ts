@@ -40,7 +40,7 @@ export default async function handler(
           (v: any) => v.nodeID === process.env.NEXT_PUBLIC_NODE_ID
         )[0]
         data.stake = validator?.totalStakeAmount / 1e9
-        data.uptime = validator?.uptime * 100
+        data.uptime = validator?.uptime
         data.totalStake =
           Math.round(((res.data.allStake * 100) / 1e9 / (7.2 * 1e8)) * 100) /
           100
